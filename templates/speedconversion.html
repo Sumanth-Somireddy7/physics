@@ -1,0 +1,196 @@
+{% extends 'base.html' %}
+
+{%load static%}
+{%block meta%}
+<!-- HTML Defaults Broweser -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Bootstrap Stylesheet and Jquery, Google APIS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<!-- Online Calculator Guru Site Fevicon -->
+<link rel="shortcut icon" href="https://onlinecalculator.guru/static/images/logo/Online-Calculator-Guru-Fevicon.png"
+    type="icon">
+
+<!-- Online Calculator Guru Project Style Sheet -->
+{%block css%}
+<link rel="stylesheet" href="https://onlinecalculator.guru/static/style.css">
+{%endblock%}
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<!-- Meta Title, Description and Canonical URL Starts --->
+<title>    Speed Conversion Calculator | Free Calculator to convert Speed Units </title>
+<meta name="description"
+    content="    Friction Loss Calculator makes it easy for you to find   Friction Loss ." />
+<link rel="canonical" href="{{request.build_absolute_uri}}">
+<!-- Meta Title, Description and Canonical URL ENDS --->
+
+<!-- OPEN GRAPH CONFIGURATIONS STARTS -->
+<!--  FACEBOOK CONFIGURATION STARTS  -->
+<meta content="https://www.facebook.com/OnlineCalculator-Guru-131572098650589/" property="og:url" />
+<meta property="og:title" content=" Friction Loss Calculator | Free Calculator to find     Friction Loss" />
+<meta property="og:description" content="    Friction Loss Calculator" />
+<meta content="" property="og:site_name" />
+    
+<meta content="https://onlinecalculator.guru/static/images/Chemistry/Friction-Loss-Calculator.jpeg"
+    property="og:image" />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:height" content="435" />
+<meta property="og:image:width" content="354" />
+<!--  FACEBOOK CONFIGURATION ENDS  -->
+<!-- TWITTER CARD CONFIGURATION STARTS  -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="https://twitter.com/onlinecalculator" />
+<meta name="twitter:title" content="    Friction Loss Calculator | Free Calculator to find     Friction Loss" />
+<meta name="twitter:description"
+    content="Ohm's law Calculator" />
+<meta name="twitter:image:src"
+    content="https://onlinecalculator.guru/static/images/Chemistry/Friction-Loss-Calculator.jpeg" />
+<meta property="twitter:image:height" content="435" />
+<meta property="twitter:image:width" content="354" />
+<!-- TWITTER CARD CONFIGURATION ENDS  -->
+<!--  LINKEDIN CONFIGURATION STARTS-->
+<tittle> Speed Conversion Calculator</tittle>
+<meta property='og:title' content="    Friction Loss Calculator |     Friction Loss" />
+<meta property='og:image'
+    content="https://onlinecalculator.guru/static/images/Chemistry/Friction-Loss-Calculator.jpeg" />
+<meta property='og:description' content="Ohm's law Calculator." />
+<meta property='og:url' content="https://www.linkedin.com/in/onlinecalculator/" />
+<!-- end of linkedin CONFIGURATIONS ENDS -->
+<!-- OPEN GRAPH CONFIGURATION ENDS -->
+<!-- FAQ SCHEMA STARTS -->
+
+{%endblock%}
+{% block content %}
+
+<style>
+    input {
+        text-align: right;
+    }
+</style>
+<body>
+    <script>
+		function Clean(){
+            document.getElementById('cards').innerHTML=''
+			document.getElementById('display').innerHTML=''
+
+		}
+	</script>
+<br>
+<br>
+<br>
+    <div class="container">
+	<div class="card">
+		<h1 class="card-header" style="background-color:#30afda;color: white;">Speed Conversion Calculator</h1>
+		<div class="card-body">
+			<form action="speed_convert" method="POST">
+				{% csrf_token %}
+				<div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><strong>Enter Number</strong></div>
+                    </div>
+                    <input type="number"  id="Ib" placeholder="Enter number"  class="form-control mt-1" name="num1"  required >
+                    </div>
+                  <br>
+                <div>
+                    <div class = "form-group">
+                        <label for="exampleFormControlInput1">From</label>
+                    <select class="form-control" name = "em">
+                        <option value="cm/min">cm per minute (cm/min)</option>
+                        <option value="cm/s">cm per second (cm/s)</option>
+                        <option value="ft/hr">foot per hour (ft/h)</option>
+                        <option value="ft/min">foot per minute (ft/min)</option>
+                        <option value="ft/s">foot per second (ft/s)</option>
+                        <option value="in/min">inch per minute (in/min)</option>
+                        <option value="in/s">inch per second (in/s)</option>
+                        <option value="km/hr">km per hour (km/hr or kph)</option>
+                        <option value="km/s">km per second (km/s)</option>
+                        <option value="knot mi/hr">knot (nautical mi/h)</option>
+                        <option value="knot uk">knot (UK) (kn)</option>
+                        <option value="m/hr">meter per hour (m/hr)</option>
+                        <option value="m/min">meter per minute (m/min)</option>
+                        <option value="m/s">meter per second (m/s)</option>
+                        <option value="mi/hr">mile per hour (mi/hr)</option>
+                        <option value="mi/min">mile per minute (mi/min)</option>
+                        <option value="mi/s">mile per second (mi/s)</option>
+                        <option value="c">speed of vaccum (c)</option>
+                        <option value="yd/hr">yard per hour (yd/hr)</option>
+                        <option value="yd/min">yard per minute (yd/min)</option>
+                        <option value="yd/s">yard per second (yd/s)</option>
+                      </select>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">To</label>
+                    <select class="form-control" aria-label="Default select example" name = "ea">
+                        <option value="cm/min">cm per minute (cm/min)</option>
+                        <option value="cm/s">cm per second (cm/s)</option>
+                        <option value="ft/hr">foot per hour (ft/h)</option>
+                        <option value="ft/min">foot per minute (ft/min)</option>
+                        <option value="ft/s">foot per second (ft/s)</option>
+                        <option value="in/min">inch per minute (in/min)</option>
+                        <option value="in/s">inch per second (in/s)</option>
+                        <option value="km/hr">km per hour (km/hr or kph)</option>
+                        <option value="km/s">km per second (km/s)</option>
+                        <option value="knot mi/hr">knot (nautical mi/h)</option>
+                        <option value="knot uk">knot (UK) (kn)</option>
+                        <option value="m/hr">meter per hour (m/hr)</option>
+                        <option value="m/min">meter per minute (m/min)</option>
+                        <option value="m/s">meter per second (m/s)</option>
+                        <option value="mi/hr">mile per hour (mi/hr)</option>
+                        <option value="mi/min">mile per minute (mi/min)</option>
+                        <option value="mi/s">mile per second (mi/s)</option>
+                        <option value="c">speed of vaccum (c)</option>
+                        <option value="yd/hr">yard per hour (yd/hr)</option>
+                        <option value="yd/min">yard per minute (yd/min)</option>
+                        <option value="yd/s">yard per second (yd/s)</option>
+                      </select>
+                </div>
+                <br>
+				<div class="center col mt-2">
+                    <center>
+					<input type="submit" class="btn btn-primary" value="Calculate">
+                    <input type="button" class="btn btn-danger" onclick="Clean()" style="margin-top: 5px;" value="Reset">
+                </center>
+				</div>
+            </form>
+            </div>
+		</div>
+	</div>
+    {% if cas %}
+    <div class="container"  style="height: auto !important;">
+    <div class="card" id= "cards">
+        <h1 class="card-header" style="background-color:#30afda;color: white;text-align: center;">Detailed Explanation</h1>
+        <div class="card-body">
+            <ul>
+                <li><h5>Given value: {{num1}} {{from}}</h5></li>
+                <li><h5>We need to convert it to {{to}} units</h5></li>
+            </ul>
+            <br>
+            <h5 class="card-text">
+                In any conversion, we need to first convert the given value to SI unit m/s.From m/s, we need to convert it to desired unit<br>
+                In general, the formula for conversion is:<br>
+                <h3><b>Converted value = Given value * Conversion Factor</b></h3>
+            </h5>
+            <br>
+            <ul>
+                <li><h5>Let's first convert to m/s:</h5><br></li>
+                {{num1}} {{from}} = {{converted_speed_m_s}} m/s
+                <br>
+                <br>
+                <li><h5>Now convert the obtained result to desired units. Here it is from <b>m/s to {{to}}</b>
+            </ul>
+            <h4 class="card-text"><b>{{converted_speed_m_s}} m/s = {{converted_speed}} {{to}}</b></h4>
+            <br>
+            <h5>The Final Answer is </h5><br>
+            <h3><b>{{num1}} {{from}} = {{converted_speed}} {{to}}</b></h3>
+        </div>
+    </div>
+    </div>
+    </div>
+    {% endif %}
+</body>
+{% endblock %}

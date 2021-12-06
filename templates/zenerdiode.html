@@ -1,0 +1,201 @@
+{% extends 'base.html' %}
+
+{%load static%}
+{%block meta%}
+<!-- HTML Defaults Broweser -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Bootstrap Stylesheet and Jquery, Google APIS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<!-- Online Calculator Guru Site Fevicon -->
+<link rel="shortcut icon" href="https://onlinecalculator.guru/static/images/logo/Online-Calculator-Guru-Fevicon.png"
+    type="icon">
+
+<!-- Online Calculator Guru Project Style Sheet -->
+{%block css%}
+<link rel="stylesheet" href="https://onlinecalculator.guru/static/style.css">
+{%endblock%}
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<!-- Meta Title, Description and Canonical URL Starts --->
+<title>    Zener Diode Calculator | Free Calculator to calculate Zener Diode </title>
+<meta name="description"
+    content="    Friction Loss Calculator makes it easy for you to find   Friction Loss ." />
+<link rel="canonical" href="{{request.build_absolute_uri}}">
+<!-- Meta Title, Description and Canonical URL ENDS --->
+
+<!-- OPEN GRAPH CONFIGURATIONS STARTS -->
+<!--  FACEBOOK CONFIGURATION STARTS  -->
+<meta content="https://www.facebook.com/OnlineCalculator-Guru-131572098650589/" property="og:url" />
+<meta property="og:title" content=" Friction Loss Calculator | Free Calculator to find     Friction Loss" />
+<meta property="og:description" content="    Friction Loss Calculator" />
+<meta content="" property="og:site_name" />
+    
+<meta content="https://onlinecalculator.guru/static/images/Chemistry/Friction-Loss-Calculator.jpeg"
+    property="og:image" />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:height" content="435" />
+<meta property="og:image:width" content="354" />
+<!--  FACEBOOK CONFIGURATION ENDS  -->
+<!-- TWITTER CARD CONFIGURATION STARTS  -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="https://twitter.com/onlinecalculator" />
+<meta name="twitter:title" content="    Friction Loss Calculator | Free Calculator to find     Friction Loss" />
+<meta name="twitter:description"
+    content="Ohm's law Calculator" />
+<meta name="twitter:image:src"
+    content="https://onlinecalculator.guru/static/images/Chemistry/Friction-Loss-Calculator.jpeg" />
+<meta property="twitter:image:height" content="435" />
+<meta property="twitter:image:width" content="354" />
+<!-- TWITTER CARD CONFIGURATION ENDS  -->
+<!--  LINKEDIN CONFIGURATION STARTS-->
+<tittle> Zener Diode Calculator</tittle>
+<meta property='og:title' content="    Friction Loss Calculator |     Friction Loss" />
+<meta property='og:image'
+    content="https://onlinecalculator.guru/static/images/Chemistry/Friction-Loss-Calculator.jpeg" />
+<meta property='og:description' content="Ohm's law Calculator." />
+<meta property='og:url' content="https://www.linkedin.com/in/onlinecalculator/" />
+<!-- end of linkedin CONFIGURATIONS ENDS -->
+<!-- OPEN GRAPH CONFIGURATION ENDS -->
+<!-- FAQ SCHEMA STARTS -->
+
+{%endblock%}
+{% block content %}
+
+<style>
+    input {
+        text-align: right;
+    }
+</style>
+<br>
+<br>
+<br>
+<body>
+	<script>
+		function Clean(){
+            document.getElementById('dss').innerHTML=''
+            document.getElementById('cards').innerHTML=''
+
+		}
+	</script>
+    <div class="container">
+	<div class="card">
+		<h1 class="card-header" style="background-color:#00BFFF;color: white;">Zener Diode Calculator</h1>
+		<div class="card-body">
+                
+			<form action="zenerdiode" method="POST">
+				{% csrf_token %}
+				<div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><strong>Minimum Input Voltage (V<sub>IN</sub><sub>(min)</sub>)</strong></div>
+                    </div>
+                    <input type="text"  id="Ib" class="form-control mt-1" name="num1"  required >
+					<div class="input-group-text"><strong>volts</strong></div>
+                    </div>
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><strong>Maximum Input Voltage (V<sub>IN</sub><sub>(max)</sub>)</strong></div>
+                        </div>
+                        <input type="text"  id="Ib"  class="form-control mt-1" name="num2"  required >
+                        <div class="input-group-text"><strong>volts</strong></div>
+                        </div>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><strong>Output Voltage (V<sub>out</sub>)</strong></div>
+                            </div>
+                            <input type="text"  id="Ib"  class="form-control mt-1" name="num3"  required >
+                            <div class="input-group-text"><strong>volts</strong></div>
+                            </div>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text"><strong>Load Current (I<sub>L</sub>)</strong></div>
+                                </div>
+                                <input type="text"  id="Ib"  class="form-control mt-1" name="num4"  required >
+                                <div class="input-group-text"><strong>mA</strong></div>
+                                </div>
+                                <div class="center col mt-2">
+                                    <center>
+                                    <input type="submit" class="btn btn-primary" value="Calculate">
+                                    <input type="button" class="btn btn-danger" onclick="Clean()" value="Reset" style="margin-top: 5px;">
+                                    </center>
+                                </div>
+				</form>
+                <br>
+                <div id = "dss">
+                {%if message %}
+                <h2 style="margin-top:10px;padding:10px;" class="display-5" id="display">{{message}}</h2>
+                {% endif %}
+            </div>
+		</div>
+	</div>
+	{%if cas %}
+    <div class="container" id="cards">
+    <div class="card">
+        <h1 class="card-header" style="background-color:#00BFFF;color: white;text-align: center;">Detailed Explanation</h1>
+        <div class="card-body">
+            <h4>Given Values</h4>
+            <ul>
+                <li><h5>{{g1}} = {{gn1}} V</h5></li>
+                <li><h5>{{g2}} = {{gn2}} V</h5></li>
+                <li><h5>{{g3}} = {{gn3}} V</h5></li>
+                <li><h5>{{g4}} = {{gn4}} mA</h5></li>
+            </ul>
+            <br>
+            <h5>We need to find the value of <b>Resistance, Zener Voltage, Zener Power, Resistance Power </b></h5>
+            <br>
+            <h5>To calculate the Resistance, formula is:-<h3> <b> R = (1000*(V<sub>IN</sub><sub>(min)</sub>-V<sub>out</sub>))/(I<sub>L</sub>+10)</b></h3></h5>
+            <h5>where</h5>
+            <ul>
+                <li><h5>R = Resistance of Zener Diode</h5></li>
+                <li><h5>V<sub>IN</sub><sub>(min)</sub> = Minimum Input Voltage</h5></li>
+                <li><h5>V<sub>out</sub> = Output Voltage</h5></li>
+                <li><h5>I<sub>L</sub> = Load Current</h5></li>
+            </ul>
+            <br>
+            <div class="alert alert-primary" role="alert">
+                <h4>Resistance = {{res}} Ω</h4>
+            </div>
+            <br>
+            <h5>To calculate the Zener Voltage, formula is:- <h3><b>Zener Voltage = V<sub>out</sub></b></h3></h5>
+            <h5>where</h5>
+            <ul>
+                <li><h5>V<sub>out</sub> = Output Voltage</h5></li>
+            </ul>
+            <br>
+            <div class="alert alert-success" role="alert">
+                <h4>Zener Volatge = {{zv}} V</h4>
+            </div>
+            <br>
+            <h5>To calculate the Zener Power, formula is:-<h3> <b>Zener Power = (1000*((V<sub>IN</sub><sub>(max)</sub>-V<sub>out</sub>)/R)*V<sub>out</sub>))/1000</b></h3></h5>
+            <h5>where</h5>
+            <ul>
+                <li><h5>V<sub>IN</sub><sub>(max)</sub> = Maximum Input Voltage</h5></li>
+                <li><h5>V<sub>out</sub> = Output Voltage</h5></li>
+                <li><h5>R = Resistance of Zener Diode</h5></li>
+            </ul>
+            <br>
+            <div class="alert alert-warning" role="alert">
+                <h4> Zener Power = {{zp}} watt</h4>
+            </div>
+            <br>
+            <h5>To calculate the Resistance Power, formula is:- <h3><b>Resistance Power = ((V<sub>IN</sub><sub>(max)</sub>-V<sub>out</sub>)<sup>2</sup>)/R</b></h3></h5>
+            <h5>where</h5>
+            <ul>
+                <li><h5>V<sub>IN</sub><sub>(max)</sub> = Maximum Input Voltage</h5></li>
+                <li><h5>V<sub>out</sub> = Output Voltage</h5></li>
+                <li><h5>R = Resistance of Zener Diode</h5></li>
+            </ul>
+            <br>
+            <div class="alert alert-info" role="alert">
+                <h4>Resistance Power = {{rp}} watt</h4>
+             </div>
+        </div>
+    </div>
+    </div>
+	{% endif %}
+</body>
+{%endblock%}

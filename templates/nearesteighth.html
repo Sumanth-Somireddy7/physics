@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+
+{%load static%}
+{%block meta%}
+<!-- HTML Defaults Broweser -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Bootstrap Stylesheet and Jquery, Google APIS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<!-- Online Calculator Guru Site Fevicon -->
+<link rel="shortcut icon" href="https://onlinecalculator.guru/static/images/logo/Online-Calculator-Guru-Fevicon.png"
+    type="icon">
+
+<!-- Online Calculator Guru Project Style Sheet -->
+{%block css%}
+<link rel="stylesheet" href="https://onlinecalculator.guru/static/style.css">
+{%endblock%}
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<!-- Meta Title, Description and Canonical URL Starts --->
+<title>    Round off to nearest Eighth Calculator | Free Calculator to Round off to Nearest Eighth of a Number </title>
+<meta name="description"
+    content="    Friction Loss Calculator makes it easy for you to find   Friction Loss ." />
+<link rel="canonical" href="{{request.build_absolute_uri}}">
+<!-- Meta Title, Description and Canonical URL ENDS --->
+
+<!-- OPEN GRAPH CONFIGURATIONS STARTS -->
+<!--  FACEBOOK CONFIGURATION STARTS  -->
+<meta content="https://www.facebook.com/OnlineCalculator-Guru-131572098650589/" property="og:url" />
+<meta property="og:title" content=" Friction Loss Calculator | Free Calculator to find     Friction Loss" />
+<meta property="og:description" content="    Friction Loss Calculator" />
+<meta content="" property="og:site_name" />
+    
+<meta content="https://onlinecalculator.guru/static/images/Chemistry/Friction-Loss-Calculator.jpeg"
+    property="og:image" />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:height" content="435" />
+<meta property="og:image:width" content="354" />
+<!--  FACEBOOK CONFIGURATION ENDS  -->
+<!-- TWITTER CARD CONFIGURATION STARTS  -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="https://twitter.com/onlinecalculator" />
+<meta name="twitter:title" content="    Friction Loss Calculator | Free Calculator to find     Friction Loss" />
+<meta name="twitter:description"
+    content="Ohm's law Calculator" />
+<meta name="twitter:image:src"
+    content="https://onlinecalculator.guru/static/images/Chemistry/Friction-Loss-Calculator.jpeg" />
+<meta property="twitter:image:height" content="435" />
+<meta property="twitter:image:width" content="354" />
+<!-- TWITTER CARD CONFIGURATION ENDS  -->
+<!--  LINKEDIN CONFIGURATION STARTS-->
+<tittle> Round off to nearest Eighth Calculator</tittle>
+<meta property='og:title' content="    Friction Loss Calculator |     Friction Loss" />
+<meta property='og:image'
+    content="https://onlinecalculator.guru/static/images/Chemistry/Friction-Loss-Calculator.jpeg" />
+<meta property='og:description' content="Ohm's law Calculator." />
+<meta property='og:url' content="https://www.linkedin.com/in/onlinecalculator/" />
+<!-- end of linkedin CONFIGURATIONS ENDS -->
+<!-- OPEN GRAPH CONFIGURATION ENDS -->
+<!-- FAQ SCHEMA STARTS -->
+
+{%endblock%}
+{% block content %}
+
+<style>
+    input {
+        text-align: right;
+    }
+</style>
+<br>
+<br>
+<br>
+<body>
+	<script>
+		function Clean(){
+            document.getElementById('cards').innerHTML=''
+		}
+	</script>
+	<div class = "container">
+	<div class="card">
+		<h1 class="card-header" style="background-color:#00BFFF;color: white;">Round off to nearest Eighth Calculator</h1>
+		<div class="card-body">
+                <form action="nearest_eighth" method = "POST">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-sm-4">
+                        </div>
+                        <div class="col-sm-4">
+                          <div class="card">
+                            <div class="card-body">
+                              <h5 class="card-title">Enter Number</h5>
+                                <input type="number" step = "any"  id="Ib" class="form-control mt-1" name="num1"  required >
+                                <div class="center col mt-2">
+                                    <center>
+                                    <input type="submit" class="btn btn-primary" value="Calculate">
+                                    <input type="button" class="btn btn-danger" onclick="Clean()" value="Reset" style="margin-top: 5px;">
+                                    </center>
+                                </div>
+                          </div>
+                        </div>
+                        </div>
+                        <div class="col-sm-4">
+                          </div>
+                      </div>
+                      
+                </form>
+            </div>
+            </div>
+        </div>
+        {%if cas %}
+        <div class = "container" id = "cards">
+        <div class="card">
+            <h1 class="card-header" style="background-color:#00BFFF;color: white;text-align: center;">Detailed Explanation</h1>
+            <div class="card-body">
+                <h2>Given Number = {{num1}}</h2>
+                <h3>Steps to round off a number to nearest eighth are:</h3>
+                <ul>
+                    <li><h4>Multiply the given number with 8<br> {{num1}} x 8 = {{step1}}</h4></li>
+                    <li><h4>Round the obtained result to the smallest integer which is not less than {{step1}}<br> = {{step2}}</h4></li>
+                    <li><h4> Now divide the obtained result by 8 <br> {{step2}}/8 = {{res}}</h4></li>
+                </ul>
+                <h2>Answer = {{res}}</h2>
+                </div>
+                </div>
+                </div>
+                </body>
+{%endif%}
+{%endblock%}
