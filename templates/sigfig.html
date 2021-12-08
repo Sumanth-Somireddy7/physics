@@ -82,7 +82,7 @@
 	</script>
 	<div class = "container">
 	<div class="card">
-		<h1 class="card-header" style="background-color:#00BFFF;color: white;">Round To One Decimal Calculator</h1>
+		<h1 class="card-header" style="background-color:#00BFFF;color: white;">Round To Significant Digits Calculator</h1>
 		<div class="card-body">
                 <form action="sigfig" method = "POST">
                     {% csrf_token %}
@@ -118,8 +118,21 @@
     <div class="card">
         <h1 class="card-header" style="background-color:#00BFFF;color: white;text-align: center;">Detailed Explanation</h1>
         <div class="card-body">
-            <h4>Given Value = {{num1}}</h4><br>
-            <h4>The value of Rounded Value to {{num2}} digits is <br>
+            <h3>Given Value = {{num1}}</h3><br>
+            <h3>Steps involved in Rounding off a number to {{num2}} Significant Digits </h3> 
+            <ul>
+                <li><h4>Locate the {{st}} digit starting from left<br><br> Here it is, {{dec}} in {{num1}}</h4></li>
+                <li><h4>If the located digit is, 5 or more, then increase the previous digit by 1 <br><br>
+                    {%if c1%}
+                    Here it is, {{res}} as the located digit is {{dec}}</h4></li>
+                    {%endif%}
+                <li><h4>If the located digit is, 4 or less, then keep the previous digit as it is <br><br>
+                    {%if c2%}
+                    Here it is, {{res}} as the located digit is {{dec}}</h4></li>
+                    {%endif%}
+                <li><h4>Fill all the digits to the right to zeroe's</h4></li>
+            </ul>
+            <h4>The value of Rounded Value to {{num2}} Significant Digits is <br>
                 <h2><b>{{num1}} = {{res}}</b></h2> 
         </div>
     </div>

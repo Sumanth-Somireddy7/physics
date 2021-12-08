@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <!-- Meta Title, Description and Canonical URL Starts --->
-<title>    Rounding to Two Decimal Calculator | Free Calculator to Round to Two Decimal </title>
+<title>    Identifying Perfect Cube Calculator | Free Calculator to Identify Perfect Cube </title>
 <meta name="description"
     content="    Friction Loss Calculator makes it easy for you to find   Friction Loss ." />
 <link rel="canonical" href="{{request.build_absolute_uri}}">
@@ -53,7 +53,7 @@
 <meta property="twitter:image:width" content="354" />
 <!-- TWITTER CARD CONFIGURATION ENDS  -->
 <!--  LINKEDIN CONFIGURATION STARTS-->
-<tittle> Round to One Decimal Calculator</tittle>
+<tittle> Identifying Perfect Cube Calculator</tittle>
 <meta property='og:title' content="    Friction Loss Calculator |     Friction Loss" />
 <meta property='og:image'
     content="https://onlinecalculator.guru/static/images/Chemistry/Friction-Loss-Calculator.jpeg" />
@@ -82,9 +82,9 @@
 	</script>
 	<div class = "container">
 	<div class="card">
-		<h1 class="card-header" style="background-color:#00BFFF;color: white;">Round To Two Decimal Calculator</h1>
+		<h1 class="card-header" style="background-color:#00BFFF;color: white;">Identifying Perfect Cube Calculator</h1>
 		<div class="card-body">
-                <form action="roundtotwo" method = "POST">
+                <form action="identifying_perfect_cube" method = "POST">
                     {% csrf_token %}
                     <div class="row">
                         <div class="col-sm-4">
@@ -92,8 +92,8 @@
                         <div class="col-sm-4">
                           <div class="card">
                             <div class="card-body">
-                              <h5 class="card-title">Enter Decimal</h5>
-                              <input type="number" step = "any"  id="Ib" class="form-control mt-1" name="num1"  required >
+                              <h5 class="card-title">Enter Number</h5>
+                              <input type="number"  id="Ib" class="form-control mt-1" name="num1"  required >
                                 <div class="center col mt-2">
                                     <center>
                                     <input type="submit" class="btn btn-primary" value="Calculate">
@@ -111,7 +111,7 @@
             </div>
             </div>
         </div>
-    {%if cas %}
+        {%if cas %}
 	<div class = "container" id = "cards">
     <div class="card">
         <h1 class="card-header" style="background-color:#00BFFF;color: white;text-align: center;">Detailed Explanation</h1>
@@ -119,26 +119,18 @@
             <h3>Given Value = {{num1}}</h3>
 
             <br>
-            <h3>Steps to Round off Number to two decimal places</h3>
+            <h3>Steps to Identify a Number is Perfect Cube or not</h3>
             <ul>
-                <li><h4>Locate the Third Digit after the Decimal Point. Here it is, <br><br>
-                    {{dec}} in {{num1}}</h4></li>
-                <li><h4>If the located digit is 5 or more, increase the previous digit by one and remove all digits to right<br><br>
-                    {%if c1%}
-                    Here it is, {{res}} as the located digit is {{dec}}</h4></li>
-                    {%endif%}
-                <li><h4>If the located digit is 4 or less, keep the previous digit the same and remove all digits to right<br><br>
-                {%if c2%}
-                Here it is, {{res}} as the located digit is {{dec}}</h4></li>
-                {%endif%}
-                
+                <li><h4>Write the Number as product of Primes<br> {{num1}} = </h4></li>
+                <li><h4>Identify the triplets in the product</h4></li>
+                <li><h4>If all the factors form triplets, then it is perfect cube, else not</h4></li>
             </ul>
             <br>
-            <h4>The value of Rounded Value to one decimal is <br>
-                <h2><b>{{num1}} = {{res}}</b></h2> 
+            <h4>The  given value of {{num1}} is {{resb}}. <br>
+                <h2><b>It is the cube of {{resa}}</b></h2> 
         </div>
     </div>
 	</div>
 	{% endif %}
 </body>
-{% endblock %}
+{%endblock%}

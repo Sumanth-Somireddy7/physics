@@ -43,5 +43,7 @@ urlpatterns = [
     path('time_clock_15_minutes/',views.time_clock_15_minutes),
     path('time_clock_15_minutes/time_clock_15_minutes',views.time_clock_15_minutes),
     path('nearest_eighth/',views.nearest_eighth),
-    path('nearest_eighth/nearest_eighth',views.nearest_eighth)
+    path('nearest_eighth/nearest_eighth',views.nearest_eighth),
+    path('identifying_perfect_cube/',views.identifying_perfect_cube),
+    path('identifying_perfect_cube/identifying_perfect_cube',views.identifying_perfect_cube)
 ]

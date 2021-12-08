@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .methods import *
+from num2words import num2words
 
 # Create your views here.
 def speed_convert(request):
@@ -2759,12 +2760,27 @@ def sigfig(request):
         res = ''
         num2 = ''
         cas = ''
+        c1 = ''
+        c2 = ''
+        dec = ''
+        st = ''
     else:
         a_number = float(num1)
         sig = int(num2)
+        st = num2words(sig+1)
         res = roundit(a_number,sig)
+        s = str(num1)
+        dec = s[sig]
+        if int(dec)>=5:
+            c1 = True
+        else:
+            c1 = False
+        if int(dec)<5:
+            c2 = True
+        else:
+            c2 = False
         cas = True
-    return render(request,'sigfig.html',{'num1':num1,'res':res,'cas':cas,'num2':num2})
+    return render(request,'sigfig.html',{'num1':num1,'res':res,'cas':cas,'num2':num2,'c1':c1,'c2':c2,'dec':dec,'st':st})
 
 def time_clock_15_minutes(request):
     try:
@@ -2808,6 +2824,21 @@ def nearest_eighth(request):
         res = roundeighth(num1)
         cas = True
     return render(request,'nearesteighth.html',{'cas':cas,'res':res,'num1':num1,'step1':step1,'step2':step2})
+
+def identifying_perfect_cube(request):
+    try:
+        num1 = request.POST['num1']
+    except:
+        num1 = ''
+        cas = False
+        resa = ''
+        resb = ''
+    else:
+        cas = True
+        res = ipd(int(num1))
+        resa = res[0]
+        resb = res[1]
+    return render(request,'identifyperfectcube.html',{'cas':cas,'resa':resa,'num1':num1,'resb':resb})
 
 
 
