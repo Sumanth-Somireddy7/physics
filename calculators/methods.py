@@ -1121,8 +1121,8 @@ def roundeighth(num1):
 def ipd(n):
     cube_root = n**(1./3.)
     if round(cube_root) ** 3 == n:
-        return [round(cube_root),'is a perfect cube']
+        return [round(cube_root),'is a perfect cube',True]
     else:
-        return [cube_root,'is not a perfect cube']
+        return [cube_root,'is not a perfect cube',False]
     
 

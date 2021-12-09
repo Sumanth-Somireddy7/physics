@@ -2833,12 +2833,23 @@ def identifying_perfect_cube(request):
         cas = False
         resa = ''
         resb = ''
+        c1 = False
+        c2 = False
+        st = ''
     else:
         cas = True
         res = ipd(int(num1))
         resa = res[0]
         resb = res[1]
-    return render(request,'identifyperfectcube.html',{'cas':cas,'resa':resa,'num1':num1,'resb':resb})
+        if res[2]==True:
+            c1 = True
+            st = str(resa)+'x'+str(resa)+'x'+str(resa)
+            c2 = False
+        else:
+            c1 = False
+            st = ''
+            c2 = True
+    return render(request,'identifyperfectcube.html',{'cas':cas,'resa':resa,'num1':num1,'resb':resb,'c1':c1,'c2':c2,'st':st})
 
 
 
