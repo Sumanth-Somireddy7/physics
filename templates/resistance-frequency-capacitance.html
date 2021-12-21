@@ -78,39 +78,46 @@
 	<script>
 		function Clean(){
             document.getElementById('cards').innerHTML=''
+            document.getElementById('cards1').innerHTML=''
 		}
+        function handleSubmit(event) {
+            if(!validate()) {
+                event.preventDefault();
+            }
+            return;
+        }
 	</script>
     <div class="container">
 	<div class="card">
 		<h1 class="card-header" style="background-color:#00BFFF;color: white;">Resistance-Frequency-Capacitance Calculator</h1>
         <div class="card-body">
-			<form action="resistance_frequency_capacitance" method="POST">
+			<form method="POST" onsubmit="handleSubmit();">
 				{% csrf_token %}
                 
 				<div class="input-group mb-2">
                     <div class="input-group-prepend">
                         <div class="input-group-text"><strong>Resistance (R)</strong></div>
                     </div>
-                    <input type="text"  id="Ib" placeholder="If you want to calculate this parameter, input as 'x'"  class="form-control mt-1" name="num1"  required >
+                    <input type="text"  id="Ib" placeholder="If you want to calculate this parameter, input as 'x'"  class="form-control mt-1" name="num1" value = "{{num1}}" required >
 					<div class="input-group-text"><strong>Ω</strong></div>
                     </div>
                     <div class="input-group mb-2">
                         <div class="input-group-prepend">
                             <div class="input-group-text"><strong>Frequency (F)</strong></div>
                         </div>
-                        <input type="text"  id="Ib" placeholder="If you want to calculate this parameter, input as 'x'"  class="form-control mt-1" name="num2"  required >
+                        <input type="text"  id="Ib" placeholder="If you want to calculate this parameter, input as 'x'"  class="form-control mt-1" name="num2" value = "{{num2}}" required >
                         <div class="input-group-text"><strong>Hertz</strong></div>
                         </div>
                         <div class="input-group mb-2">
                             <div class="input-group-prepend">
                                 <div class="input-group-text"><strong>Capacitance (C)</strong></div>
                             </div>
-                            <input type="text"  id="Ib" placeholder="If you want to calculate this parameter, input as 'x'"  class="form-control mt-1" name="num3"  required >
+                            <input type="text"  id="Ib" placeholder="If you want to calculate this parameter, input as 'x'"  class="form-control mt-1" name="num3" value = "{{num3}}" required >
                             <div class="input-group-text"><strong>µF</strong></div>
                             </div>
                             <div class="center col mt-2">
                                 <center>
-                                <input type="submit" class="btn btn-primary" value="Calculate">
+                                <input type="submit" class="btn btn-primary" value="Calculate" onclick="myFunction()">
                                 <input type="button" class="btn btn-danger" onclick="Clean()" value="Reset" style="margin-top: 5px;">
                                 </center>
                             </div>
@@ -118,30 +125,47 @@
 		</div>
 	</div>
     </div>
-	{%if cas %}
-    <div class="container" id = "cards">
+    {%if cas %}
+	<div class = "container" id = "cards">
     <div class="card">
-        <h5 class="card-header" style="background-color:#00BFFF;color: white;text-align: center;">Detailed Explanation</h5>
+        <h1 class="card-header" style="background-color:#00BFFF;color: white;text-align: center;">{{uks}} in Resistance-Frequency-Capacitance</h1>
         <div class="card-body">
+            <p><b>{{uks}} = {{ukv}} {{unit}}</b></p>
+        </div>
+    </div>
+	</div>
+{% endif%}
+	{%if cas %}
+    <div class="container" id = "cards1">
+    <div class="card">
+        <h1 class="card-header" style="background-color:#00BFFF;color: white;text-align: center;">Steps to find {{uks}} in Resistance-Frequency-Capacitance</h1>
+        <div class="card-body">
+            <p>In an RC Circuit, we have three components namely Resistance,Frequency,Capacitance</p>
             <h5>Given Values</h5>
             <ul>
-                <li><h5>{{g1}} = {{gn1}} {{u1}}</h5></li>
-                <li><h5>{{g2}} = {{gn2}} {{u2}}</h5></li>
+                <li><p>{{g1}} = {{gn1}} {{u1}}</p></li>
+                <li><p>{{g2}} = {{gn2}} {{u2}}</p></li>
             </ul>
-            <br>
-            <h5>We need to find the value of x,Here in this it is, <b>{{uks}}</b></h5>
-            <h2 class="card-text">
+            <p>We need to find the value of x,Here in this it is, <b>{{uks}}</b></p>
+            <h4 class="card-text">
                 As per the Resistance-Frequency-Capacitance Formula: <br>
                 F = 1/2πRC
-            </h2>
-            <br>
-            <h5>On substitution of given values in the formula above, we get</h5>
-            <br>
-            <h5>The value of unknown x i.e.. <br></h5>
+            </h4>
+            <p>On substitution of given values in the formula above, we get</p>
+            <p>The value of unknown x i.e..</p>
             <h4><b>{{uks}} = {{ukv}} {{unit}}</b> </h4>
         </div>
     </div>
     </div>
 	{% endif %}
+    <script>
+        var scrollDiv = document.getElementById("cards").offsetTop;
+        window.scrollTo({ top: scrollDiv, behavior: 'smooth' });
+        
+            function myFunction() {
+                document.getElementById("cards").innerHTML = "";
+        
+            }
+        </script>
 </body>
 {%endblock%}

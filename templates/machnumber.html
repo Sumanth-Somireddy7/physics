@@ -78,37 +78,44 @@
 	<script>
 		function Clean(){
             document.getElementById('cards').innerHTML=''
+			document.getElementById('cards1').innerHTML=''
 		}
+		function handleSubmit(event) {
+            if(!validate()) {
+                event.preventDefault();
+            }
+            return;
+        }
 	</script>
 	<div class="container">
 	<div class="card">
 		<h1 class="card-header" style="background-color:#00BFFF;color: white;">Mach Number Calculator</h1>
 		<div class="card-body">
-			<form action="machnumber" method="POST">
+			<form  method="POST" onsubmit="handleSubmit();">
 				{% csrf_token %}
 				<div class="input-group mb-2">
                     <div class="input-group-prepend">
                         <div class="input-group-text"><strong>Object speed (v)</strong></div>
                     </div>
-                    <input type="text"  id="Ib" placeholder="If you want to calculate this parameter, input as 'x'"  class="form-control mt-1" name="num1"  required >
+                    <input type="text"  id="Ib" placeholder="If you want to calculate this parameter, input as 'x'"  class="form-control mt-1" name="num1" value="{{num1}}" required >
 					<div class="input-group-text"><strong>meter/sec</strong></div>
                     </div>
 					<div class="input-group mb-2">
 						<div class="input-group-prepend">
 							<div class="input-group-text"><strong>Speed of sound in medium (c)</strong></div>
 						</div>
-						<input type="text"  id="Ib" placeholder="If you want to calculate this parameter, input as 'x'"  class="form-control mt-1" name="num2"  required >
+						<input type="text"  id="Ib" placeholder="If you want to calculate this parameter, input as 'x'"  class="form-control mt-1" name="num2" value="{{num2}}" required >
 						<div class="input-group-text"><strong>meter/sec</strong></div>
 						</div>
 						<div class="input-group mb-2">
 							<div class="input-group-prepend">
 								<div class="input-group-text"><strong>Mach Number (M)</strong></div>
 							</div>
-							<input type="text"  id="Ib" placeholder="If you want to calculate this parameter, input as 'x'"  class="form-control mt-1" name="num3"  required >
+							<input type="text"  id="Ib" placeholder="If you want to calculate this parameter, input as 'x'"  class="form-control mt-1" name="num3" value="{{num3}}" required >
 							</div>
 							<div class="center col mt-2">
 								<center>
-								<input type="submit" class="btn btn-primary" value="Calculate">
+								<input type="submit" class="btn btn-primary" value="Calculate" onclick="myFunction()">
 								<input type="button" class="btn btn-danger" onclick="Clean()" value="Reset" style="margin-top: 5px;">
 								</center>
 							</div>
@@ -117,26 +124,34 @@
 	</div>
 	</div>
 	{%if cas %}
-	<div class="container" id = "cards">
+	<div class = "container" id = "cards">
     <div class="card">
-        <h5 class="card-header" style="background-color:#00BFFF;color: white;text-align: center;">Detailed Explanation</h5>
+        <h1 class="card-header" style="background-color:#00BFFF;color: white;text-align: center;">{{stru}} in Mach Number is</h1>
         <div class="card-body">
+            <p><b>{{stru}} {{eq}} {{result}} {{unit}}</b></p>
+        </div>
+    </div>
+	</div>
+{% endif%}
+	{%if cas %}
+	<div class="container" id = "cards1">
+    <div class="card">
+        <h1 class="card-header" style="background-color:#00BFFF;color: white;text-align: center;">Steps to Find {{stru}} in Mach Number</h1>
+        <div class="card-body">
+			<p>Sound travels at different speeds in different medium and at different temperatures. That speed is compared with the speed of an object, say an aircraft or a boat. The ratio of the speed of an object and the speed of sound is known as the Mach number. </p>
             <h5>Given Values</h5>
             <ul>
-                <li><h5>{{strg1}} {{eq}} {{g1}} {{u1}}</h5></li>
-                <li><h5>{{strg2}} {{eq}} {{g2}} {{u2}}</h5></li>
+                <li><p>{{strg1}} {{eq}} {{g1}} {{u1}}</p></li>
+                <li><p>{{strg2}} {{eq}} {{g2}} {{u2}}</p></li>
             </ul>
-            <br>
-            <h5>We need to find the value of x, Here, in this case, it is <b>{{stru}}</b></h5>
-            <h2 class="card-text">
+            <p>We need to find the value of x, Here, in this case, it is <b>{{stru}}</b></p>
+            <h4 class="card-text">
                 As per the Mach Number Formula: <br>
                 Mach Number = (Speed of object)/(Speed of Sound in medium)
-            </h2>
-            <br>
-            <h5>On substitution of given values in the formula above, we get</h5>
-            <br>
-            <h4>The value of unknown x i.e.. </h4><br>
-			<h2><b>{{stru}} {{eq}} {{result}} {{unit}}</b></h2> 
+            </h4>
+            <p>On substitution of given values in the formula above, we get</p>
+            <p>The value of unknown x i.e.. </p>
+			<h4><b>{{stru}} {{eq}} {{result}} {{unit}}</b></h4> 
         </div>
     </div>
 	</div>

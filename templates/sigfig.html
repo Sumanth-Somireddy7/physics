@@ -78,13 +78,20 @@
 	<script>
 		function Clean(){
             document.getElementById('cards').innerHTML=''
+            document.getElementById('cards1').innerHTML=''
 		}
+        function handleSubmit(event) {
+            if(!validate()) {
+                event.preventDefault();
+            }
+            return;
+        }
 	</script>
 	<div class = "container">
 	<div class="card">
 		<h1 class="card-header" style="background-color:#00BFFF;color: white;">Round To Significant Digits Calculator</h1>
 		<div class="card-body">
-                <form action="sigfig" method = "POST">
+                <form method = "POST" onsubmit="handleSubmit();">
                     {% csrf_token %}
                     <div class="row">
                         <div class="col-sm-4">
@@ -93,12 +100,12 @@
                           <div class="card">
                             <div class="card-body">
                               <h5 class="card-title">Enter Decimal</h5>
-                                <input type="number" step = "any"  id="Ib" class="form-control mt-1" name="num1"  required >
+                                <input type="number" step = "any"  id="Ib" class="form-control mt-1" name="num1" value="{{num1}}" required >
                                 <h5 class="card-title">Enter Number of Significant Digits</h5>
-                                <input type="number" id="Ib" class="form-control mt-1" name="num2"  required >
+                                <input type="number" id="Ib" class="form-control mt-1" name="num2" value="{{num2}}" required >
                                 <div class="center col mt-2">
                                     <center>
-                                    <input type="submit" class="btn btn-primary" value="Calculate">
+                                    <input type="submit" class="btn btn-primary" value="Calculate" onclick="myFunction()">
                                     <input type="button" class="btn btn-danger" onclick="Clean()" value="Reset" style="margin-top: 5px;">
                                     </center>
                                 </div>
@@ -113,30 +120,50 @@
             </div>
             </div>
         </div>
-    {%if cas %}
+        {%if cas %}
 	<div class = "container" id = "cards">
     <div class="card">
-        <h1 class="card-header" style="background-color:#00BFFF;color: white;text-align: center;">Detailed Explanation</h1>
+        <h1 class="card-header" style="background-color:#00BFFF;color: white;text-align: center;">Rounding {{num1}} to {{num2}} Significant Digits is</h1>
         <div class="card-body">
-            <h3>Given Value = {{num1}}</h3><br>
-            <h3>Steps involved in Rounding off a number to {{num2}} Significant Digits </h3> 
+            <p><b>{{num1}} = {{res}}</b></p>
+        </div>
+    </div>
+	</div>
+{% endif%}
+    {%if cas %}
+	<div class = "container" id = "cards1">
+    <div class="card">
+        <h1 class="card-header" style="background-color:#00BFFF;color: white;text-align: center;">Steps to Round off {{num1}} to {{num2}} Significant Digits</h1>
+        <div class="card-body">
+            <p>Significant figures are all numbers that add to the meaning of the overall value of the number. To prevent repeating figures that aren't significant, numbers are often rounded</p>
+            <h5>Given Value = {{num1}}</h5><br>
+            <p>Steps involved in Rounding off a number to {{num2}} Significant Digits </p> 
             <ul>
-                <li><h4>Locate the {{st}} digit starting from left<br><br> Here it is, {{dec}} in {{num1}}</h4></li>
-                <li><h4>If the located digit is, 5 or more, then increase the previous digit by 1 <br><br>
+                <li><p>Locate the {{st}} digit starting from left<br> Here it is, {{dec}} in {{num1}}</p></li>
+                <li><p>If the located digit is, 5 or more, then increase the previous digit by 1 <br>
                     {%if c1%}
-                    Here it is, {{res}} as the located digit is {{dec}}</h4></li>
+                    Here it is, {{res}} as the located digit is {{dec}}</p></li>
                     {%endif%}
-                <li><h4>If the located digit is, 4 or less, then keep the previous digit as it is <br><br>
+                <li><p>If the located digit is, 4 or less, then keep the previous digit as it is <br>
                     {%if c2%}
-                    Here it is, {{res}} as the located digit is {{dec}}</h4></li>
+                    Here it is, {{res}} as the located digit is {{dec}}</p></li>
                     {%endif%}
-                <li><h4>Fill all the digits to the right to zeroe's</h4></li>
+                <li><p>Fill all the digits to the right to zeroe's</p></li>
             </ul>
-            <h4>The value of Rounded Value to {{num2}} Significant Digits is <br>
-                <h2><b>{{num1}} = {{res}}</b></h2> 
+            <p>The value of Rounded Value to {{num2}} Significant Digits is </p>>
+                <h4><b>{{num1}} = {{res}}</b></h4> 
         </div>
     </div>
 	</div>
 	{% endif %}
+    <script>
+        var scrollDiv = document.getElementById("cards").offsetTop;
+        window.scrollTo({ top: scrollDiv, behavior: 'smooth' });
+        
+            function myFunction() {
+                document.getElementById("cards").innerHTML = "";
+        
+            }
+        </script>
 </body>
 {% endblock %}

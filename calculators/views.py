@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .methods import *
 from num2words import num2words
+from django.http import HttpResponse
 
 # Create your views here.
 def speed_convert(request):
@@ -55,6 +56,9 @@ def kineticfriction(request):
         mu = ''
         nf = ''
         cas = False
+        num1 = ''
+        num2 = ''
+        num3 = ''
     else:
         if num1=='x':
             try:
@@ -75,6 +79,9 @@ def kineticfriction(request):
                 nf = ''
                 fr = ''
                 cas = False
+                num1 = ''
+                num2 = ''
+                num3 = ''
             else:
                 res = fricf(mu,nf)
                 fr = res
@@ -107,6 +114,9 @@ def kineticfriction(request):
                 mu = ''
                 nf = ''
                 cas = False
+                num1 = ''
+                num2 = ''
+                num3 = ''
             else:
                 res = fricm(fr,nf)
                 mu = res
@@ -139,6 +149,9 @@ def kineticfriction(request):
                 mu = ''
                 nf = ''
                 cas = False
+                num1 = ''
+                num2 = ''
+                num3 = ''
             else:
                 res = fricn(fr,mu)
                 nf = res
@@ -153,7 +166,7 @@ def kineticfriction(request):
                 st = 'Here in this case, it is'
                 cas = True
     return render(request,"kineticfriction.html",{'result':res,'fr':fr,'mu':mu,'nf':nf, 'strg1':strg1,'strg2':strg2,
-	'stru':stru,'g1':g1,'g2':g2,'x':x,'eq':eq,'unit':unit,'st':st,'cas':cas})
+	'stru':stru,'g1':g1,'g2':g2,'x':x,'eq':eq,'unit':unit,'st':st,'cas':cas,'num1':num1,'num2':num2,'num3':num3})
 def instantaneous_velocity(request):
     try:
         num1 = request.POST['num1']
@@ -185,6 +198,11 @@ def instantaneous_velocity(request):
         u3 = ''
         u4 = ''
         uu = ''
+        num1 = ''
+        num2 = ''
+        num3 = ''
+        num4 = ''
+        num5 = ''
     else:
         if num1 == 'x':
             try:
@@ -216,6 +234,11 @@ def instantaneous_velocity(request):
                 u3 = ''
                 u4 = ''
                 uu = ''
+                num1 = ''
+                num2 = ''
+                num3 = ''
+                num4 = ''
+                num5 = ''
             else:
                 res = fx2(x1,t2,t1,v)
                 x2 = res
@@ -267,6 +290,11 @@ def instantaneous_velocity(request):
                 u3 = ''
                 u4 = ''
                 uu = ''
+                num1 = ''
+                num2 = ''
+                num3 = ''
+                num4 = ''
+                num5 = ''
             else:
                 res = fx1(x2,t2,t1,v)
                 x1 = res
@@ -317,6 +345,11 @@ def instantaneous_velocity(request):
                 u3 = ''
                 u4 = ''
                 uu = ''
+                num1 = ''
+                num2 = ''
+                num3 = ''
+                num4 = ''
+                num5 = ''
             else:
                 res = ft2(x2,x1,t1,v)
                 x = 'x ='
@@ -367,7 +400,11 @@ def instantaneous_velocity(request):
                 u3 = ''
                 u4 = ''
                 uu = ''
-
+                num1 = ''
+                num2 = ''
+                num3 = ''
+                num4 = ''
+                num5 = ''
             else:
                 res = ft1(x2,x1,t2,v)
                 t1 = res
@@ -418,6 +455,11 @@ def instantaneous_velocity(request):
                 u3 = ''
                 u4 = ''
                 uu = ''
+                num1 = ''
+                num2 = ''
+                num3 = ''
+                num4 = ''
+                num5 = ''
             else:
                 res = fv(x2,x1,t2,t1)
                 v = res
@@ -440,7 +482,7 @@ def instantaneous_velocity(request):
                 uu = 'm/s'
     return render(request,"instantaneousvelocity.html",
     {'result':res,'x2':x2,'x1':x1,'t2':t2,'t1':t1,'v':v,'cas':cas,'g1':g1,'g2':g2,'g3':g3,'g4':g4,'uk':uk,'gn1':gn1,'gn2':gn2,'gn3':gn3,
-    'gn4':gn4,'x':x,'eq':eq,'u1':u1,'u2':u2,'u3':u3,'u4':u4,'uu':uu})
+    'gn4':gn4,'x':x,'eq':eq,'u1':u1,'u2':u2,'u3':u3,'u4':u4,'uu':uu,'num1':num1,'num2':num2,'num3':num3,'num4':num4,'num5':num5})
 
 def horsepower(request):
     try:
@@ -468,6 +510,10 @@ def horsepower(request):
         u2 = ''
         u3 = ''
         cas = False
+        num1 = ''
+        num2 = ''
+        num3 = ''
+        num4 = ''
     else:
         if num1=='x':
             try:
@@ -495,6 +541,10 @@ def horsepower(request):
                 u2 = ''
                 u3 = ''
                 cas = False
+                num1 = ''
+                num2 = ''
+                num3 = ''
+                num4 = ''
             else:
                 res = hpp(d,t,f)
                 p = res
@@ -537,6 +587,10 @@ def horsepower(request):
                 u2 = ''
                 u3 = ''
                 cas = False
+                num1 = ''
+                num2 = ''
+                num3 = ''
+                num4 = ''
             else:
                 res = hpd(p,t,f)
                 d = res
@@ -579,6 +633,10 @@ def horsepower(request):
                 u2 = ''
                 u3 = ''
                 cas = False
+                num1 = ''
+                num2 = ''
+                num3 = ''
+                num4 = ''
             else:
                 res = hpt(p,d,f)
                 t = res
@@ -621,6 +679,10 @@ def horsepower(request):
                 u2 = ''
                 u3 = ''
                 cas = False
+                num1 = ''
+                num2 = ''
+                num3 = ''
+                num4 = ''
             else:
                 res = hpf(p,d,t)
                 f = res
@@ -639,7 +701,7 @@ def horsepower(request):
                 unit = 'N'
                 cas = True
     return render(request,"horsepower.html",{'result':res,'p':p,'d':d,'t':t,'f':f ,'strg1':strg1,'strg2':strg2,'stru':stru,'g1':g1,'g2':g2,'x':x,'eq':eq,'unit':unit,'cas':cas,
-    'strg3':strg3,'g3':g3,'u1':u1,'u2':u2,'u3':u3})
+    'strg3':strg3,'g3':g3,'u1':u1,'u2':u2,'u3':u3,'num1':num1,'num2':num2,'num3':num3,'num4':num4})
 
 def impulse(request):
     try:
@@ -662,6 +724,9 @@ def impulse(request):
         u1 = ''
         u2 = ''
         cas = False
+        num1 = ''
+        num2 = ''
+        num3 = ''
     else:
         if num1=='x':
             try:
@@ -683,6 +748,9 @@ def impulse(request):
                 u1 = ''
                 u2 = ''
                 cas = False
+                num1 = ''
+                num2 = ''
+                num3 = ''
             else:
                 res = imj(f,t)
                 j = res
@@ -718,6 +786,9 @@ def impulse(request):
                 u2 = ''
                 u3 = ''
                 cas = False
+                num1 = ''
+                num2 = ''
+                num3 = ''
             else:
                 res = imf(j,t)
                 f = res
@@ -752,6 +823,9 @@ def impulse(request):
                 u1 = ''
                 u2 = ''
                 cas = False
+                num1 = ''
+                num2 = ''
+                num3 = ''
             else:
                 res = imt(j,f)
                 t = res
@@ -767,7 +841,7 @@ def impulse(request):
                 unit = 's'
                 cas = True
     return render(request,"impulse.html",{'result':res,'j':j,'f':f,'t':t, 'strg1':strg1,'strg2':strg2,'stru':stru,'g1':g1,'g2':g2,'x':x,'eq':eq,'unit':unit
-    ,'cas':cas,'u1':u1,'u2':u2})
+    ,'cas':cas,'u1':u1,'u2':u2,'num1':num1,'num2':num2,'num3':num3})
 
 def inductivereactance(request):
     try:
@@ -790,6 +864,9 @@ def inductivereactance(request):
         f = ''
         xl = ''
         cas = False
+        num1 = ''
+        num2 = ''
+        num3 = ''
     else:
         if num1=='x':
             try:
@@ -812,6 +889,9 @@ def inductivereactance(request):
                 f = ''
                 xl = ''
                 cas = False
+                num1 = ''
+                num2 = ''
+                num3 = ''
             else:
                 res = irxl(i,f)
                 xl = res
@@ -846,6 +926,9 @@ def inductivereactance(request):
                 f = ''
                 xl = ''
                 cas = False
+                num1 = ''
+                num2 = ''
+                num3 = ''
             else:
                 res = iri(xl,f)
                 i = res
@@ -880,6 +963,9 @@ def inductivereactance(request):
                 xl = ''
                 f = ''
                 cas = False
+                num1 = ''
+                num2 = ''
+                num3 = ''
             else:
                 res = irf(xl,i)
                 f = res
@@ -896,7 +982,7 @@ def inductivereactance(request):
                 cas = True
     return render(request,"inductivereactance.html",{'result':res,'fr':i,'mu':f,'nf':xl, 'strg1':strg1,
     'strg2':strg2,'stru':stru,'g1':g1,'u1':u1,'u2':u2,
-    'g2':g2,'x':x,'eq':eq,'unit':unit,'cas':cas})
+    'g2':g2,'x':x,'eq':eq,'unit':unit,'cas':cas,'num1':num1,'num2':num2,'num3':num3})
 
 def heattransfer(request):
     try:
@@ -923,6 +1009,10 @@ def heattransfer(request):
         dt = ''
         d = ''
         q = ''
+        num1 = ''
+        num2 = ''
+        num3 = ''
+        num4 = ''
         cas = False
     else:
         if num1=='x':
@@ -950,6 +1040,10 @@ def heattransfer(request):
                 dt = ''
                 d = ''
                 cas = False
+                num1 = ''
+                num2 = ''
+                num3 = ''
+                num4 = ''
             else:
                 res = heatq(k,dt,d)
                 q = res
@@ -992,6 +1086,10 @@ def heattransfer(request):
                 d = ''
                 k = ''
                 cas = False
+                num1 = ''
+                num2 = ''
+                num3 = ''
+                num4 = ''
             else:
                 res = heatk(q,dt,d)
                 k = res
@@ -1034,6 +1132,10 @@ def heattransfer(request):
                 d = ''
                 k = ''
                 cas = False
+                num1 = ''
+                num2 = ''
+                num3 = ''
+                num4 = ''
             else:
                 res = heatdt(q,k,d)
                 dt = res
@@ -1075,6 +1177,10 @@ def heattransfer(request):
                 k = ''
                 dt = ''
                 d = ''
+                num1 = ''
+                num2 = ''
+                num3 = ''
+                num4 = ''
                 cas = False
             else:
                 res = heatd(q,k,dt)
@@ -1095,7 +1201,7 @@ def heattransfer(request):
                 cas = True
     return render(request,"heattransfer.html",{'result':res,'q':q,'dt':dt,'d':d,'k':k, 'strg1':strg1,
     'strg2':strg2,'stru':stru,'g1':g1,'u1':u1,'u2':u2,'g3':g3,'u3':u3,'strg3':strg3,
-    'g2':g2,'x':x,'eq':eq,'unit':unit,'cas':cas})
+    'g2':g2,'x':x,'eq':eq,'unit':unit,'cas':cas,'num1':num1,'num2':num2,'num3':num3,'num4':num4})
 
 def machnumber(request):
     try:
@@ -1118,6 +1224,9 @@ def machnumber(request):
         u1 = ''
         u2 = ''
         cas = False
+        num1 = ''
+        num2 = ''
+        num3 = ''
     else:
         if num1=='x':
             try:
@@ -1139,6 +1248,9 @@ def machnumber(request):
                 u1 = ''
                 u2 = ''
                 cas = False
+                num1 = ''
+                num2 = ''
+                num3 = ''
             else:
                 res = machv(c,m)
                 v = res
@@ -1173,6 +1285,9 @@ def machnumber(request):
                 u1 = ''
                 u2 = ''
                 cas = False
+                num1 = ''
+                num2 = ''
+                num3 = ''
             else:
                 res = machc(v,m)
                 c = res
@@ -1207,6 +1322,9 @@ def machnumber(request):
                 u1 = ''
                 u2 = ''
                 cas = False
+                num1 = ''
+                num2 = ''
+                num3 = ''
             else:
                 res = machm(v,c)
                 m = res
@@ -1222,7 +1340,7 @@ def machnumber(request):
                 u2 = 'm/s'
                 cas = True
     return render(request,"machnumber.html",{'result':res,'v':v,'c':c,'m':m, 'strg1':strg1,'strg2':strg2,'stru':stru,'g1':g1,'g2':g2,'x':x,
-    'eq':eq,'unit':unit,'cas':cas,'u1':u1,'u2':u2})
+    'eq':eq,'unit':unit,'cas':cas,'u1':u1,'u2':u2,'num1':num1,'num2':num2,'num3':num3})
 def lcresonance(request):
     try:
         num1 = request.POST['num1']
@@ -1244,6 +1362,9 @@ def lcresonance(request):
         u1 = ''
         u2 = ''
         cas = False
+        num1 = ''
+        num2 = ''
+        num3 = ''
     else:
         if num1=='x':
             try:
@@ -1265,6 +1386,9 @@ def lcresonance(request):
                 l = ''
                 c = ''
                 cas = False
+                num1 = ''
+                num2 = ''
+                num3 = ''
             else:
                 res = lcf(c,l)
                 f = res
@@ -1299,6 +1423,9 @@ def lcresonance(request):
                 l = ''
                 c = ''
                 cas = False
+                num1 = ''
+                num2 = ''
+                num3 = ''
             else:
                 res = lcc(f,l)
                 c = res
@@ -1333,6 +1460,9 @@ def lcresonance(request):
                 l = ''
                 c = ''
                 cas = False
+                num1 = ''
+                num2 = ''
+                num3 = ''
             else:
                 res = lcl(f,c)
                 l = res
@@ -1348,7 +1478,7 @@ def lcresonance(request):
                 unit = 'H'
                 cas = True
     return render(request,"lcresonance.html",{'result':res,'f':f,'l':l,'c':c, 'strg1':strg1,'strg2':strg2,'stru':stru,'g1':g1,'g2':g2,
-    'x':x,'eq':eq,'unit':unit,'cas':cas,'u1':u1,'u2':u2})
+    'x':x,'eq':eq,'unit':unit,'cas':cas,'u1':u1,'u2':u2,'num1':num1,'num2':num2,'num3':num3})
 
 def zenerdiode(request):
     try:
@@ -1372,6 +1502,10 @@ def zenerdiode(request):
         zp = ''
         zv = ''
         rp = ''
+        num1 = ''
+        num2 = ''
+        num3 = ''
+        num4  =''
     else:
             try:
                 vmi = float(num1)
@@ -1394,6 +1528,10 @@ def zenerdiode(request):
                 zp = ''
                 rp = ''
                 res = ''
+                num1 = ''
+                num2 = ''
+                num3 = ''
+                num4 = ''
             else:
                 if vmi<=vout:
                     rest = ''
@@ -1429,7 +1567,7 @@ def zenerdiode(request):
                     gn4 = il
                     cas = True
     return render(request,"zenerdiode.html",{'rest':rest,'cas':cas,'res':res,'zv':zv,'zp':zp,'rp':rp,
-    'g1':g1,'g2':g2,'g3':g3,'gn1':gn1,'gn2':gn2,'gn3':gn3,'gn4':gn4,'g4':g4,'message':message})
+    'g1':g1,'g2':g2,'g3':g3,'gn1':gn1,'gn2':gn2,'gn3':gn3,'gn4':gn4,'g4':g4,'message':message,'num1':num1,'num2':num2,'num3':num3,'num4':num4})
 
 def centripetal_acceleration(request):
     try:
@@ -1448,6 +1586,9 @@ def centripetal_acceleration(request):
         u1 = ''
         u2 = ''
         unit = ''
+        num1 = ''
+        num2 = ''
+        num3 = ''
     else:
         if num1=='x':
             try:
@@ -1465,6 +1606,9 @@ def centripetal_acceleration(request):
                 u1 = ''
                 u2 = ''
                 unit = ''
+                num1 = ''
+                num2 = ''
+                num3 = ''
             else:
                 res = ''
                 cas = True
@@ -1493,6 +1637,9 @@ def centripetal_acceleration(request):
                 u1 = ''
                 u2 = ''
                 unit = ''
+                num1 = ''
+                num2 = ''
+                num3 = ''
             else:
                 res = ''
                 cas = True
@@ -1521,6 +1668,9 @@ def centripetal_acceleration(request):
                 u1 = ''
                 u2 = ''
                 unit = ''
+                num1 = ''
+                num2 = ''
+                num3 = ''
             else:
                 res = ''
                 cas = True
@@ -1534,7 +1684,7 @@ def centripetal_acceleration(request):
                 u2 = 'm/s'
                 unit = 'm'
     return render(request,'centripetalacceleration.html',{'res':res,'cas':cas,'ukv':ukv,'uks':uks,'g1':g1,'g2':g2,
-    'gn1':gn1,'gn2':gn2,'u1':u1,'u2':u2,'unit':unit})
+    'gn1':gn1,'gn2':gn2,'u1':u1,'u2':u2,'unit':unit,'num1':num1,'num2':num2,'num3':num3})
 
 def resistance_frequency_capacitance(request):
     try:
@@ -1556,6 +1706,9 @@ def resistance_frequency_capacitance(request):
         u1 = ''
         u2 = ''
         unit = ''
+        num1 = ''
+        num2 = ''
+        num3 = ''
     else:
         if num1=='x':
             try:
@@ -1576,6 +1729,9 @@ def resistance_frequency_capacitance(request):
                 u1 = ''
                 u2 = ''
                 unit = ''
+                num1 = ''
+                num2 = ''
+                num3 = ''
             else:
                 ukv = rfcr(f,c)
                 uks = 'Resistance'
@@ -1609,6 +1765,9 @@ def resistance_frequency_capacitance(request):
                 u2 = ''
                 r = ''
                 unit = ''
+                num1 = ''
+                num2 = ''
+                num3 = ''
             else:
                 ukv = rfcf(r,c)
                 uks = 'Frequency'
@@ -1642,6 +1801,9 @@ def resistance_frequency_capacitance(request):
                 u2 = ''
                 r = ''
                 unit = ''
+                num1 = ''
+                num2 = ''
+                num3 = ''
             else:
                 ukv = rfcc(r,f)
                 uks = 'Capacitance'
@@ -1656,7 +1818,7 @@ def resistance_frequency_capacitance(request):
                 c = ''
                 cas = True
     return render(request,'resistance-frequency-capacitance.html',{'gn1':gn1,'gn2':gn2,'g1':g1,'g2':g2,
-    'r':r,'f':f,'c':c,'u1':u1,'u2':u2,'unit':unit,'cas':cas,'res':res,'ukv':ukv,'uks':uks})
+    'r':r,'f':f,'c':c,'u1':u1,'u2':u2,'unit':unit,'cas':cas,'res':res,'ukv':ukv,'uks':uks,'num1':num1,'num2':num2,'num3':num3})
 def kinematic(request):
     try:
         num1 = request.POST['num1']
@@ -1689,6 +1851,11 @@ def kinematic(request):
         gn3 = ''
         f1 = ''
         f2 = ''
+        num1 = ''
+        num2 = ''
+        num3 = ''
+        num4 = ''
+        num5 = ''
     else:
         if   (num1=='x' and num2=='y') or (num1=='y' and num2 == 'x'):
             try:
@@ -1720,6 +1887,11 @@ def kinematic(request):
                 gn3 = ''
                 f1 = ''
                 f2 = ''
+                num1 = ''
+                num2 = ''
+                num3 = ''
+                num4 = ''
+                num5 = ''
             else:
                 ff = kinsa(u,v,t)
                 s = ff[0]
@@ -1773,6 +1945,11 @@ def kinematic(request):
                 gn3 = ''
                 f1 = ''
                 f2 = ''
+                num1 = ''
+                num2 = ''
+                num3 = ''
+                num4 = ''
+                num5 = ''
             else:
                 ff = kinsu(a,v,t)
                 s = ff[0]
@@ -1826,6 +2003,11 @@ def kinematic(request):
                 gn3 = ''
                 f1 = ''
                 f2 = ''
+                num1 = ''
+                num2 = ''
+                num3 = ''
+                num4 = ''
+                num5 = ''
             else:
                 ff = kinsv(a,u,t)
                 s = ff[0]
@@ -1879,6 +2061,11 @@ def kinematic(request):
                 gn3 = ''
                 f1 = ''
                 f2 = ''
+                num1 = ''
+                num2 = ''
+                num3 = ''
+                num4 = ''
+                num5 = ''
             else:
                 ff = kinst(a,u,v)
                 s = ff[0]
@@ -1932,6 +2119,11 @@ def kinematic(request):
                 gn3 = ''
                 f1 = ''
                 f2 = ''
+                num1 = ''
+                num2 = ''
+                num3 = ''
+                num4= ''
+                num5 = ''
             else:
                 ff = kinau(s,v,t)
                 a = ff[0]
@@ -1985,6 +2177,11 @@ def kinematic(request):
                 gn3 = ''
                 f1 = ''
                 f2 = ''
+                num1 = ''
+                num2 = ''
+                num3 = ''
+                num4 = ''
+                num5 = ''
             else:
                 ff = kinav(s,u,t)
                 a = ff[0]
@@ -2038,6 +2235,11 @@ def kinematic(request):
                 gn3 = ''
                 f1 = ''
                 f2 = ''
+                num1 = ''
+                num2 = ''
+                num3 = ''
+                num4 = ''
+                num5 = ''
             else:
                 ff = kinat(s,u,v)
                 a = ff[0]
@@ -2091,6 +2293,11 @@ def kinematic(request):
                 gn3 = ''
                 f1 = ''
                 f2 = ''
+                num1 = ''
+                num2 = ''
+                num3 = ''
+                num4 = ''
+                num5 = ''
             else:
                 ff = kinuv(s,a,t)
                 u = ff[0]
@@ -2144,6 +2351,11 @@ def kinematic(request):
                 gn3 = ''
                 f1 = ''
                 f2 = ''
+                num1 = ''
+                num2 = ''
+                num3 = ''
+                num4 = ''
+                num5 = ''
             else:
                 ff = kinut(s,a,v)
                 u = ff[0]
@@ -2197,6 +2409,12 @@ def kinematic(request):
                 f1 = ''
                 f2 = ''
                 cas = False
+                num1 = ''
+                num2 = ''
+                num3 = ''
+                num4 = ''
+                num5 = ''
+            
             else:
                 ff = kinvt(s,a,u)
                 v = ff[0]
@@ -2222,7 +2440,7 @@ def kinematic(request):
                 f2 = 'v = u+at'
     return render(request,'kinematics.html',{'s':s,'a':a,'u':u,'v':v,'t':t,'g1':g1,'g2':g2,'g3':g3,'u1':u1,'u2':u2,'u3':u3,
     'uk1':uk1,'uk2':uk2,'unit1':unit1,'unit2':unit2,'cas':cas,'res':res,'tf1':tf1,'tf2':tf2,'gn1':gn1,'gn2':gn2,'gn3':gn3,
-    'f1':f1,'f2':f2})
+    'f1':f1,'f2':f2,'num1':num1,'num2':num2,'num3':num3,'num4':num4,'num5':num5})
 
 def  voltageresistancepowercurrent(request):
     try:
@@ -2248,6 +2466,10 @@ def  voltageresistancepowercurrent(request):
         u3 = ''
         unit = ''
         cas = False
+        num1 = ''
+        num2 = ''
+        num3 = ''
+        num4 = ''
     else:
         if num1=='x':
             try:
@@ -2272,6 +2494,10 @@ def  voltageresistancepowercurrent(request):
                 u3 = ''
                 unit = ''
                 cas = False
+                num1 = ''
+                num2 = ''
+                num3 = ''
+                num4 = ''
             else:
                 ukv = viprv(r,i,p)
                 v = ''
@@ -2310,6 +2536,10 @@ def  voltageresistancepowercurrent(request):
                 u3 = ''
                 unit = ''
                 cas = False
+                num1 = ''
+                num2 = ''
+                num3 = ''
+                num4 = ''
             else:
                 ukv = viprr(v,i,p)
                 r = ''
@@ -2348,6 +2578,10 @@ def  voltageresistancepowercurrent(request):
                 u3 = ''
                 unit = ''
                 cas = False
+                num1 = ''
+                num2 = ''
+                num3 = ''
+                num4 = ''
             else:
                 ukv = vipri(v,r,p)
                 i = ''
@@ -2386,6 +2620,10 @@ def  voltageresistancepowercurrent(request):
                 u3 = ''
                 unit = ''
                 cas = False
+                num1 = ''
+                num2 = ''
+                num3 = ''
+                num4 = ''
             else:
                 ukv = viprp(v,r,i)
                 p = ''
@@ -2402,7 +2640,7 @@ def  voltageresistancepowercurrent(request):
                 unit = 'Watts'
                 cas = True
     return render(request,'voltageresistancepowercurrent.html',{'ukv':ukv,'uks':uks,'v':v,'i':i,'p':p,'r':r,'gn1':gn1,'gn2':gn2,'gn3':gn3,
-    'g1':g1,'g2':g2,'g3':g3,'u1':u1,'u2':u2,'u3':u3,'unit':unit,'cas':cas})
+    'g1':g1,'g2':g2,'g3':g3,'u1':u1,'u2':u2,'u3':u3,'unit':unit,'cas':cas,'num1':num1,'num2':num2,'num3':num3,'num4':num4})
 
 def specificheatanddensity(request):
     try:
@@ -2433,6 +2671,11 @@ def specificheatanddensity(request):
         u4 = ''
         unit = ''
         cas = False
+        num1 = ''
+        num2 = ''
+        num3 = ''
+        num4 = ''
+        num5 = ''
     else:
         if num1=='x':
             try:
@@ -2462,6 +2705,11 @@ def specificheatanddensity(request):
                 u4 = ''
                 unit = ''
                 cas = False
+                num1 = ''
+                num2 = ''
+                num3 = ''
+                num4 = ''
+                num5 = ''
             else:
                 ukv = shdc(m,t1,t2,q)
                 c = ''
@@ -2508,6 +2756,11 @@ def specificheatanddensity(request):
                 u4 = ''
                 unit = ''
                 cas = False
+                num1 = ''
+                num2 = ''
+                num3 = ''
+                num4 = ''
+                num5 = ''
             else:
                 ukv = shdm(c,t1,t2,q)
                 m = ''
@@ -2554,6 +2807,11 @@ def specificheatanddensity(request):
                 u4 = ''
                 unit = ''
                 cas = False
+                num1 = ''
+                num2 = ''
+                num3 = ''
+                num4 = ''
+                num5 = ''
             else:
                 ukv = shdt1(c,m,t2,q)
                 t1 = ''
@@ -2600,6 +2858,11 @@ def specificheatanddensity(request):
                 u4 = ''
                 unit = ''
                 cas = False
+                num1 = ''
+                num2 = ''
+                num3 = ''
+                num4 = ''
+                num5 = ''
             else:
                 ukv = shdt2(c,m,t1,q)
                 t2 = ''
@@ -2646,6 +2909,11 @@ def specificheatanddensity(request):
                 u4 = ''
                 unit = ''
                 cas = False
+                num1 = ''
+                num2 = ''
+                num3 = ''
+                num4 = ''
+                num5 = ''
             else:
                 ukv = shdq(c,m,t1,t2)
                 q = ''
@@ -2666,7 +2934,7 @@ def specificheatanddensity(request):
                 cas = True
 
     return render(request,'specificheatanddensity.html',{'ukv':ukv,'uks':uks,'c':c,'q':q,'m':m,'t2':t2,'t1':t1,'gn1':gn1,'gn2':gn2,'gn3':gn3,'gn4':gn4,
-    'g1':g1,'g2':g2,'g3':g3,'g4':g4,'u1':u1,'u2':u2,'u3':u3,'u4':u4,'unit':unit,'cas':cas})
+    'g1':g1,'g2':g2,'g3':g3,'g4':g4,'u1':u1,'u2':u2,'u3':u3,'u4':u4,'unit':unit,'cas':cas,'num1':num1,'num2':num2,'num3':num3,'num4':num4,'num5':num5})
 def roundone(request):
     try:
         num1 = request.POST['num1']
@@ -2792,10 +3060,12 @@ def time_clock_15_minutes(request):
         final = ''
         cas = False
         scas = False
+        min = ''
     else:
         num1 = str(num1)
         n = num1.split(":")
-        if n[0] in ('00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12','13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23'):
+        min = n[0]
+        if min in ('00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12','13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23'):
             final = min_15_round(n[0],n[1])
             cas = True
             if n[1] in ('53', '54', '55', '56', '57', '58', '59', '60'):
@@ -2806,7 +3076,7 @@ def time_clock_15_minutes(request):
             final = ''
             cas = False
             scas = False
-    return render(request,'time15minute.html',{'final':final,'cas':cas,'min':n[1],'scas':scas})
+    return render(request,'time15minute.html',{'final':final,'cas':cas,'min':min,'scas':scas,'num1':num1})
 
 def nearest_eighth(request):
     try:
@@ -2851,14 +3121,917 @@ def identifying_perfect_cube(request):
             c2 = True
     return render(request,'identifyperfectcube.html',{'cas':cas,'resa':resa,'num1':num1,'resb':resb,'c1':c1,'c2':c2,'st':st})
 
+def cancel_out(request):
+    try:
+        num1 = request.POST['num1']
+        num2 = request.POST['num2']
+    except:
+        num1 = ''
+        num2 = ''
+        resn = ''
+        resd = ''
+        cas = False
+        gcd = ''
+    else:
+        res = cancel(num1,num2)
+        resn = res[0]
+        resd = res[1]
+        gcd = res[2]
+        cas = True
+    return render(request,'cancelout.html',{'num1':num1,'num2':num2,'cas':cas,'resn':resn,'resd':resd,'gcd':gcd})
 
+def feet_inch(request):
+    try:
+        num1 = request.POST['num1']
+        num2 = request.POST['num2']
+    except:
+        num1 = ''
+        num2 = ''
+        msg = ''
+        ro = ''
+        resf = ''
+        resi = ''
+        cas = False
+        cas1 = False
+    else:
+        try:
+            num1 = int(num1)
+            num2 = int(num2)
+        except:
+            num1 = ''
+            num2 = ''
+            msg = ''
+            ro = ''
+            resf = ''
+            resi = ''
+            cas = False
+            cas1 = False
+        else:
+            res = feetinch(num1,num2)
+            resf = res[0]
+            resi = res[1]
+            msg = res[2]
+            ro = res[3]
+            cas1 = res[4]
+            cas = res[4]
+    return render(request,'feetinch.html',{'cas':cas,'resf':resf,'resi':resi,'msg':msg,'ro':ro,'num1':num1,'num2':num2,'cas1':cas1})
 
+def nearest_feet(request):
+    try:
+        num1 = request.POST['num1']
+    except:
+        num1 = ''
+        cas = False
+        whole = ''
+        tens = ''
+        hund = ''
+        thou = ''
+        cas1 = False
+        placeten = ''
+        placehun = ''
+        placetho = ''
+        st = ''
+        st1 = ''
+        tensid = ''
+        sh = ''
+        sh1 = ''
+        hunid = ''
+        sth = ''
+        sth1 = ''
+        thouid = ''
+    else:
+        try:
+            num1 = float(num1)
+        except:
+            num1 = ''
+            cas = False
+            whole = ''
+            tens = ''
+            hund = ''
+            thou = ''
+            cas1 = False
+            placeten = ''
+            placehun = ''
+            placetho = ''
+            st = ''
+            st1 = ''
+            tensid = ''
+            sh = ''
+            sh1 = ''
+            hunid = ''
+            sth = ''
+            sth1 = ''
+            thouid = ''
+        else:
+            if num1.is_integer():
+                cas1 = False
+            else:
+                cas1 = True
+            rnth = h_3(num1)
+            rnh = h_2(num1)
+            rnt = h_1(num1)
+            placeten = 'ones'
+            placehun = 'tens'
+            placetho = 'hundred'
+            st = rnt[0]
+            st1 = rnt[1]
+            tensid = rnt[2]
+            sh = rnh[0]
+            sh1 = rnh[1]
+            hunid = rnh[2]
+            sth = rnth[0]
+            sth1 = rnth[1]
+            thouid = rnth[2]
+            res = nearfeet(num1)
+            whole = res[0]
+            tens = res[1]
+            hund = res[2]
+            thou = res[3]
+            cas = True
+    return render(request,'nearestfeet.html',{'num1':num1,'whole':whole,'tens':tens,'hund':hund,'thou':thou,'cas':cas,
+    'placeten':placeten,'placehun':placehun,'placetho':placetho,'st':st,'st1':st,'sh':sh,'sh1':sh1,
+    'sth':sth,'sth1':sth1,'tensid':tensid,'hunid':hunid,'thouid':thouid,'cas1':cas1})
 
+def meter_centimeter(request):
+    try:
+        num1 = request.POST['num1']
+        num2 = request.POST['num2']
+    except:
+        num1 = ''
+        num2 = ''
+        msg = ''
+        ro = ''
+        resf = ''
+        resi = ''
+        cas = False
+        cas1 = False
+    else:
+        try:
+            num1 = int(num1)
+            num2 = int(num2)
+        except:
+            num1 = ''
+            num2 = ''
+            msg = ''
+            ro = ''
+            resf = ''
+            resi = ''
+            cas = False
+            cas1 = False
+        else:
+            res = m_cm(num1,num2)
+            resf = res[0]
+            resi = res[1]
+            msg = res[2]
+            ro = res[3]
+            cas1 = res[4]
+            cas = res[4]
+    return render(request,'metercentimeter.html',{'cas':cas,'resf':resf,'resi':resi,'msg':msg,'ro':ro,'num1':num1,'num2':num2,'cas1':cas1})
 
+def nearest_meter(request):
+    try:
+        num1 = request.POST['num1']
+    except:
+        num1 = ''
+        cas = False
+        whole = ''
+        tens = ''
+        hund = ''
+        thou = ''
+        cas1 = False
+        placeten = ''
+        placehun = ''
+        placetho = ''
+        st = ''
+        st1 = ''
+        tensid = ''
+        sh = ''
+        sh1 = ''
+        hunid = ''
+        sth = ''
+        sth1 = ''
+        thouid = ''
+    else:
+        try:
+            num1 = float(num1)
+        except:
+            num1 = ''
+            cas = False
+            whole = ''
+            tens = ''
+            hund = ''
+            thou = ''
+            cas1 = False
+            placeten = ''
+            placehun = ''
+            placetho = ''
+            st = ''
+            st1 = ''
+            tensid = ''
+            sh = ''
+            sh1 = ''
+            hunid = ''
+            sth = ''
+            sth1 = ''
+            thouid = ''
+        else:
+            if num1.is_integer():
+                cas1 = False
+            else:
+                cas1 = True
+            rnth = h_3(num1)
+            rnh = h_2(num1)
+            rnt = h_1(num1)
+            placeten = 'ones'
+            placehun = 'tens'
+            placetho = 'hundred'
+            st = rnt[0]
+            st1 = rnt[1]
+            tensid = rnt[2]
+            sh = rnh[0]
+            sh1 = rnh[1]
+            hunid = rnh[2]
+            sth = rnth[0]
+            sth1 = rnth[1]
+            thouid = rnth[2]
+            res = nearfeet(num1)
+            whole = res[0]
+            tens = res[1]
+            hund = res[2]
+            thou = res[3]
+            cas = True
+    return render(request,'nearestmeter.html',{'num1':num1,'whole':whole,'tens':tens,'hund':hund,'thou':thou,'cas':cas,
+    'placeten':placeten,'placehun':placehun,'placetho':placetho,'st':st,'st1':st,'sh':sh,'sh1':sh1,
+    'sth':sth,'sth1':sth1,'tensid':tensid,'hunid':hunid,'thouid':thouid,'cas1':cas1})
 
+def centimeter_millimeter(request):
+    try:
+        num1 = request.POST['num1']
+        num2 = request.POST['num2']
+    except:
+        num1 = ''
+        num2 = ''
+        msg = ''
+        ro = ''
+        resf = ''
+        resi = ''
+        cas = False
+        cas1 = False
+    else:
+        try:
+            num1 = int(num1)
+            num2 = int(num2)
+        except:
+            num1 = ''
+            num2 = ''
+            msg = ''
+            ro = ''
+            resf = ''
+            resi = ''
+            cas = False
+            cas1 = False
+        else:
+            res = cm_mm(num1,num2)
+            resf = res[0]
+            resi = res[1]
+            msg = res[2]
+            ro = res[3]
+            cas1 = res[4]
+            cas = res[4]
+    return render(request,'centimetermillimeter.html',{'cas':cas,'resf':resf,'resi':resi,'msg':msg,'ro':ro,'num1':num1,'num2':num2,'cas1':cas1})
 
+def nearest_centimeter(request):
+    try:
+        num1 = request.POST['num1']
+    except:
+        num1 = ''
+        cas = False
+        whole = ''
+        tens = ''
+        hund = ''
+        thou = ''
+        cas1 = False
+        placeten = ''
+        placehun = ''
+        placetho = ''
+        st = ''
+        st1 = ''
+        tensid = ''
+        sh = ''
+        sh1 = ''
+        hunid = ''
+        sth = ''
+        sth1 = ''
+        thouid = ''
+    else:
+        try:
+            num1 = float(num1)
+        except:
+            num1 = ''
+            cas = False
+            whole = ''
+            tens = ''
+            hund = ''
+            thou = ''
+            cas1 = False
+            placeten = ''
+            placehun = ''
+            placetho = ''
+            st = ''
+            st1 = ''
+            tensid = ''
+            sh = ''
+            sh1 = ''
+            hunid = ''
+            sth = ''
+            sth1 = ''
+            thouid = ''
+        else:
+            if num1.is_integer():
+                cas1 = False
+            else:
+                cas1 = True
+            rnth = h_3(num1)
+            rnh = h_2(num1)
+            rnt = h_1(num1)
+            placeten = 'ones'
+            placehun = 'tens'
+            placetho = 'hundred'
+            st = rnt[0]
+            st1 = rnt[1]
+            tensid = rnt[2]
+            sh = rnh[0]
+            sh1 = rnh[1]
+            hunid = rnh[2]
+            sth = rnth[0]
+            sth1 = rnth[1]
+            thouid = rnth[2]
+            res = nearfeet(num1)
+            whole = res[0]
+            tens = res[1]
+            hund = res[2]
+            thou = res[3]
+            cas = True
+    return render(request,'nearestcentimeter.html',{'num1':num1,'whole':whole,'tens':tens,'hund':hund,'thou':thou,'cas':cas,
+    'placeten':placeten,'placehun':placehun,'placetho':placetho,'st':st,'st1':st,'sh':sh,'sh1':sh1,
+    'sth':sth,'sth1':sth1,'tensid':tensid,'hunid':hunid,'thouid':thouid,'cas1':cas1})
 
+def kilometer_meter(request):
+    try:
+        num1 = request.POST['num1']
+        num2 = request.POST['num2']
+    except:
+        num1 = ''
+        num2 = ''
+        msg = ''
+        ro = ''
+        resf = ''
+        resi = ''
+        cas = False
+        cas1 = False
+    else:
+        try:
+            num1 = int(num1)
+            num2 = int(num2)
+        except:
+            num1 = ''
+            num2 = ''
+            msg = ''
+            ro = ''
+            resf = ''
+            resi = ''
+            cas = False
+            cas1 = False
+        else:
+            res = km_m(num1,num2)
+            resf = res[0]
+            resi = res[1]
+            msg = res[2]
+            ro = res[3]
+            cas1 = res[4]
+            cas = res[4]
+    return render(request,'kilometermeter.html',{'cas':cas,'resf':resf,'resi':resi,'msg':msg,'ro':ro,'num1':num1,'num2':num2,'cas1':cas1})
 
-        
+def nearest_kilometer(request):
+    try:
+        num1 = request.POST['num1']
+    except:
+        num1 = ''
+        cas = False
+        whole = ''
+        tens = ''
+        hund = ''
+        thou = ''
+        cas1 = False
+        placeten = ''
+        placehun = ''
+        placetho = ''
+        st = ''
+        st1 = ''
+        tensid = ''
+        sh = ''
+        sh1 = ''
+        hunid = ''
+        sth = ''
+        sth1 = ''
+        thouid = ''
+    else:
+        try:
+            num1 = float(num1)
+        except:
+            num1 = ''
+            cas = False
+            whole = ''
+            tens = ''
+            hund = ''
+            thou = ''
+            cas1 = False
+            placeten = ''
+            placehun = ''
+            placetho = ''
+            st = ''
+            st1 = ''
+            tensid = ''
+            sh = ''
+            sh1 = ''
+            hunid = ''
+            sth = ''
+            sth1 = ''
+            thouid = ''
+        else:
+            if num1.is_integer():
+                cas1 = False
+            else:
+                cas1 = True
+            rnth = h_3(num1)
+            rnh = h_2(num1)
+            rnt = h_1(num1)
+            placeten = 'ones'
+            placehun = 'tens'
+            placetho = 'hundred'
+            st = rnt[0]
+            st1 = rnt[1]
+            tensid = rnt[2]
+            sh = rnh[0]
+            sh1 = rnh[1]
+            hunid = rnh[2]
+            sth = rnth[0]
+            sth1 = rnth[1]
+            thouid = rnth[2]
+            res = nearfeet(num1)
+            whole = res[0]
+            tens = res[1]
+            hund = res[2]
+            thou = res[3]
+            cas = True
+    return render(request,'nearestkilometer.html',{'num1':num1,'whole':whole,'tens':tens,'hund':hund,'thou':thou,'cas':cas,
+    'placeten':placeten,'placehun':placehun,'placetho':placetho,'st':st,'st1':st,'sh':sh,'sh1':sh1,
+    'sth':sth,'sth1':sth1,'tensid':tensid,'hunid':hunid,'thouid':thouid,'cas1':cas1})
+def nearest_millimeter(request):
+    try:
+        num1 = request.POST['num1']
+    except:
+        num1 = ''
+        cas = False
+        whole = ''
+        tens = ''
+        hund = ''
+        thou = ''
+        cas1 = False
+        placeten = ''
+        placehun = ''
+        placetho = ''
+        st = ''
+        st1 = ''
+        tensid = ''
+        sh = ''
+        sh1 = ''
+        hunid = ''
+        sth = ''
+        sth1 = ''
+        thouid = ''
+    else:
+        try:
+            num1 = float(num1)
+        except:
+            num1 = ''
+            cas = False
+            whole = ''
+            tens = ''
+            hund = ''
+            thou = ''
+            cas1 = False
+            placeten = ''
+            placehun = ''
+            placetho = ''
+            st = ''
+            st1 = ''
+            tensid = ''
+            sh = ''
+            sh1 = ''
+            hunid = ''
+            sth = ''
+            sth1 = ''
+            thouid = ''
+        else:
+            if num1.is_integer():
+                cas1 = False
+            else:
+                cas1 = True
+            rnth = h_3(num1)
+            rnh = h_2(num1)
+            rnt = h_1(num1)
+            placeten = 'ones'
+            placehun = 'tens'
+            placetho = 'hundred'
+            st = rnt[0]
+            st1 = rnt[1]
+            tensid = rnt[2]
+            sh = rnh[0]
+            sh1 = rnh[1]
+            hunid = rnh[2]
+            sth = rnth[0]
+            sth1 = rnth[1]
+            thouid = rnth[2]
+            res = nearfeet(num1)
+            whole = res[0]
+            tens = res[1]
+            hund = res[2]
+            thou = res[3]
+            cas = True
+    return render(request,'nearestmillimeter.html',{'num1':num1,'whole':whole,'tens':tens,'hund':hund,'thou':thou,'cas':cas,
+    'placeten':placeten,'placehun':placehun,'placetho':placetho,'st':st,'st1':st,'sh':sh,'sh1':sh1,
+    'sth':sth,'sth1':sth1,'tensid':tensid,'hunid':hunid,'thouid':thouid,'cas1':cas1})
 
+def millimeter_micrometer(request):
+    try:
+        num1 = request.POST['num1']
+        num2 = request.POST['num2']
+    except:
+        num1 = ''
+        num2 = ''
+        msg = ''
+        ro = ''
+        resf = ''
+        resi = ''
+        cas = False
+        cas1 = False
+    else:
+        try:
+            num1 = int(num1)
+            num2 = int(num2)
+        except:
+            num1 = ''
+            num2 = ''
+            msg = ''
+            ro = ''
+            resf = ''
+            resi = ''
+            cas = False
+            cas1 = False
+        else:
+            res = mm_mi(num1,num2)
+            resf = res[0]
+            resi = res[1]
+            msg = res[2]
+            ro = res[3]
+            cas1 = res[4]
+            cas = res[4]
+    return render(request,'millimetermicrometer.html',{'cas':cas,'resf':resf,'resi':resi,'msg':msg,'ro':ro,'num1':num1,'num2':num2,'cas1':cas1})
+def nearest_micrometer(request):
+    try:
+        num1 = request.POST['num1']
+    except:
+        num1 = ''
+        cas = False
+        whole = ''
+        tens = ''
+        hund = ''
+        thou = ''
+        cas1 = False
+        placeten = ''
+        placehun = ''
+        placetho = ''
+        st = ''
+        st1 = ''
+        tensid = ''
+        sh = ''
+        sh1 = ''
+        hunid = ''
+        sth = ''
+        sth1 = ''
+        thouid = ''
+    else:
+        try:
+            num1 = float(num1)
+        except:
+            num1 = ''
+            cas = False
+            whole = ''
+            tens = ''
+            hund = ''
+            thou = ''
+            cas1 = False
+            placeten = ''
+            placehun = ''
+            placetho = ''
+            st = ''
+            st1 = ''
+            tensid = ''
+            sh = ''
+            sh1 = ''
+            hunid = ''
+            sth = ''
+            sth1 = ''
+            thouid = ''
+        else:
+            if num1.is_integer():
+                cas1 = False
+            else:
+                cas1 = True
+            rnth = h_3(num1)
+            rnh = h_2(num1)
+            rnt = h_1(num1)
+            placeten = 'ones'
+            placehun = 'tens'
+            placetho = 'hundred'
+            st = rnt[0]
+            st1 = rnt[1]
+            tensid = rnt[2]
+            sh = rnh[0]
+            sh1 = rnh[1]
+            hunid = rnh[2]
+            sth = rnth[0]
+            sth1 = rnth[1]
+            thouid = rnth[2]
+            res = nearfeet(num1)
+            whole = res[0]
+            tens = res[1]
+            hund = res[2]
+            thou = res[3]
+            cas = True
+    return render(request,'nearestmicrometer.html',{'num1':num1,'whole':whole,'tens':tens,'hund':hund,'thou':thou,'cas':cas,
+    'placeten':placeten,'placehun':placehun,'placetho':placetho,'st':st,'st1':st,'sh':sh,'sh1':sh1,
+    'sth':sth,'sth1':sth1,'tensid':tensid,'hunid':hunid,'thouid':thouid,'cas1':cas1})
 
+def micrometer_nanometer(request):
+    try:
+        num1 = request.POST['num1']
+        num2 = request.POST['num2']
+    except:
+        num1 = ''
+        num2 = ''
+        msg = ''
+        ro = ''
+        resf = ''
+        resi = ''
+        cas = False
+        cas1 = False
+    else:
+        try:
+            num1 = int(num1)
+            num2 = int(num2)
+        except:
+            num1 = ''
+            num2 = ''
+            msg = ''
+            ro = ''
+            resf = ''
+            resi = ''
+            cas = False
+            cas1 = False
+        else:
+            res = mm_mi(num1,num2)
+            resf = res[0]
+            resi = res[1]
+            msg = res[2]
+            ro = res[3]
+            cas1 = res[4]
+            cas = res[4]
+    return render(request,'micrometernanometer.html',{'cas':cas,'resf':resf,'resi':resi,'msg':msg,'ro':ro,'num1':num1,'num2':num2,'cas1':cas1})
+
+def nearest_nanometer(request):
+    try:
+        num1 = request.POST['num1']
+    except:
+        num1 = ''
+        cas = False
+        whole = ''
+        tens = ''
+        hund = ''
+        thou = ''
+        cas1 = False
+        placeten = ''
+        placehun = ''
+        placetho = ''
+        st = ''
+        st1 = ''
+        tensid = ''
+        sh = ''
+        sh1 = ''
+        hunid = ''
+        sth = ''
+        sth1 = ''
+        thouid = ''
+    else:
+        try:
+            num1 = float(num1)
+        except:
+            num1 = ''
+            cas = False
+            whole = ''
+            tens = ''
+            hund = ''
+            thou = ''
+            cas1 = False
+            placeten = ''
+            placehun = ''
+            placetho = ''
+            st = ''
+            st1 = ''
+            tensid = ''
+            sh = ''
+            sh1 = ''
+            hunid = ''
+            sth = ''
+            sth1 = ''
+            thouid = ''
+        else:
+            if num1.is_integer():
+                cas1 = False
+            else:
+                cas1 = True
+            rnth = h_3(num1)
+            rnh = h_2(num1)
+            rnt = h_1(num1)
+            placeten = 'ones'
+            placehun = 'tens'
+            placetho = 'hundred'
+            st = rnt[0]
+            st1 = rnt[1]
+            tensid = rnt[2]
+            sh = rnh[0]
+            sh1 = rnh[1]
+            hunid = rnh[2]
+            sth = rnth[0]
+            sth1 = rnth[1]
+            thouid = rnth[2]
+            res = nearfeet(num1)
+            whole = res[0]
+            tens = res[1]
+            hund = res[2]
+            thou = res[3]
+            cas = True
+    return render(request,'nearestnanometer.html',{'num1':num1,'whole':whole,'tens':tens,'hund':hund,'thou':thou,'cas':cas,
+    'placeten':placeten,'placehun':placehun,'placetho':placetho,'st':st,'st1':st,'sh':sh,'sh1':sh1,
+    'sth':sth,'sth1':sth1,'tensid':tensid,'hunid':hunid,'thouid':thouid,'cas1':cas1})
+def nearest_yard(request):
+    try:
+        num1 = request.POST['num1']
+    except:
+        num1 = ''
+        cas = False
+        whole = ''
+        tens = ''
+        hund = ''
+        thou = ''
+        cas1 = False
+        placeten = ''
+        placehun = ''
+        placetho = ''
+        st = ''
+        st1 = ''
+        tensid = ''
+        sh = ''
+        sh1 = ''
+        hunid = ''
+        sth = ''
+        sth1 = ''
+        thouid = ''
+    else:
+        try:
+            num1 = float(num1)
+        except:
+            num1 = ''
+            cas = False
+            whole = ''
+            tens = ''
+            hund = ''
+            thou = ''
+            cas1 = False
+            placeten = ''
+            placehun = ''
+            placetho = ''
+            st = ''
+            st1 = ''
+            tensid = ''
+            sh = ''
+            sh1 = ''
+            hunid = ''
+            sth = ''
+            sth1 = ''
+            thouid = ''
+        else:
+            if num1.is_integer():
+                cas1 = False
+            else:
+                cas1 = True
+            rnth = h_3(num1)
+            rnh = h_2(num1)
+            rnt = h_1(num1)
+            placeten = 'ones'
+            placehun = 'tens'
+            placetho = 'hundred'
+            st = rnt[0]
+            st1 = rnt[1]
+            tensid = rnt[2]
+            sh = rnh[0]
+            sh1 = rnh[1]
+            hunid = rnh[2]
+            sth = rnth[0]
+            sth1 = rnth[1]
+            thouid = rnth[2]
+            res = nearfeet(num1)
+            whole = res[0]
+            tens = res[1]
+            hund = res[2]
+            thou = res[3]
+            cas = True
+    return render(request,'nearestyard.html',{'num1':num1,'whole':whole,'tens':tens,'hund':hund,'thou':thou,'cas':cas,
+    'placeten':placeten,'placehun':placehun,'placetho':placetho,'st':st,'st1':st,'sh':sh,'sh1':sh1,
+    'sth':sth,'sth1':sth1,'tensid':tensid,'hunid':hunid,'thouid':thouid,'cas1':cas1})
+def nearest_mile(request):
+    try:
+        num1 = request.POST['num1']
+    except:
+        num1 = ''
+        cas = False
+        whole = ''
+        tens = ''
+        hund = ''
+        thou = ''
+        cas1 = False
+        placeten = ''
+        placehun = ''
+        placetho = ''
+        st = ''
+        st1 = ''
+        tensid = ''
+        sh = ''
+        sh1 = ''
+        hunid = ''
+        sth = ''
+        sth1 = ''
+        thouid = ''
+    else:
+        try:
+            num1 = float(num1)
+        except:
+            num1 = ''
+            cas = False
+            whole = ''
+            tens = ''
+            hund = ''
+            thou = ''
+            cas1 = False
+            placeten = ''
+            placehun = ''
+            placetho = ''
+            st = ''
+            st1 = ''
+            tensid = ''
+            sh = ''
+            sh1 = ''
+            hunid = ''
+            sth = ''
+            sth1 = ''
+            thouid = ''
+        else:
+            if num1.is_integer():
+                cas1 = False
+            else:
+                cas1 = True
+            rnth = h_3(num1)
+            rnh = h_2(num1)
+            rnt = h_1(num1)
+            placeten = 'ones'
+            placehun = 'tens'
+            placetho = 'hundred'
+            st = rnt[0]
+            st1 = rnt[1]
+            tensid = rnt[2]
+            sh = rnh[0]
+            sh1 = rnh[1]
+            hunid = rnh[2]
+            sth = rnth[0]
+            sth1 = rnth[1]
+            thouid = rnth[2]
+            res = nearfeet(num1)
+            whole = res[0]
+            tens = res[1]
+            hund = res[2]
+            thou = res[3]
+            cas = True
+    return render(request,'nearestmile.html',{'num1':num1,'whole':whole,'tens':tens,'hund':hund,'thou':thou,'cas':cas,
+    'placeten':placeten,'placehun':placehun,'placetho':placetho,'st':st,'st1':st,'sh':sh,'sh1':sh1,
+    'sth':sth,'sth1':sth1,'tensid':tensid,'hunid':hunid,'thouid':thouid,'cas1':cas1})

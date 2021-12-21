@@ -75,24 +75,30 @@
     <script>
 		function Clean(){
             document.getElementById('cards').innerHTML=''
-			document.getElementById('display').innerHTML=''
+			document.getElementById('cards1').innerHTML=''
 
 		}
+        function handleSubmit(event) {
+            if(!validate()) {
+                event.preventDefault();
+            }
+            return;
+        }
 	</script>
 <br>
 <br>
 <br>
     <div class="container">
 	<div class="card">
-		<h1 class="card-header" style="background-color:#30afda;color: white;">Speed Conversion Calculator</h1>
+		<h1 class="card-header" style="background-color:#00BFFF;color: white;">Speed Conversion Calculator</h1>
 		<div class="card-body">
-			<form action="speed_convert" method="POST">
+			<form  method="POST" onsubmit="handleSubmit();">
 				{% csrf_token %}
 				<div class="input-group mb-2">
                     <div class="input-group-prepend">
                         <div class="input-group-text"><strong>Enter Number</strong></div>
                     </div>
-                    <input type="number"  id="Ib" placeholder="Enter number"  class="form-control mt-1" name="num1"  required >
+                    <input type="number"  id="Ib" placeholder="Enter number"  class="form-control mt-1" name="num1" value = "{{num1}}" required >
                     </div>
                   <br>
                 <div>
@@ -152,7 +158,7 @@
                 <br>
 				<div class="center col mt-2">
                     <center>
-					<input type="submit" class="btn btn-primary" value="Calculate">
+					<input type="submit" class="btn btn-primary" value="Calculate" onclick="myFunction()">
                     <input type="button" class="btn btn-danger" onclick="Clean()" style="margin-top: 5px;" value="Reset">
                 </center>
 				</div>
@@ -160,37 +166,50 @@
             </div>
 		</div>
 	</div>
+    {%if cas %}
+	<div class = "container" id = "cards">
+    <div class="card">
+        <h1 class="card-header" style="background-color:#00BFFF;color: white;text-align: center;">Conversion of {{num1}} {{from}} to {{to}}</h1>
+        <div class="card-body">
+            <p><b>{{num1}} {{from}} = {{converted_speed}} {{to}}</b></p>
+        </div>
+    </div>
+	</div>
+{% endif%}
     {% if cas %}
     <div class="container"  style="height: auto !important;">
-    <div class="card" id= "cards">
-        <h1 class="card-header" style="background-color:#30afda;color: white;text-align: center;">Detailed Explanation</h1>
+    <div class="card" id= "cards1">
+        <h1 class="card-header" style="background-color:#00BFFF;color: white;text-align: center;">Steps to convert {{num1}} {{from}} to {{to}} speed units</h1>
         <div class="card-body">
             <ul>
-                <li><h5>Given value: {{num1}} {{from}}</h5></li>
-                <li><h5>We need to convert it to {{to}} units</h5></li>
+                <li><p>Given value: {{num1}} {{from}}</p></li>
+                <li><p>We need to convert it to {{to}} units</p></li>
             </ul>
-            <br>
-            <h5 class="card-text">
+            <p>
                 In any conversion, we need to first convert the given value to SI unit m/s.From m/s, we need to convert it to desired unit<br>
-                In general, the formula for conversion is:<br>
+                In general, the formula for conversion is:</p>
                 <h3><b>Converted value = Given value * Conversion Factor</b></h3>
-            </h5>
-            <br>
             <ul>
-                <li><h5>Let's first convert to m/s:</h5><br></li>
+                <li><p>Let's first convert to m/s:</p></li>
                 {{num1}} {{from}} = {{converted_speed_m_s}} m/s
-                <br>
-                <br>
-                <li><h5>Now convert the obtained result to desired units. Here it is from <b>m/s to {{to}}</b>
+                <li><p>Now convert the obtained result to desired units. Here it is from <b>m/s to {{to}}</b></p>
             </ul>
-            <h4 class="card-text"><b>{{converted_speed_m_s}} m/s = {{converted_speed}} {{to}}</b></h4>
-            <br>
-            <h5>The Final Answer is </h5><br>
-            <h3><b>{{num1}} {{from}} = {{converted_speed}} {{to}}</b></h3>
+            <p><b>{{converted_speed_m_s}} m/s = {{converted_speed}} {{to}}</b></p>
+            <p>The Final Answer is </p>
+            <h4><b>{{num1}} {{from}} = {{converted_speed}} {{to}}</b></h4>
         </div>
     </div>
     </div>
     </div>
     {% endif %}
+    <script>
+        var scrollDiv = document.getElementById("cards").offsetTop;
+        window.scrollTo({ top: scrollDiv, behavior: 'smooth' });
+        
+            function myFunction() {
+                document.getElementById("cards").innerHTML = "";
+        
+            }
+        </script>
 </body>
 {% endblock %}

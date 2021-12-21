@@ -78,13 +78,20 @@
 	<script>
 		function Clean(){
             document.getElementById('cards').innerHTML=''
+            document.getElementById('cards1').innerHTML=''
 		}
+        function handleSubmit(event) {
+            if(!validate()) {
+                event.preventDefault();
+            }
+            return;
+        }
 	</script>
 	<div class = "container">
 	<div class="card">
 		<h1 class="card-header" style="background-color:#00BFFF;color: white;">Round To Three Decimal Calculator</h1>
 		<div class="card-body">
-                <form action="roundtothree" method = "POST">
+                <form  method = "POST" onsubmit="handleSubmit();">
                     {% csrf_token %}
                     <div class="row">
                         <div class="col-sm-4">
@@ -93,10 +100,10 @@
                           <div class="card">
                             <div class="card-body">
                               <h5 class="card-title">Enter Decimal</h5>
-                              <input type="number" step = "any"  id="Ib" class="form-control mt-1" name="num1"  required >
+                              <input type="number" step = "any"  id="Ib" class="form-control mt-1" name="num1" value="{{num1}}" required >
                                 <div class="center col mt-2">
                                     <center>
-                                    <input type="submit" class="btn btn-primary" value="Calculate">
+                                    <input type="submit" class="btn btn-primary" value="Calculate" onclick="myFunction()">
                                     <input type="button" class="btn btn-danger" onclick="Clean()" value="Reset" style="margin-top: 5px;">
                                     </center>
                                 </div>
@@ -111,33 +118,50 @@
             </div>
             </div>
         </div>
-    {%if cas %}
+        {%if cas %}
 	<div class = "container" id = "cards">
     <div class="card">
-        <h1 class="card-header" style="background-color:#00BFFF;color: white;text-align: center;">Detailed Explanation</h1>
+        <h1 class="card-header" style="background-color:#00BFFF;color: white;text-align: center;">Rounding {{num1}} to Three Decimal Place is</h1>
         <div class="card-body">
-            <h3>Given Value = {{num1}}</h3>
-
-            <br>
-            <h3>Steps to Round off Number to three decimal places</h3>
+            <p>{{num1}} = {{res}}</p>
+        </div>
+    </div>
+	</div>
+{% endif%}
+    {%if cas %}
+	<div class = "container" id = "cards1">
+    <div class="card">
+        <h1 class="card-header" style="background-color:#00BFFF;color: white;text-align: center;">Steps to Round off {{num1}} to Three Decimal Places</h1>
+        <div class="card-body">
+            <p>Rounding calculator to round numbers up or down to any decimal place</p>
+            <h5>Given Value = {{num1}}</h5>
+            <p>Steps to Round off Number to three decimal places</p>
             <ul>
-                <li><h4>Locate the Fourth Digit after the Decimal Point.Here, it is<br><br>
-                    {{dec}} in {{num1}}</h4></li>
-                <li><h4>If the located digit is 5 or more, increase the previous digit by one and remove all digits to right<br><br>
+                <li><p>Locate the Fourth Digit after the Decimal Point.Here, it is<br>
+                    {{dec}} in {{num1}}</p></li>
+                <li><p>If the located digit is 5 or more, increase the previous digit by one and remove all digits to right<br>
                     {%if c1%}
-                    Here in this case, it is {{res}} as the located digit is {{dec}}</h4></li><br>
+                    Here in this case, it is {{res}} as the located digit is {{dec}}</p></li><br>
                     {%endif%}
-                <li><h4>If it's 4 or less, keep the previous digit the same and remove all digits to right<br><br>
+                <li><p>If it's 4 or less, keep the previous digit the same and remove all digits to right<br>
                 {%if c2%}
-                Here it is, {{res}} as the located digit is {{dec}}</h4></li>
+                Here it is, {{res}} as the located digit is {{dec}}</p></li>
                 {%endif%}
             </ul>
-            <br>
-            <h4>The value of Rounded Value to one decimal is</h4> <br>
-                <h3><b>{{num1}} = {{res}}</b></h3> 
+            <p>The value of Rounded Value to one decimal is</p>
+                <h4><b>{{num1}} = {{res}}</b></h4> 
         </div>
     </div>
 	</div>
 	{% endif %}
+    <script>
+        var scrollDiv = document.getElementById("cards").offsetTop;
+        window.scrollTo({ top: scrollDiv, behavior: 'smooth' });
+        
+            function myFunction() {
+                document.getElementById("cards").innerHTML = "";
+        
+            }
+        </script>
 </body>
 {% endblock %}

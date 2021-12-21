@@ -78,13 +78,20 @@
 	<script>
 		function Clean(){
             document.getElementById('cards').innerHTML=''
+            document.getElementById('cards1').innerHTML=''
 		}
+        function handleSubmit(event) {
+            if(!validate()) {
+                event.preventDefault();
+            }
+            return;
+        }
 	</script>
 	<div class = "container">
 	<div class="card">
 		<h1 class="card-header" style="background-color:#00BFFF;color: white;">Identifying Perfect Cube Calculator</h1>
 		<div class="card-body">
-                <form action="identifying_perfect_cube" method = "POST">
+                <form  method = "POST" onsubmit = "handleSubmit();">
                     {% csrf_token %}
                     <div class="row">
                         <div class="col-sm-4">
@@ -93,10 +100,10 @@
                           <div class="card">
                             <div class="card-body">
                               <h5 class="card-title">Enter Number</h5>
-                              <input type="number"  id="Ib" class="form-control mt-1" name="num1"  required >
+                              <input type="number"  id="Ib" class="form-control mt-1" name="num1" value = {{num1}} required >
                                 <div class="center col mt-2">
                                     <center>
-                                    <input type="submit" class="btn btn-primary" value="Calculate">
+                                    <input type="submit" class="btn btn-primary" value="Calculate" onclick="myFunction()">
                                     <input type="button" class="btn btn-danger" onclick="Clean()" value="Reset" style="margin-top: 5px;">
                                     </center>
                                 </div>
@@ -114,31 +121,52 @@
         {%if cas %}
 	<div class = "container" id = "cards">
     <div class="card">
-        <h1 class="card-header" style="background-color:#00BFFF;color: white;text-align: center;">Detailed Explanation</h1>
+        <h1 class="card-header" style="background-color:#00BFFF;color: white;text-align: center;">{{num1}}: Perfect Cube or Not</h1>
         <div class="card-body">
-            <h3>Given Value = {{num1}}</h3>
-
-            <br>
-            <h3>Steps to Identify a Number is Perfect Cube or not</h3>
-            <ul>
-                <li><h4>A number N is perfect cube if we can write it in the form N = a*a*a, where a is an integer <br><br>
-                {%if c1%}
-                Here, we can write {{num1}} = {{st}}.<br><br> Hence {{num1}} is a perfect cube</h4></li>
-                {%endif%}
-                {%if c2%}
-                Here we cannot write {{num1}} in the form of a*a*a, where a being any integer.<br><br> Hence, it is not a perfect cube</h4></li>
-                {%endif%}
-            </ul>
-            <br>
             {%if c1%}
-            <h2>{{num1}} is a perfect cube of {{resa}}</h2>
+            <p>{{num1}} is a perfect cube of {{resa}}</p>
             {%endif%}
             {%if c2%}
-            <h2>{{num1}} is not a perfect cube</h2>
+            <p>{{num1}} is not a perfect cube</p>
+            {%endif%}
+        </div>
+    </div>
+	</div>
+{% endif%}
+        {%if cas %}
+	<div class = "container" id = "cards1">
+    <div class="card">
+        <h1 class="card-header" style="background-color:#00BFFF;color: white;text-align: center;">Steps to Find {{num1}} is Perfect Cube or Not</h1>
+        <div class="card-body">
+            <h5>Given Value = {{num1}}</h5>
+            <p>Steps to Identify a Number is Perfect Cube or not</p>
+            <ul>
+                <li><p>A number N is perfect cube if we can write it in the form N = a*a*a, where a is an integer <br><br>
+                {%if c1%}
+                Here, we can write {{num1}} = {{st}}.<br><br> Hence {{num1}} is a perfect cube</p></li>
+                {%endif%}
+                {%if c2%}
+                Here we cannot write {{num1}} in the form of a*a*a, where a being any integer.<br><br> Hence, it is not a perfect cube</p></li>
+                {%endif%}
+            </ul>
+            {%if c1%}
+            <h3>{{num1}} is a perfect cube of {{resa}}</h3>
+            {%endif%}
+            {%if c2%}
+            <h3>{{num1}} is not a perfect cube</h3>
             {%endif%}
         </div>
     </div>
 	</div>
 	{% endif %}
+    <script>
+        var scrollDiv = document.getElementById("cards").offsetTop;
+        window.scrollTo({ top: scrollDiv, behavior: 'smooth' });
+        
+            function myFunction() {
+                document.getElementById("cards").innerHTML = "";
+        
+            }
+        </script>
 </body>
 {%endblock%}

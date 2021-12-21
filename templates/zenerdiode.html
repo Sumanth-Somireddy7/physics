@@ -77,125 +77,145 @@
 <body>
 	<script>
 		function Clean(){
-            document.getElementById('dss').innerHTML=''
             document.getElementById('cards').innerHTML=''
-
+            document.getElementById('cards1').innerHTML=''
 		}
+        function handleSubmit(event) {
+            if(!validate()) {
+                event.preventDefault();
+            }
+            return;
+        }
 	</script>
     <div class="container">
 	<div class="card">
 		<h1 class="card-header" style="background-color:#00BFFF;color: white;">Zener Diode Calculator</h1>
 		<div class="card-body">
                 
-			<form action="zenerdiode" method="POST">
+			<form method="POST" onsubmit="handleSubmit();">
 				{% csrf_token %}
 				<div class="input-group mb-2">
                     <div class="input-group-prepend">
                         <div class="input-group-text"><strong>Minimum Input Voltage (V<sub>IN</sub><sub>(min)</sub>)</strong></div>
                     </div>
-                    <input type="text"  id="Ib" class="form-control mt-1" name="num1"  required >
+                    <input type="text"  id="Ib" class="form-control mt-1" name="num1" value="{{num1}}"  required >
 					<div class="input-group-text"><strong>volts</strong></div>
                     </div>
                     <div class="input-group mb-2">
                         <div class="input-group-prepend">
                             <div class="input-group-text"><strong>Maximum Input Voltage (V<sub>IN</sub><sub>(max)</sub>)</strong></div>
                         </div>
-                        <input type="text"  id="Ib"  class="form-control mt-1" name="num2"  required >
+                        <input type="text"  id="Ib"  class="form-control mt-1" name="num2" value="{{num2}}" required >
                         <div class="input-group-text"><strong>volts</strong></div>
                         </div>
                         <div class="input-group mb-2">
                             <div class="input-group-prepend">
                                 <div class="input-group-text"><strong>Output Voltage (V<sub>out</sub>)</strong></div>
                             </div>
-                            <input type="text"  id="Ib"  class="form-control mt-1" name="num3"  required >
+                            <input type="text"  id="Ib"  class="form-control mt-1" name="num3" value="{{num3}}" required >
                             <div class="input-group-text"><strong>volts</strong></div>
                             </div>
                             <div class="input-group mb-2">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text"><strong>Load Current (I<sub>L</sub>)</strong></div>
                                 </div>
-                                <input type="text"  id="Ib"  class="form-control mt-1" name="num4"  required >
+                                <input type="text"  id="Ib"  class="form-control mt-1" name="num4" value="{{num4}}" required >
                                 <div class="input-group-text"><strong>mA</strong></div>
                                 </div>
                                 <div class="center col mt-2">
                                     <center>
-                                    <input type="submit" class="btn btn-primary" value="Calculate">
+                                    <input type="submit" class="btn btn-primary" value="Calculate" onclick="myFunction()">
                                     <input type="button" class="btn btn-danger" onclick="Clean()" value="Reset" style="margin-top: 5px;">
                                     </center>
                                 </div>
 				</form>
                 <br>
-                <div id = "dss">
+                <div id = "dss" class = "hello">
                 {%if message %}
-                <h2 style="margin-top:10px;padding:10px;" class="display-5" id="display">{{message}}</h2>
+                <p style="margin-top:10px;padding:10px;" class="display-5" id="display">{{message}}</p>
                 {% endif %}
             </div>
 		</div>
 	</div>
-	{%if cas %}
-    <div class="container" id="cards">
+    {%if cas %}
+	<div class = "container" id = "cards">
     <div class="card">
-        <h1 class="card-header" style="background-color:#00BFFF;color: white;text-align: center;">Detailed Explanation</h1>
+        <h1 class="card-header" style="background-color:#00BFFF;color: white;text-align: center;">Resistance, Zener Voltage, Zener Power, Resistance Power of Zener Diode</h1>
         <div class="card-body">
-            <h4>Given Values</h4>
+            <p>Resistance = {{res}} Ω</p>
+            <p>Zener Volatge = {{zv}} V</p>
+            <p> Zener Power = {{zp}} watt</p>
+            <p>Resistance Power = {{rp}} watt</p>
+
+        </div>
+    </div>
+	</div>
+    {%endif%}
+	{%if cas %}
+    <div class="container" id="cards1">
+    <div class="card">
+        <h1 class="card-header" style="background-color:#00BFFF;color: white;text-align: center;">Steps to find Resistance, Zener Voltage, Zener Power, Resistance Power of Zener Diode </h1>
+        <div class="card-body">
+            <p>The Zener diode is also known as the breakdown diode that is heavily doped in the semiconductor devices. It is a silicon semiconductor with the p-n junction, which is specially designed to work in the reverse biased condition. The main objective of the Zener diode is that it works as a voltage regulator to maintain the constant voltage.</p>
+            <h5>Given Values</h5>
             <ul>
-                <li><h5>{{g1}} = {{gn1}} V</h5></li>
-                <li><h5>{{g2}} = {{gn2}} V</h5></li>
-                <li><h5>{{g3}} = {{gn3}} V</h5></li>
-                <li><h5>{{g4}} = {{gn4}} mA</h5></li>
+                <li><p>{{g1}} = {{gn1}} V</p></li>
+                <li><p>{{g2}} = {{gn2}} V</p></li>
+                <li><p>{{g3}} = {{gn3}} V</p></li>
+                <li><p>{{g4}} = {{gn4}} mA</p></li>
             </ul>
-            <br>
-            <h5>We need to find the value of <b>Resistance, Zener Voltage, Zener Power, Resistance Power </b></h5>
-            <br>
-            <h5>To calculate the Resistance, formula is:-<h3> <b> R = (1000*(V<sub>IN</sub><sub>(min)</sub>-V<sub>out</sub>))/(I<sub>L</sub>+10)</b></h3></h5>
-            <h5>where</h5>
+            <p>We need to find the value of <b>Resistance, Zener Voltage, Zener Power, Resistance Power </b></p>
+            <p>To calculate the Resistance, formula is:-<p> <b> R = (1000*(V<sub>IN</sub><sub>(min)</sub>-V<sub>out</sub>))/(I<sub>L</sub>+10)</b></p></p>
+            <p>where</p>
             <ul>
-                <li><h5>R = Resistance of Zener Diode</h5></li>
-                <li><h5>V<sub>IN</sub><sub>(min)</sub> = Minimum Input Voltage</h5></li>
-                <li><h5>V<sub>out</sub> = Output Voltage</h5></li>
-                <li><h5>I<sub>L</sub> = Load Current</h5></li>
+                <li><p>R = Resistance of Zener Diode</p></li>
+                <li><p>V<sub>IN</sub><sub>(min)</sub> = Minimum Input Voltage</p></li>
+                <li><p>V<sub>out</sub> = Output Voltage<p></li>
+                <li><p>I<sub>L</sub> = Load Current</p></li>
             </ul>
-            <br>
             <div class="alert alert-primary" role="alert">
-                <h4>Resistance = {{res}} Ω</h4>
+                <p>Resistance = {{res}} Ω</p>
             </div>
-            <br>
-            <h5>To calculate the Zener Voltage, formula is:- <h3><b>Zener Voltage = V<sub>out</sub></b></h3></h5>
-            <h5>where</h5>
+            <p>To calculate the Zener Voltage, formula is:- <p><b>Zener Voltage = V<sub>out</sub></b></p></p>
+            <p>where</p>
             <ul>
-                <li><h5>V<sub>out</sub> = Output Voltage</h5></li>
+                <li><p>V<sub>out</sub> = Output Voltage</p></li>
             </ul>
-            <br>
             <div class="alert alert-success" role="alert">
-                <h4>Zener Volatge = {{zv}} V</h4>
+                <p>Zener Volatge = {{zv}} V</p>
             </div>
-            <br>
-            <h5>To calculate the Zener Power, formula is:-<h3> <b>Zener Power = (1000*((V<sub>IN</sub><sub>(max)</sub>-V<sub>out</sub>)/R)*V<sub>out</sub>))/1000</b></h3></h5>
-            <h5>where</h5>
+            <p>To calculate the Zener Power, formula is:-<p> <b>Zener Power = (1000*((V<sub>IN</sub><sub>(max)</sub>-V<sub>out</sub>)/R)*V<sub>out</sub>))/1000</b></p></p>
+            <p>where</p>
             <ul>
-                <li><h5>V<sub>IN</sub><sub>(max)</sub> = Maximum Input Voltage</h5></li>
-                <li><h5>V<sub>out</sub> = Output Voltage</h5></li>
-                <li><h5>R = Resistance of Zener Diode</h5></li>
+                <li><p>V<sub>IN</sub><sub>(max)</sub> = Maximum Input Voltage</p></li>
+                <li><p>V<sub>out</sub> = Output Voltage</p></li>
+                <li><p>R = Resistance of Zener Diode</p></li>
             </ul>
-            <br>
             <div class="alert alert-warning" role="alert">
-                <h4> Zener Power = {{zp}} watt</h4>
+                <p> Zener Power = {{zp}} watt</p>
             </div>
-            <br>
-            <h5>To calculate the Resistance Power, formula is:- <h3><b>Resistance Power = ((V<sub>IN</sub><sub>(max)</sub>-V<sub>out</sub>)<sup>2</sup>)/R</b></h3></h5>
-            <h5>where</h5>
+            <p>To calculate the Resistance Power, formula is:- <p><b>Resistance Power = ((V<sub>IN</sub><sub>(max)</sub>-V<sub>out</sub>)<sup>2</sup>)/R</b></p></p>
+            <p>where</p>
             <ul>
-                <li><h5>V<sub>IN</sub><sub>(max)</sub> = Maximum Input Voltage</h5></li>
-                <li><h5>V<sub>out</sub> = Output Voltage</h5></li>
-                <li><h5>R = Resistance of Zener Diode</h5></li>
+                <li><p>V<sub>IN</sub><sub>(max)</sub> = Maximum Input Voltage</p></li>
+                <li><p>V<sub>out</sub> = Output Voltage</p></li>
+                <li><p>R = Resistance of Zener Diode</p></li>
             </ul>
-            <br>
             <div class="alert alert-info" role="alert">
-                <h4>Resistance Power = {{rp}} watt</h4>
+                <p>Resistance Power = {{rp}} watt</p>
              </div>
         </div>
     </div>
     </div>
 	{% endif %}
+    <script>
+        var scrollDiv = document.getElementById("cards").offsetTop;
+        window.scrollTo({ top: scrollDiv, behavior: 'smooth' });
+        
+            function myFunction() {
+                document.getElementById("cards").innerHTML = "";
+        
+            }
+        </script>
 </body>
 {%endblock%}

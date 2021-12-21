@@ -78,53 +78,60 @@
 	<script>
 		function Clean(){
             document.getElementById('cards').innerHTML=''
+			document.getElementById('cards1').innerHTML=''
 
 		}
+		function handleSubmit(event) {
+            if(!validate()) {
+                event.preventDefault();
+            }
+            return;
+        }
 	</script>
 	<div class = "container">
 	<div class="card">
 		<h1 class="card-header" style="background-color:#00BFFF;color: white;">Kinematic Calculator</h1>
 		<div class="card-body">
-	<form action="kinematic" method="POST">
+	<form  method="POST" onsubmit="handleSubmit();">
 		{% csrf_token %}
 		<div class="input-group mb-2">
 			<div class="input-group-prepend">
 				<div class="input-group-text"><strong>Displacement (s)</strong></div>
 			</div>
-			<input type="text"  id="Ib" placeholder="If you want to calculate this parameter, input as 'x' or 'y'"  class="form-control mt-1" name="num1"  required >
+			<input type="text"  id="Ib" placeholder="If you want to calculate this parameter, input as 'x' or 'y'"  class="form-control mt-1" name="num1" value = "{{num1}}" required >
 			<div class="input-group-text"><strong>meter/sec</strong></div>
 			</div>
 			<div class="input-group mb-2">
 				<div class="input-group-prepend">
 					<div class="input-group-text"><strong>Acceleration (a)</strong></div>
 				</div>
-				<input type="text"  id="Ib" placeholder="If you want to calculate this parameter, input as 'x' or 'y'"  class="form-control mt-1" name="num2"  required >
+				<input type="text"  id="Ib" placeholder="If you want to calculate this parameter, input as 'x' or 'y'"  class="form-control mt-1" name="num2" value = "{{num2}}" required >
 				<div class="input-group-text"><strong>meter/sec<sup>2</sup></strong></div>
 				</div>
 				<div class="input-group mb-2">
                     <div class="input-group-prepend">
                         <div class="input-group-text"><strong>Initial Velocity (u)</strong></div>
                     </div>
-                    <input type="text"  id="Ib" placeholder="If you want to calculate this parameter, input as 'x' or 'y'"  class="form-control mt-1" name="num3"  required >
+                    <input type="text"  id="Ib" placeholder="If you want to calculate this parameter, input as 'x' or 'y'"  class="form-control mt-1" name="num3" value = "{{num3}}" required >
 					<div class="input-group-text"><strong>meter/sec</strong></div>
                     </div>
 					<div class="input-group mb-2">
 						<div class="input-group-prepend">
 							<div class="input-group-text"><strong>Final Velocity (v)</strong></div>
 						</div>
-						<input type="text"  id="Ib" placeholder="If you want to calculate this parameter, input as 'x' or 'y"  class="form-control mt-1" name="num4"  required >
+						<input type="text"  id="Ib" placeholder="If you want to calculate this parameter, input as 'x' or 'y"  class="form-control mt-1" name="num4" value = "{{num4}}" required >
 						<div class="input-group-text"><strong>meter/sec</strong></div>
 						</div>
 						<div class="input-group mb-2">
 							<div class="input-group-prepend">
 								<div class="input-group-text"><strong>Time (t)</strong></div>
 							</div>
-							<input type="text"  id="Ib" placeholder="If you want to calculate this parameter, input as 'x' or 'y'"  class="form-control mt-1" name="num5"  required >
+							<input type="text"  id="Ib" placeholder="If you want to calculate this parameter, input as 'x' or 'y'"  class="form-control mt-1" name="num5" value = "{{num5}}" required >
 							<div class="input-group-text"><strong>sec</strong></div>
 							</div>
 							<div class="center col mt-2">
 								<center>
-								<input type="submit" class="btn btn-primary" value="Calculate">
+								<input type="submit" class="btn btn-primary" value="Calculate" onclick="myFunction()">
 								<input type="button" class="btn btn-danger" onclick="Clean()" value="Reset" style="margin-top: 5px;">
 								</center>
 							</div>
@@ -133,37 +140,54 @@
 	</div>
 	</div>
 	{%if cas %}
-	<div class="container">
+	<div class = "container" id = "cards">
     <div class="card">
-        <h1 class="card-header" style="background-color:#00BFFF;color: white;text-align: center;">Detailed Explanation</h1>
+        <h1 class="card-header" style="background-color:#00BFFF;color: white;text-align: center;">{{uk1}} and {{uk2}} in Kinematics are</h1>
         <div class="card-body">
+            <p><b>{{uk1}} = {{tf1}} {{unit1}}</b><br><b>{{uk2}} = {{tf2}} {{unit2}}</p>
+        </div>
+    </div>
+	</div>
+{% endif%}
+	{%if cas %}
+	<div class="container" id = "cards1">
+    <div class="card">
+        <h1 class="card-header" style="background-color:#00BFFF;color: white;text-align: center;">Steps to find {{uk1}} and {{uk2}} in Kinematcs</h1>
+        <div class="card-body">
+			<p>Kinematics is the branch of classical mechanics which deals with the study of the motion of an object. It is the study of motion without having the reference to the force which causes the motion.</p>
             <h5>Given Values</h5>
             <ul>
-                <li><h5>{{g1}} = {{gn1}} {{u1}}</h5></li>
-                <li><h5>{{g2}} = {{gn2}} {{u2}}</h5></li>
-				<li><h5>{{g3}} = {{gn3}} {{u3}}</h5></li>
+                <li><p>{{g1}} = {{gn1}} {{u1}}</p></li>
+                <li><p>{{g2}} = {{gn2}} {{u2}}</p></li>
+				<li><p>{{g3}} = {{gn3}} {{u3}}</p></li>
             </ul>
-            <br>
-            <h5>We need to find the value of x and y.Here, in this case, it is <b>{{uk1}}</b> and <b>{{uk2}}</b>
+            <p>We need to find the value of x and y.Here, in this case, it is <b>{{uk1}}</b> and <b>{{uk2}}</b></p>
             <h4 class="card-text">
                 As per the Equations of Motion: <br>
                 {{f1}} <br>
 				{{f2}}
-            </h4><br>
+            </h4>
 			<ul>
-                <li><h5>s = Displacement</h5></li>
-                <li><h5>a = Acceleration</h5></li>
-                <li><h5>t = Time</h5></li>
-                <li><h5>u = Initial Velocity</h5></li>
-				<li><h5>v = Final Velocity</h5></li>
+                <li><p>s = Displacement</h5></p>
+                <li><p>a = Acceleration</h5></p>
+                <li><p>t = Time</h5></p>
+                <li><p>u = Initial Velocity</p></li>
+				<li><p>v = Final Velocity</p></li>
             </ul>
-            <br>
-            <h5>On substitution of given values in the above formulas, we get</h5>
-            <br>
-            <h4>The value of unknown x and y is i.e..<br><br>
-				 <b>{{uk1}} = {{tf1}} {{unit1}}</b><br><b>{{uk2}} = {{tf2}} {{unit2}}</b> </h4>
+            <p>On substitution of given values in the above formulas, we get</p>
+            <p>The value of unknown x and y is i.e..</p>
+				<h4><b>{{uk1}} = {{tf1}} {{unit1}}</b><br><b>{{uk2}} = {{tf2}} {{unit2}}</b></h4>
         </div>
     </div>
 	{% endif %}
+	<script>
+		var scrollDiv = document.getElementById("cards").offsetTop;
+		window.scrollTo({ top: scrollDiv, behavior: 'smooth' });
+		
+			function myFunction() {
+				document.getElementById("cards").innerHTML = "";
+		
+			}
+		</script>
 </body>
 {%endblock%}

@@ -78,13 +78,20 @@
 	<script>
 		function Clean(){
             document.getElementById('cards').innerHTML=''
+            document.getElementById('cards1').innerHTML=''
 		}
+    function handleSubmit(event) {
+            if(!validate()) {
+                event.preventDefault();
+            }
+            return;
+        }
 	</script>
 	<div class = "container">
 	<div class="card">
 		<h1 class="card-header" style="background-color:#00BFFF;color: white;">Time Clock 15 Minutes Rounding Calculator</h1>
 		<div class="card-body">
-                <form action="time_clock_15_minutes" method = "POST">
+                <form  method = "POST" onsubmit="handleSubmit()">
                     {% csrf_token %}
                     <div class="row">
                         <div class="col-sm-4">
@@ -96,7 +103,7 @@
                                 <input type="text"  id="Ib" class="form-control mt-1" name="num1"  required >
                                 <div class="center col mt-2">
                                     <center>
-                                    <input type="submit" class="btn btn-primary" value="Calculate">
+                                    <input type="submit" class="btn btn-primary" value="Calculate" onclick="myFunction()">
                                     <input type="button" class="btn btn-danger" onclick="Clean()" value="Reset" style="margin-top: 5px;">
                                     </center>
                                 </div>
@@ -112,11 +119,21 @@
             </div>
         </div>
         {%if cas %}
-        <div class = "container" id = "cards">
+	<div class = "container" id = "cards">
+    <div class="card">
+        <h1 class="card-header" style="background-color:#00BFFF;color: white;text-align: center;">Rounding off {{num1}} to Nearest 15 Minutes</h1>
+        <div class="card-body">
+            <p>Answer = {{final}}</p>
+        </div>
+    </div>
+	</div>
+{% endif%}
+        {%if cas %}
+        <div class = "container" id = "cards1">
         <div class="card">
-            <h1 class="card-header" style="background-color:#00BFFF;color: white;text-align: center;">Detailed Explanation</h1>
+            <h1 class="card-header" style="background-color:#00BFFF;color: white;text-align: center;">Steps to Round off {{num1}} to Nearest 15 Minutes </h1>
             <div class="card-body">
-            <br>
+              <p>Rounding to 15 minutes (or 1/4 hour) observes two thresholds that indicate whether the clock-ins and clock-outs are rounded up or down; The first 7.5 minutes is always rounded down while the second-half 7.5 minutes are rounded up to a full quarter of an hour </p>
                 <table class="table table-bordered">
                     <thead>
                       <tr>
@@ -149,14 +166,24 @@
                       </tr>
                     </tbody>
                   </table><br>
-                  <h4>Here, the minutes is {{min}}. So, according to the table, we round off to the nearest 15th minute</h4>
+                  <p>Here, the minutes is {{min}}. So, according to the table, we round off to the nearest 15th minute</p>
                   {%if scas%}
-                  <h4>Here, in this case, the minute is in the range 53-59. Hence, we round off to next hour and to nearest 15th minute.<br><br>Hour is {{hour}}</h4>
+                  <p>Here, in this case, the minute is in the range 53-59. Hence, we round off to next hour and to nearest 15th minute.<br>Hour is {{hour}}</p>
                   {%endif%}
-                  <h2>Answer = {{final}}</h2>
+                  <h4>Answer = {{final}}</h4>
                 </div>
                 </div>
                 </div>
-                </body>
         {%endif%}
+        <script>
+          var scrollDiv = document.getElementById("cards").offsetTop;
+          window.scrollTo({ top: scrollDiv, behavior: 'smooth' });
+          
+              function myFunction() {
+                  document.getElementById("cards").innerHTML = "";
+          
+              }
+          </script>
+      </body>
+
 {%endblock%}

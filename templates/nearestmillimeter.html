@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <!-- Meta Title, Description and Canonical URL Starts --->
-<title>    Rounding to Two Decimal Calculator | Free Calculator to Round to Two Decimal </title>
+<title>    Rounding off to Nearest Millimeter Calculator | Free Calculator to Round off to Nearest Millimeter</title>
 <meta name="description"
     content="    Friction Loss Calculator makes it easy for you to find   Friction Loss ." />
 <link rel="canonical" href="{{request.build_absolute_uri}}">
@@ -53,7 +53,7 @@
 <meta property="twitter:image:width" content="354" />
 <!-- TWITTER CARD CONFIGURATION ENDS  -->
 <!--  LINKEDIN CONFIGURATION STARTS-->
-<tittle> Round to Two Decimal Calculator</tittle>
+<tittle> Rounding Off Nearest Millimeter Calculator</tittle>
 <meta property='og:title' content="    Friction Loss Calculator |     Friction Loss" />
 <meta property='og:image'
     content="https://onlinecalculator.guru/static/images/Chemistry/Friction-Loss-Calculator.jpeg" />
@@ -89,7 +89,7 @@
 	</script>
 	<div class = "container">
 	<div class="card">
-		<h1 class="card-header" style="background-color:#00BFFF;color: white;">Round To Two Decimal Calculator</h1>
+		<h1 class="card-header" style="background-color:#00BFFF;color: white;">Round Off to Nearest Millimeter Calculator</h1>
 		<div class="card-body">
                 <form  method = "POST" onsubmit="handleSubmit();">
                     {% csrf_token %}
@@ -99,19 +99,17 @@
                         <div class="col-sm-4">
                           <div class="card">
                             <div class="card-body">
-                              <h5 class="card-title">Enter Decimal</h5>
-                              <input type="number" step = "any"  id="Ib" class="form-control mt-1" name="num1" value = "{{num1}}" required >
+                              <h5 class="card-title">Enter Millimeters</h5>
+                                <input type="number" step = "any" id="Ib" class="form-control mt-1" min = "1" name="num1" value="{{num1}}" placeholder="Enter any Number" required >
                                 <div class="center col mt-2">
                                     <center>
-                                    <input type="submit" class="btn btn-primary" value="Calculate" onclick="myFunction()" >
+                                    <input type="submit" class="btn btn-primary" value="Calculate" onclick="myFunction()">
                                     <input type="button" class="btn btn-danger" onclick="Clean()" value="Reset" style="margin-top: 5px;">
                                     </center>
                                 </div>
                           </div>
                         </div>
                         </div>
-                        <div class="col-sm-4">
-                          </div>
                       </div>
                       
                 </form>
@@ -119,50 +117,77 @@
             </div>
         </div>
         {%if cas %}
-	<div class = "container" id = "cards">
+        <div class = "container" id = "cards">
+        <div class="card">
+            <h1 class="card-header" style="background-color:#00BFFF;color: white;text-align: center;">Rounding off {{num1}} to Nearest Millimeter</h1>
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th scope="col">Round off to Nearest Millimeter</th>
+                        <th scope="col">Value</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Round off to Nearest Whole Number</td>
+                        <td>{{whole}} Millimeters</td>
+                      </tr>
+                      <tr>
+                        
+                        <td>Round off to Nearest Tens</td>
+                        <td>{{tens}} Millimeters</td>
+                    
+                      </tr>
+                      <tr>
+                        <td>Round off to Nearest Hundreds</td>
+                        <td>{{hund}} Millimeters</td>
+                      </tr>
+                      <tr>
+                        <td>Round off to Nearest Thousands</td>
+                        <td>{{thou}} Millimeters</td>
+                      </tr>
+                    </tbody>
+                  </table>
+            </div>
+            </div>
+            </div>
+        {% endif%}
+        {%if cas1 %}
+<div class = "container" id = "cards1">
     <div class="card">
-        <h1 class="card-header" style="background-color:#00BFFF;color: white;text-align: center;">Rounding {{num1}} to Two Decimal Place is</h1>
+        <h1 class="card-header" style="background-color:#00BFFF;color: white;text-align: center;">Steps for Rounding {{num1}} to Nearest Tens, Hundreds and Thousands</h1>
         <div class="card-body">
-            <p>{{num1}} = {{res}}</p>
+          <h3 style="background-color:#DAF7A6;">Rounding off to Nearest Tens</h3>
+            <p>Given Number is {{num1}}</p>
+            <p>Observe the {{placeten}} digit in the number. Here it is {{tensid}}</p>
+            <p>The {{placeten}} place digit {{tensid}} {{st}}. {{st1}}</p>
+            <p>Rounded value of {{num1}} is {{tens}}</p>
+            <p>Therefore, {{num1}} is rounded to the nearest tens is <strong>{{tens}}</strong>.</p>
+          <h3 style="background-color:#DAF7A6;">Rounding off to Nearest Hundreds</h3>
+          <p>Given Number is {{num1}}</p>
+            <p>Observe the {{placehun}} digit in the number. Here it is {{hunid}}</p>
+            <p>The {{placehun}} place digit {{hunid}} {{sh}}. {{sh1}}</p>
+            <p>Rounded value of {{num1}} is {{tens}}</p>
+            <p>Therefore, {{num1}} is rounded to the nearest hundreds is <strong>{{hund}}</strong>.</p>
+          <h3 style="background-color:#DAF7A6;">Rounding off to Nearest Thousand</h3>
+          <p>Given Number is {{num1}}</p>
+            <p>Observe the {{placetho}} digit in the number. Here it is {{thouid}}</p>
+            <p>The {{placetho}} place digit {{thouid}} {{sth}}. {{sth1}}</p>
+            <p>Rounded value of {{num1}} is {{thou}}</p>
+            <p>Therefore, {{num1}} is rounded to the nearest thousands is <strong>{{thou}}</strong>.</p>
         </div>
     </div>
 	</div>
-{% endif%}
-    {%if cas %}
-	<div class = "container" id = "cards1">
-    <div class="card">
-        <h1 class="card-header" style="background-color:#00BFFF;color: white;text-align: center;">Steps to Round off {{num1}} to Two Decimal Places</h1>
-        <div class="card-body">
-            <p>Rounding calculator to round numbers up or down to any decimal place</p>
-            <h5>Given Value = {{num1}}</h5>
-            <p>Steps to Round off Number to two decimal places</p>
-            <ul>
-                <li><p>Locate the Third Digit after the Decimal Point. Here it is, <br>
-                    {{dec}} in {{num1}}</p></li>
-                <li><p>If the located digit is 5 or more, increase the previous digit by one and remove all digits to right<br>
-                    {%if c1%}
-                    Here it is, {{res}} as the located digit is {{dec}}</p></li>
-                    {%endif%}
-                <li><p>If the located digit is 4 or less, keep the previous digit the same and remove all digits to right<br>
-                {%if c2%}
-                Here it is, {{res}} as the located digit is {{dec}}</p></li>
-                {%endif%}
-                
-            </ul>
-            <p>The value of Rounded Value to one decimal is </p>
-                <h4><b>{{num1}} = {{res}}</b></h4> 
-        </div>
-    </div>
-	</div>
-	{% endif %}
-    <script>
-        var scrollDiv = document.getElementById("cards").offsetTop;
-        window.scrollTo({ top: scrollDiv, behavior: 'smooth' });
-        
-            function myFunction() {
-                document.getElementById("cards").innerHTML = "";
-        
-            }
-        </script>
-</body>
-{% endblock %}
+{% endif %}
+        <script>
+            var scrollDiv = document.getElementById("cards").offsetTop;
+            window.scrollTo({ top: scrollDiv, behavior: 'smooth' });
+            
+                function myFunction() {
+                    document.getElementById("cards").innerHTML = "";
+            
+                }
+            </script>
+    </body>
+    {%endblock%}

@@ -78,38 +78,45 @@
 	<script>
 		function Clean(){
             document.getElementById('cards').innerHTML=''
+            document.getElementById('cards1').innerHTML=''
 		}
+        function handleSubmit(event) {
+            if(!validate()) {
+                event.preventDefault();
+            }
+            return;
+        }
 	</script>
     <div class="container">
 	<div class="card">
 		<h1 class="card-header" style="background-color:#00BFFF;color: white;">Centripetal Acceleration Calculator</h1>
 		<div class="card-body">
-			<form action="centripetal_acceleration" method="POST">
+			<form method="POST" onclick="handleSubmit();">
 				{% csrf_token %}
 				<div class="input-group mb-2">
                     <div class="input-group-prepend">
                         <div class="input-group-text"><strong>Centripetal Acceleration (a)</strong></div>
                     </div>
-                    <input type="text"  id="Ib" placeholder="If you want to calculate this parameter, input as 'x'"  class="form-control mt-1" name="num1"  required >
+                    <input type="text"  id="Ib" placeholder="If you want to calculate this parameter, input as 'x'"  class="form-control mt-1" name="num1" value = "{{num1}}" required >
 					<div class="input-group-text"><strong>meter/sec²</strong></div>
                     </div>
                     <div class="input-group mb-2">
                         <div class="input-group-prepend">
                             <div class="input-group-text"><strong>Velocity (v)</strong></div>
                         </div>
-                        <input type="text"  id="Ib" placeholder="If you want to calculate this parameter, input as 'x'"  class="form-control mt-1" name="num2"  required >
+                        <input type="text"  id="Ib" placeholder="If you want to calculate this parameter, input as 'x'"  class="form-control mt-1" name="num2" value = "{{num2}}" required >
                         <div class="input-group-text"><strong>meter/sec</strong></div>
                         </div>
                         <div class="input-group mb-2">
                             <div class="input-group-prepend">
                                 <div class="input-group-text"><strong>Radius (r)</strong></div>
                             </div>
-                            <input type="text"  id="Ib" placeholder="If you want to calculate this parameter, input as 'x'"  class="form-control mt-1" name="num3"  required >
+                            <input type="text"  id="Ib" placeholder="If you want to calculate this parameter, input as 'x'"  class="form-control mt-1" name="num3" value = "{{num3}}" required >
                             <div class="input-group-text"><strong>meters</strong></div>
                             </div>
                             <div class="center col mt-2">
                                 <center>
-                                <input type="submit" class="btn btn-primary" value="Calculate">
+                                <input type="submit" class="btn btn-primary" value="Calculate" onclick="myFunction()">
                                 <input type="button" class="btn btn-danger" onclick="Clean()" value="Reset" style="margin-top: 5px;">
                                 </center>
                             </div>
@@ -117,36 +124,52 @@
                 </div>
 		</div>
 	</div>
-    {% if cas %}
-    <div class="container" id = "cards">
+    {%if cas %}
+	<div class = "container" id = "cards">
     <div class="card">
-        <h1 class="card-header" style="background-color:#00BFFF;color: white;text-align: center;">Detailed Explanation</h1>
+        <h1 class="card-header" style="background-color:#00BFFF;color: white;text-align: center;">The {{uks}} is </h1>
         <div class="card-body">
+            <p>{{uks}} = <strong>{{ukv}} {{unit}}</strong></p>
+        </div>
+    </div>
+	</div>
+{% endif%}
+    {% if cas %}
+    <div class="container" id = "cards1">
+    <div class="card">
+        <h1 class="card-header" style="background-color:#00BFFF;color: white;text-align: center;">Steps for Finding {{uks}}</h1>
+        <div class="card-body">
+            <p>acceleration means a change in velocity. When the object is moving in a circular fashion, it has an acceleration vector that points towards the centre of the circle. The acceleration experienced by the moving object is called the centripetal acceleration. The unit of centripetal acceleration is m/s2. In general, centripetal means towards the centre. Similarly, the force that causes the acceleration towards the centre of the circle is called the centripetal force. </p>
             <h5>Given Values</h5>
             <ul>
-                <li><h5>{{g1}} = {{gn1}} {{u1}}</h5></li>
-                <li><h5>{{g2}} = {{gn2}} {{u2}}</h5></li>
+                <li><p>{{g1}} = {{gn1}} {{u1}}</p></li>
+                <li><p>{{g2}} = {{gn2}} {{u2}}</p></li>
             </ul>
-            <br>
-            <h5>We need to find the value of x, Here it is <b>{{uks}}</b></h5>
-            <h3 class="card-text">
+            <p>We need to find the value of x, Here it is <b>{{uks}}</b></p>
+            <h4 class="card-text">
                 As per the Centripetal Acceleration Formula: <br>
                 a = v<sup>2</sup>/r
-            </h3>
-            <h5>where</h5>
+            </h4>
+            <p>where</p>
             <ul>
-                <li><h5>a = Centripetal Acceleration</h5></li>
-                <li><h5>v = Velocity</h5></li>
-                <li><h5>r = Radius</h5></li>
+                <li><p>a = Centripetal Acceleration</p></li>
+                <li><p>v = Velocity</p></li>
+                <li><p>r = Radius</p></li>
             </ul>
-            <br>
-            <h5>On substitution of given values in the formula above, we get</h5>
-            <br>
-            <h5>The value of unknown x i.e.. </h5>
-            <br>
-            <h2><b> {{uks}} = {{ukv}} {{unit}}</b></h2>
+            <p>On substitution of given values in the formula above, we get</p>
+            <p>The value of unknown x i.e.. </p>
+            <h4><b> {{uks}} = {{ukv}} {{unit}}</b></h4>
         </div>
     </div>
 	{% endif %}
+    <script>
+        var scrollDiv = document.getElementById("cards").offsetTop;
+        window.scrollTo({ top: scrollDiv, behavior: 'smooth' });
+        
+            function myFunction() {
+                document.getElementById("cards").innerHTML = "";
+        
+            }
+        </script>
 </body>
 {%endblock%}

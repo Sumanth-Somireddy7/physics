@@ -78,52 +78,59 @@
 	<script>
 		function Clean(){
             document.getElementById('cards').innerHTML=''
+            document.getElementById('cards1').innerHTML=''
 		}
+        function handleSubmit(event) {
+            if(!validate()) {
+                event.preventDefault();
+            }
+            return;
+        }
 	</script>
     <div class="container">
 	<div class="card">
 		<h1 class="card-header" style="background-color:#00BFFF;color: white;">Specific Heat & Density Calculator</h1>
 		<div class="card-body">
-			<form action="specificheatanddensity" method="POST">
+			<form  method="POST" onsubmit="handleSubmit();">
 				{% csrf_token %}
 				<div class="input-group mb-2">
                     <div class="input-group-prepend">
                         <div class="input-group-text"><strong>Specific Heat (c)</strong></div>
                     </div>
-                    <input type="text"  id="Ib" placeholder="If you want to calculate this parameter, input as 'x'"  class="form-control mt-1" name="num1"  required >
+                    <input type="text"  id="Ib" placeholder="If you want to calculate this parameter, input as 'x'"  class="form-control mt-1" name="num1" value="{{num1}}" required >
 					<div class="input-group-text"><strong>J/kg.K</strong></div>
                     </div>
                     <div class="input-group mb-2">
                         <div class="input-group-prepend">
                             <div class="input-group-text"><strong>Mass (m)</strong></div>
                         </div>
-                        <input type="text"  id="Ib" placeholder="If you want to calculate this parameter, input as 'x'"  class="form-control mt-1" name="num2"  required >
+                        <input type="text"  id="Ib" placeholder="If you want to calculate this parameter, input as 'x'"  class="form-control mt-1" name="num2" value="{{num2}}" required >
                         <div class="input-group-text"><strong>Kg</strong></div>
                         </div>
                         <div class="input-group mb-2">
                             <div class="input-group-prepend">
                                 <div class="input-group-text"><strong>Initial Temperature (T1)</strong></div>
                             </div>
-                            <input type="text"  id="Ib" placeholder="If you want to calculate this parameter, input as 'x'"  class="form-control mt-1" name="num3"  required >
+                            <input type="text"  id="Ib" placeholder="If you want to calculate this parameter, input as 'x'"  class="form-control mt-1" name="num3" value="{{num3}}" required >
                             <div class="input-group-text"><strong>Kelvin</strong></div>
                             </div>
                             <div class="input-group mb-2">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text"><strong>Final Temperature (T2)</strong></div>
                                 </div>
-                                <input type="text"  id="Ib" placeholder="If you want to calculate this parameter, input as 'x'"  class="form-control mt-1" name="num4"  required >
+                                <input type="text"  id="Ib" placeholder="If you want to calculate this parameter, input as 'x'"  class="form-control mt-1" name="num4" value="{{num4}}" required >
                                 <div class="input-group-text"><strong>Kelvin</strong></div>
                                 </div>
                                 <div class="input-group mb-2">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text"><strong>Heat Energy (Q)</strong></div>
                                     </div>
-                                    <input type="text"  id="Ib" placeholder="If you want to calculate this parameter, input as 'x'"  class="form-control mt-1" name="num5"  required >
+                                    <input type="text"  id="Ib" placeholder="If you want to calculate this parameter, input as 'x'"  class="form-control mt-1" name="num5" value="{{num5}}" required >
                                     <div class="input-group-text"><strong>Joules</strong></div>
                                     </div>
                             <div class="center col mt-2">
                                 <center>
-                                <input type="submit" class="btn btn-primary" value="Calculate">
+                                <input type="submit" class="btn btn-primary" value="Calculate" onclick="myFunction()">
                                 <input type="button" class="btn btn-danger" onclick="Clean()" value="Reset" style="margin-top: 5px;">
                                 </center>
                             </div>
@@ -132,38 +139,55 @@
 		</div>
 	</div>
     {%if cas %}
-    <div class="container" id = "cards">
+	<div class = "container" id = "cards">
     <div class="card">
-        <h5 class="card-header" style="background-color:#00BFFF;color: white;text-align: center;">Detailed Explanation</h5>
+        <h1 class="card-header" style="background-color:#00BFFF;color: white;text-align: center;">{{uks}} in Specific Heat And Density is</h1>
         <div class="card-body">
+            <p><b>{{uks}} = {{ukv}} {{unit}}</b> </p>
+        </div>
+    </div>
+	</div>
+{% endif%}
+    {%if cas %}
+    <div class="container" id = "cards1">
+    <div class="card">
+        <h1 class="card-header" style="background-color:#00BFFF;color: white;text-align: center;">Steps to Find {{uks}} in Specific Heat and Density</h1>
+        <div class="card-body">
+            <p>Specific heat is the amount of thermal energy you need to supply to a sample weighing 1 kg to increase its temperature by 1 K</p>
             <h5>Given Values</h5>
             <ul>
-                <li><h5>{{g1}} = {{gn1}} {{u1}}</h5></li>
-                <li><h5>{{g2}} = {{gn2}} {{u2}}</h5></li>
-                <li><h5>{{g3}} = {{gn3}} {{u3}}</h5></li>
-                <li><h5>{{g4}} = {{gn4}} {{u4}}</h5></li>
+                <li><p>{{g1}} = {{gn1}} {{u1}}</p></li>
+                <li><p>{{g2}} = {{gn2}} {{u2}}</p></li>
+                <li><p>{{g3}} = {{gn3}} {{u3}}</p></li>
+                <li><p>{{g4}} = {{gn4}} {{u4}}</p></li>
             </ul>
-            <br>
-            <h5>We need to find the value of x,Here in this it is, <b>{{uks}}</b></h5>
-            <h2 class="card-text">
+            <p>We need to find the value of x,Here in this it is, <b>{{uks}}</b></p>
+            <h4 class="card-text">
                 As per the Specific Heat & Density Formula: <br>
                 c = Q/mΔT
-            </h2>
-            <h5>where</h5>
+            </h4>
+            <p>where</p>
             <ul>
-                <li><h5>c = Specific Heat</h5></li>
-                <li><h5>Q = Heat Energy</h5></li>
-                <li><h5>m = Mass</h5></li>
-                <li><h5>ΔT = T2-T1 = Temperature Difference</h5></li>
+                <li><p>c = Specific Heat</p></li>
+                <li><p>Q = Heat Energy</p></li>
+                <li><p>m = Mass</p></li>
+                <li><p>ΔT = T2-T1 = Temperature Difference</p></li>
             </ul>
-            <br>
-            <h5>On substitution of given values in the formula above, we get</h5>
-            <br>
-            <h5>The value of unknown x i.e.. <br></h5>
+            <p>On substitution of given values in the formula above, we get</p>
+            <p>The value of unknown x i.e.. </p>
             <h4><b>{{uks}} = {{ukv}} {{unit}}</b> </h4>
         </div>
     </div>
     </div>
 	{% endif %}
+    <script>
+        var scrollDiv = document.getElementById("cards").offsetTop;
+        window.scrollTo({ top: scrollDiv, behavior: 'smooth' });
+        
+            function myFunction() {
+                document.getElementById("cards").innerHTML = "";
+        
+            }
+        </script>
 </body>
 {%endblock%}

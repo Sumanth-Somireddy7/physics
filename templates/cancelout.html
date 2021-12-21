@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <!-- Meta Title, Description and Canonical URL Starts --->
-<title>    Rounding to Two Decimal Calculator | Free Calculator to Round to Two Decimal </title>
+<title>    Cancelling Out Calculator | Free Calculator to Cancel out fractions </title>
 <meta name="description"
     content="    Friction Loss Calculator makes it easy for you to find   Friction Loss ." />
 <link rel="canonical" href="{{request.build_absolute_uri}}">
@@ -53,7 +53,7 @@
 <meta property="twitter:image:width" content="354" />
 <!-- TWITTER CARD CONFIGURATION ENDS  -->
 <!--  LINKEDIN CONFIGURATION STARTS-->
-<tittle> Round to Two Decimal Calculator</tittle>
+<tittle> Cancel Out Calculator</tittle>
 <meta property='og:title' content="    Friction Loss Calculator |     Friction Loss" />
 <meta property='og:image'
     content="https://onlinecalculator.guru/static/images/Chemistry/Friction-Loss-Calculator.jpeg" />
@@ -89,7 +89,7 @@
 	</script>
 	<div class = "container">
 	<div class="card">
-		<h1 class="card-header" style="background-color:#00BFFF;color: white;">Round To Two Decimal Calculator</h1>
+		<h1 class="card-header" style="background-color:#00BFFF;color: white;">Cancel Out Calculator</h1>
 		<div class="card-body">
                 <form  method = "POST" onsubmit="handleSubmit();">
                     {% csrf_token %}
@@ -99,11 +99,13 @@
                         <div class="col-sm-4">
                           <div class="card">
                             <div class="card-body">
-                              <h5 class="card-title">Enter Decimal</h5>
-                              <input type="number" step = "any"  id="Ib" class="form-control mt-1" name="num1" value = "{{num1}}" required >
+                              <h5 class="card-title">Enter Numerator</h5>
+                                <input type="number" id="Ib" class="form-control mt-1" name="num1" value="{{num1}}" required >
+                                <h5 class="card-title">Enter Denominator</h5>
+                                <input type="number" min = "1" max = "99999" id="Ib" class="form-control mt-1" name="num2" value="{{num2}}" required >
                                 <div class="center col mt-2">
                                     <center>
-                                    <input type="submit" class="btn btn-primary" value="Calculate" onclick="myFunction()" >
+                                    <input type="submit" class="btn btn-primary" value="Calculate" onclick="myFunction()">
                                     <input type="button" class="btn btn-danger" onclick="Clean()" value="Reset" style="margin-top: 5px;">
                                     </center>
                                 </div>
@@ -121,40 +123,32 @@
         {%if cas %}
 	<div class = "container" id = "cards">
     <div class="card">
-        <h1 class="card-header" style="background-color:#00BFFF;color: white;text-align: center;">Rounding {{num1}} to Two Decimal Place is</h1>
+        <h1 class="card-header" style="background-color:#00BFFF;color: white;text-align: center;">Cancelling out <sup>{{num1}}</sup>&frasl;<sub>{{num2}}</sub> to Simple Fraction</h1>
         <div class="card-body">
-            <p>{{num1}} = {{res}}</p>
+            <h3><sup>{{num1}}</sup>&frasl;<sub>{{num2}}</sub> = <sup>{{resn}}</sup>&frasl;<sub>{{resd}}</sub></h3>
         </div>
     </div>
 	</div>
 {% endif%}
-    {%if cas %}
+{%if cas %}
 	<div class = "container" id = "cards1">
     <div class="card">
-        <h1 class="card-header" style="background-color:#00BFFF;color: white;text-align: center;">Steps to Round off {{num1}} to Two Decimal Places</h1>
+        <h1 class="card-header" style="background-color:#00BFFF;color: white;text-align: center;">Steps to Cancel Out <sup>{{num1}}</sup>&frasl;<sub>{{num2}}</sub> to Simple Fraction</h1>
         <div class="card-body">
-            <p>Rounding calculator to round numbers up or down to any decimal place</p>
-            <h5>Given Value = {{num1}}</h5>
-            <p>Steps to Round off Number to two decimal places</p>
+            <p>Reducing a fraction to lowest terms possible</p>
+            <h5>Given Value = <sup>{{num1}}</sup>&frasl;<sub>{{num2}}</sub></h5>
+            <p>Steps to Reduce the fraction</p>
             <ul>
-                <li><p>Locate the Third Digit after the Decimal Point. Here it is, <br>
-                    {{dec}} in {{num1}}</p></li>
-                <li><p>If the located digit is 5 or more, increase the previous digit by one and remove all digits to right<br>
-                    {%if c1%}
-                    Here it is, {{res}} as the located digit is {{dec}}</p></li>
-                    {%endif%}
-                <li><p>If the located digit is 4 or less, keep the previous digit the same and remove all digits to right<br>
-                {%if c2%}
-                Here it is, {{res}} as the located digit is {{dec}}</p></li>
-                {%endif%}
-                
+            <li><p>Find the Greatest Common Divisor (GCD) of Numerator {{num1}} and Denominator {{num2}}. Here, the GCD = {{gcd}}</p></li>
+            <li><p>Divide both Numerator and Denominator with the obtained GCD<br><h4><sup>{{num1}}÷{{gcd}}</sup>&frasl;<sub>{{num2}}÷{{gcd}}</sub></h4></p></li>
+            <li><p>After Division of Numerator and Denominator, we get </p><h4><sup>{{resn}}</sup>&frasl;<sub>{{resd}}</sub></h4></li>
             </ul>
-            <p>The value of Rounded Value to one decimal is </p>
-                <h4><b>{{num1}} = {{res}}</b></h4> 
+            <p>The Simplified Fraction is  </p>
+                <h4><b><sup>{{num1}}</sup>&frasl;<sub>{{num2}}</sub> = <sup>{{resn}}</sup>&frasl;<sub>{{resd}}</b></h4> 
         </div>
     </div>
 	</div>
-	{% endif %}
+	{% endif%}
     <script>
         var scrollDiv = document.getElementById("cards").offsetTop;
         window.scrollTo({ top: scrollDiv, behavior: 'smooth' });
@@ -165,4 +159,4 @@
             }
         </script>
 </body>
-{% endblock %}
+{%endblock%}
