@@ -87,6 +87,13 @@
             }
             return;
         }
+		function ClearFields() {
+            document.getElementById("Ib1").value = "";
+			document.getElementById("Ib2").value = "";
+			document.getElementById("Ib3").value = "";
+			document.getElementById("Ib4").value = "";
+			document.getElementById("Ib5").value = "";
+        }
 	</script>
 	<div class = "container">
 	<div class="card">
@@ -98,41 +105,41 @@
 			<div class="input-group-prepend">
 				<div class="input-group-text"><strong>Displacement (s)</strong></div>
 			</div>
-			<input type="text"  id="Ib" placeholder="If you want to calculate this parameter, input as 'x' or 'y'"  class="form-control mt-1" name="num1" value = "{{num1}}" required >
+			<input type="text"  id="Ib1" placeholder="If you want to calculate this parameter, input as 'x' or 'y'"  class="form-control mt-1" name="num1" value = "{{num1}}" required >
 			<div class="input-group-text"><strong>meter/sec</strong></div>
 			</div>
 			<div class="input-group mb-2">
 				<div class="input-group-prepend">
 					<div class="input-group-text"><strong>Acceleration (a)</strong></div>
 				</div>
-				<input type="text"  id="Ib" placeholder="If you want to calculate this parameter, input as 'x' or 'y'"  class="form-control mt-1" name="num2" value = "{{num2}}" required >
+				<input type="text"  id="Ib2" placeholder="If you want to calculate this parameter, input as 'x' or 'y'"  class="form-control mt-1" name="num2" value = "{{num2}}" required >
 				<div class="input-group-text"><strong>meter/sec<sup>2</sup></strong></div>
 				</div>
 				<div class="input-group mb-2">
                     <div class="input-group-prepend">
                         <div class="input-group-text"><strong>Initial Velocity (u)</strong></div>
                     </div>
-                    <input type="text"  id="Ib" placeholder="If you want to calculate this parameter, input as 'x' or 'y'"  class="form-control mt-1" name="num3" value = "{{num3}}" required >
+                    <input type="text"  id="Ib3" placeholder="If you want to calculate this parameter, input as 'x' or 'y'"  class="form-control mt-1" name="num3" value = "{{num3}}" required >
 					<div class="input-group-text"><strong>meter/sec</strong></div>
                     </div>
 					<div class="input-group mb-2">
 						<div class="input-group-prepend">
 							<div class="input-group-text"><strong>Final Velocity (v)</strong></div>
 						</div>
-						<input type="text"  id="Ib" placeholder="If you want to calculate this parameter, input as 'x' or 'y"  class="form-control mt-1" name="num4" value = "{{num4}}" required >
+						<input type="text"  id="Ib4" placeholder="If you want to calculate this parameter, input as 'x' or 'y"  class="form-control mt-1" name="num4" value = "{{num4}}" required >
 						<div class="input-group-text"><strong>meter/sec</strong></div>
 						</div>
 						<div class="input-group mb-2">
 							<div class="input-group-prepend">
 								<div class="input-group-text"><strong>Time (t)</strong></div>
 							</div>
-							<input type="text"  id="Ib" placeholder="If you want to calculate this parameter, input as 'x' or 'y'"  class="form-control mt-1" name="num5" value = "{{num5}}" required >
+							<input type="text"  id="Ib5" placeholder="If you want to calculate this parameter, input as 'x' or 'y'"  class="form-control mt-1" name="num5" value = "{{num5}}" required >
 							<div class="input-group-text"><strong>sec</strong></div>
 							</div>
 							<div class="center col mt-2">
 								<center>
 								<input type="submit" class="btn btn-primary" value="Calculate" onclick="myFunction()">
-								<input type="button" class="btn btn-danger" onclick="Clean()" value="Reset" style="margin-top: 5px;">
+								<input type="button" class="btn btn-danger" onclick="Clean();ClearFields();" value="Reset" style="margin-top: 5px;">
 								</center>
 							</div>
 	    </form>

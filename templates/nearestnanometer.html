@@ -86,6 +86,9 @@
             }
             return;
         }
+        function ClearFields() {
+            document.getElementById("Ib").value = "";
+        }
 	</script>
 	<div class = "container">
 	<div class="card">
@@ -100,11 +103,11 @@
                           <div class="card">
                             <div class="card-body">
                               <h5 class="card-title">Enter Nanometers</h5>
-                                <input type="number" step = "any" id="Ib" class="form-control mt-1" min = "1" name="num1" value="{{num1}}" placeholder="Enter any Number" required >
+                                <input type="number" step = "any" id="Ib" class="form-control mt-1" min = "0" name="num1" value="{{num1}}" placeholder="3245.678" required >
                                 <div class="center col mt-2">
                                     <center>
-                                    <input type="submit" class="btn btn-primary" value="Calculate" onclick="myFunction()">
-                                    <input type="button" class="btn btn-danger" onclick="Clean()" value="Reset" style="margin-top: 5px;">
+                                    <input type="submit" class="btn btn-primary" value="Calculate" onclick="myFunction();Clean();">
+                                    <input type="button" class="btn btn-danger" onclick="ClearFields();Clean();ClearFields();" value="Reset" style="margin-top: 5px;">
                                     </center>
                                 </div>
                           </div>
@@ -119,7 +122,7 @@
         {%if cas %}
         <div class = "container" id = "cards">
         <div class="card">
-            <h1 class="card-header" style="background-color:#00BFFF;color: white;text-align: center;">Rounding off {{num1}} to Nearest Nanometer</h1>
+            <h1 class="card-header" style="background-color:#00BFFF;color: white;">Rounding off {{num1}} to Nearest Nanometer</h1>
             <div class="card-body">
                 <table class="table table-bordered">
                     <thead>
@@ -156,26 +159,44 @@
         {%if cas1 %}
 <div class = "container" id = "cards1">
     <div class="card">
-        <h1 class="card-header" style="background-color:#00BFFF;color: white;text-align: center;">Steps for Rounding {{num1}} to Nearest Tens, Hundreds and Thousands</h1>
+        <h1 class="card-header" style="background-color:#00BFFF;color: white;">Steps for Rounding {{num1}} to Nearest Tens, Hundreds and Thousands</h1>
         <div class="card-body">
           <h3 style="background-color:#DAF7A6;">Rounding off to Nearest Tens</h3>
+          {%if tetcas%}
             <p>Given Number is {{num1}}</p>
             <p>Observe the {{placeten}} digit in the number. Here it is {{tensid}}</p>
             <p>The {{placeten}} place digit {{tensid}} {{st}}. {{st1}}</p>
             <p>Rounded value of {{num1}} is {{tens}}</p>
             <p>Therefore, {{num1}} is rounded to the nearest tens is <strong>{{tens}}</strong>.</p>
+          {%endif%}
+          {%if tefcas%}
+            <p>{{st}}</p>
+            <p>{{st1}}</p>
+            {%endif%}
           <h3 style="background-color:#DAF7A6;">Rounding off to Nearest Hundreds</h3>
+          {%if htcas%}
           <p>Given Number is {{num1}}</p>
             <p>Observe the {{placehun}} digit in the number. Here it is {{hunid}}</p>
             <p>The {{placehun}} place digit {{hunid}} {{sh}}. {{sh1}}</p>
             <p>Rounded value of {{num1}} is {{tens}}</p>
             <p>Therefore, {{num1}} is rounded to the nearest hundreds is <strong>{{hund}}</strong>.</p>
+          {%endif%}
+          {%if hfcas%}
+          <p>{{sh}}</p>
+          <p>{{sh1}}</p>
+          {%endif%}
           <h3 style="background-color:#DAF7A6;">Rounding off to Nearest Thousand</h3>
+          {%if ttcas%}
           <p>Given Number is {{num1}}</p>
             <p>Observe the {{placetho}} digit in the number. Here it is {{thouid}}</p>
             <p>The {{placetho}} place digit {{thouid}} {{sth}}. {{sth1}}</p>
             <p>Rounded value of {{num1}} is {{thou}}</p>
             <p>Therefore, {{num1}} is rounded to the nearest thousands is <strong>{{thou}}</strong>.</p>
+          {%endif%}
+          {%if tfcas%}
+          <p>{{sth}}</p>
+          <p>{{sth1}}</p>
+          {%endif%}
         </div>
     </div>
 	</div>

@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <!-- Meta Title, Description and Canonical URL Starts --->
-<title>    Rounding to Two Decimal Calculator | Free Calculator to Round to Two Decimal </title>
+<title>    Time Clock 30 Minutes Rounding Calculator | Free Calculator to Round to Time Clock 30 Minutes </title>
 <meta name="description"
     content="    Friction Loss Calculator makes it easy for you to find   Friction Loss ." />
 <link rel="canonical" href="{{request.build_absolute_uri}}">
@@ -53,7 +53,7 @@
 <meta property="twitter:image:width" content="354" />
 <!-- TWITTER CARD CONFIGURATION ENDS  -->
 <!--  LINKEDIN CONFIGURATION STARTS-->
-<tittle> Round to Two Decimal Calculator</tittle>
+<tittle> Time Clock 30 Minutes Rounding Calculator</tittle>
 <meta property='og:title' content="    Friction Loss Calculator |     Friction Loss" />
 <meta property='og:image'
     content="https://onlinecalculator.guru/static/images/Chemistry/Friction-Loss-Calculator.jpeg" />
@@ -77,25 +77,26 @@
 <body>
 	<script>
 		function Clean(){
-            document.getElementById('cards').innerHTML=''
+            var s = document.getElementById('cards');
+            s.parentNode.removeChild(s);
             document.getElementById('cards1').innerHTML=''
 		}
-        function handleSubmit(event) {
+    function handleSubmit(event) {
             if(!validate()) {
                 event.preventDefault();
             }
             return;
         }
         function ClearFields() {
-            document.getElementById("Ib").value = "";
-			
-        }
+
+document.getElementById("Ib").value = "";
+}
 	</script>
 	<div class = "container">
 	<div class="card">
-		<h1 class="card-header" style="background-color:#00BFFF;color: white;">Round To Two Decimal Calculator</h1>
+		<h1 class="card-header" style="background-color:#00BFFF;color: white;">Time Clock 30 Minutes Rounding Calculator</h1>
 		<div class="card-body">
-                <form  method = "POST" onsubmit="handleSubmit();">
+                <form  method = "POST" onsubmit="handleSubmit()">
                     {% csrf_token %}
                     <div class="row">
                         <div class="col-sm-4">
@@ -103,70 +104,83 @@
                         <div class="col-sm-4">
                           <div class="card">
                             <div class="card-body">
-                              <h5 class="card-title">Enter Decimal</h5>
-                              <input type="number" step = "any"  id="Ib" class="form-control mt-1" name="num1" value = "{{num1}}" required >
+                              <h5 class="card-title">Enter Time in HH:MM<br></h5>
+                                <input type="time"  id="Ib" class="form-control mt-1" name="num1" value = "{{num1}}" placeholder = "00:00" required>
                                 <div class="center col mt-2">
                                     <center>
-                                    <input type="submit" class="btn btn-primary" value="Calculate" onclick="myFunction()" >
-                                    <input type="button" class="btn btn-danger" onclick="Clean();ClearFields();" value="Reset" style="margin-top: 5px;">
+                                    <input type="submit" class="btn btn-primary" value="Calculate" onclick="myFunction();Clean();">
+                                    <input type="button" class="btn btn-danger" onclick="ClearFields();Clean();ClearFields();" value="Reset" style="margin-top: 5px;">
                                     </center>
                                 </div>
+                                
                           </div>
+                          
                         </div>
-                        </div>
-                        <div class="col-sm-4">
-                          </div>
                       </div>
-                      
-                </form>
+                </form> 
+                {%if mcas%}
+                <div class = "container" id = "cards">
+                  <center><p>{{msg}}</p></center>
+                </div>
+                {%endif%}
             </div>
             </div>
+            
         </div>
         {%if cas %}
 	<div class = "container" id = "cards">
     <div class="card">
-        <h1 class="card-header" style="background-color:#00BFFF;color: white;text-align: center;">Rounding {{num1}} to Two Decimal Place is</h1>
+        <h1 class="card-header" style="background-color:#00BFFF;color: white;">Rounding off {{num1}} to Nearest 30 Minutes</h1>
         <div class="card-body">
-            <p>{{num1}} = {{res}}</p>
+            <p>Answer = {{final}}</p>
         </div>
     </div>
 	</div>
 {% endif%}
-    {%if cas %}
-	<div class = "container" id = "cards1">
-    <div class="card">
-        <h1 class="card-header" style="background-color:#00BFFF;color: white;text-align: center;">Steps to Round off {{num1}} to Two Decimal Places</h1>
-        <div class="card-body">
-            <p>Rounding calculator to round numbers up or down to any decimal place</p>
-            <h5>Given Value = {{num1}}</h5>
-            <p>Steps to Round off Number to two decimal places</p>
-            <ul>
-                <li><p>Locate the Third Digit after the Decimal Point. Here it is, <br>
-                    {{dec}} in {{num1}}</p></li>
-                <li><p>If the located digit is 5 or more, increase the previous digit by one and remove all digits to right<br>
-                    {%if c1%}
-                    Here it is, {{res}} as the located digit is {{dec}}</p></li>
-                    {%endif%}
-                <li><p>If the located digit is 4 or less, keep the previous digit the same and remove all digits to right<br>
-                {%if c2%}
-                Here it is, {{res}} as the located digit is {{dec}}</p></li>
-                {%endif%}
-                
-            </ul>
-            <p>The value of Rounded Value to one decimal is </p>
-                <h4><b>{{num1}} = {{res}}</b></h4> 
-        </div>
-    </div>
-	</div>
-	{% endif %}
-    <script>
-        var scrollDiv = document.getElementById("cards").offsetTop;
-        window.scrollTo({ top: scrollDiv, behavior: 'smooth' });
-        
-            function myFunction() {
-                document.getElementById("cards").innerHTML = "";
-        
-            }
-        </script>
-</body>
-{% endblock %}
+        {%if cas %}
+        <div class = "container" id = "cards1">
+        <div class="card">
+            <h1 class="card-header" style="background-color:#00BFFF;color: white;">Steps to Round off {{num1}} to Nearest 30 Minutes </h1>
+            <div class="card-body">
+              <p>Rounding to 30 minutes (or 1/2 hour) observes two thresholds that indicate whether the clock-ins and clock-outs are rounded up or down; The first 29 minutes is always rounded down while the second-half 29 minutes are rounded up to a full half of an hour </p>
+                <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th scope="col">Minutes After the Hour</th>
+                        <th scope="col">Minute Mark To Round To</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>0 – 30</td>
+                        <td>:30 (of the current hour)</td>
+                      </tr>
+                      <tr>
+                        
+                        <td>31 – 59</td>
+                        <td>:60</td>
+                    
+                      </tr>
+                    </tbody>
+                  </table><br>
+                  <p>Here, the minutes is {{min}}. So, according to the table, we round off to the nearest 30th minute</p>
+                  {%if scas%}
+                  <p>Here, in this case, the minute is in the range 31-59. Hence, we round off to next hour and to nearest 30th minute.<br>Hour is {{hour}}</p>
+                  {%endif%}
+                  <h4>Answer = {{final}}</h4>
+                </div>
+                </div>
+                </div>
+        {%endif%}
+        <script>
+          var scrollDiv = document.getElementById("cards").offsetTop;
+          window.scrollTo({ top: scrollDiv, behavior: 'smooth' });
+          
+              function myFunction() {
+                  document.getElementById("cards").innerHTML = "";
+          
+              }
+          </script>
+      </body>
+
+{%endblock%}

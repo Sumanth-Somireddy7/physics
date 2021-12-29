@@ -40,4 +40,6 @@ urlpatterns = [
     path('nearest_nanometer/',views.nearest_nanometer,name = 'nearest_nanometer'),
     path('nearest_yard/',views.nearest_yard,name = 'nearest_yard'),
     path('nearest_mile/',views.nearest_mile,name = 'nearest_mile'),
+    path('time_clock_30_minutes/',views.time_clock_30_minutes,name = 'time_clock_30_minutes')
+
 ]

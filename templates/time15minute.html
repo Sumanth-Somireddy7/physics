@@ -77,7 +77,8 @@
 <body>
 	<script>
 		function Clean(){
-            document.getElementById('cards').innerHTML=''
+            var s = document.getElementById('cards');
+            s.parentNode.removeChild(s);
             document.getElementById('cards1').innerHTML=''
 		}
     function handleSubmit(event) {
@@ -86,6 +87,10 @@
             }
             return;
         }
+        function ClearFields() {
+
+document.getElementById("Ib").value = "";
+}
 	</script>
 	<div class = "container">
 	<div class="card">
@@ -99,29 +104,33 @@
                         <div class="col-sm-4">
                           <div class="card">
                             <div class="card-body">
-                              <h5 class="card-title">Enter Time in HH:MM<br> (24-Hour Format)</h5>
-                                <input type="text"  id="Ib" class="form-control mt-1" name="num1"  required >
+                              <h5 class="card-title">Enter Time in HH:MM<br></h5>
+                                <input type="time"  id="Ib" class="form-control mt-1" name="num1" value = "{{num1}}" placeholder="00:00" required>
                                 <div class="center col mt-2">
                                     <center>
-                                    <input type="submit" class="btn btn-primary" value="Calculate" onclick="myFunction()">
-                                    <input type="button" class="btn btn-danger" onclick="Clean()" value="Reset" style="margin-top: 5px;">
+                                    <input type="submit" class="btn btn-primary" value="Calculate" onclick="myFunction();Clean();">
+                                    <input type="button" class="btn btn-danger" onclick="ClearFields();Clean();ClearFields();" value="Reset" style="margin-top: 5px;">
                                     </center>
                                 </div>
+                                
                           </div>
+                          
                         </div>
-                        </div>
-                        <div class="col-sm-4">
-                          </div>
                       </div>
-                      
-                </form>
+                </form> 
+                {%if mcas%}
+                <div class = "container" id = "cards">
+                  <center><p>{{msg}}</p></center>
+                </div>
+                {%endif%}
             </div>
             </div>
+            
         </div>
         {%if cas %}
 	<div class = "container" id = "cards">
     <div class="card">
-        <h1 class="card-header" style="background-color:#00BFFF;color: white;text-align: center;">Rounding off {{num1}} to Nearest 15 Minutes</h1>
+        <h1 class="card-header" style="background-color:#00BFFF;color: white;">Rounding off {{num1}} to Nearest 15 Minutes</h1>
         <div class="card-body">
             <p>Answer = {{final}}</p>
         </div>
@@ -131,7 +140,7 @@
         {%if cas %}
         <div class = "container" id = "cards1">
         <div class="card">
-            <h1 class="card-header" style="background-color:#00BFFF;color: white;text-align: center;">Steps to Round off {{num1}} to Nearest 15 Minutes </h1>
+            <h1 class="card-header" style="background-color:#00BFFF;color: white;">Steps to Round off {{num1}} to Nearest 15 Minutes </h1>
             <div class="card-body">
               <p>Rounding to 15 minutes (or 1/4 hour) observes two thresholds that indicate whether the clock-ins and clock-outs are rounded up or down; The first 7.5 minutes is always rounded down while the second-half 7.5 minutes are rounded up to a full quarter of an hour </p>
                 <table class="table table-bordered">

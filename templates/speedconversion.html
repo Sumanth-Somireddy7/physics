@@ -84,6 +84,9 @@
             }
             return;
         }
+        function ClearFields() {
+            document.getElementById("Ib").value = "";
+        }
 	</script>
 <br>
 <br>
@@ -159,7 +162,7 @@
 				<div class="center col mt-2">
                     <center>
 					<input type="submit" class="btn btn-primary" value="Calculate" onclick="myFunction()">
-                    <input type="button" class="btn btn-danger" onclick="Clean()" style="margin-top: 5px;" value="Reset">
+                    <input type="button" class="btn btn-danger" onclick="Clean();ClearFields();" style="margin-top: 5px;" value="Reset">
                 </center>
 				</div>
             </form>

@@ -1111,9 +1111,9 @@ def roundit(x, sig):
     return round(x, sig-int(floor(log10(abs(x))))-1)
 
 def min_15_round(n1,n2):
-    if n2 in ('0','1','2','3','4','5','6','7'):
+    if n2 in ('00','01','02','03','04','05','06','07'):
         return n1+':'+'00'
-    elif  n2 in ('8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22'):
+    elif  n2 in ('08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22'):
         return n1+':'+'15'
     elif n2 in ('23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37'):
         return n1+':'+'30'
@@ -1124,6 +1124,8 @@ def min_15_round(n1,n2):
             return '00'+':'+'00'
         else:
             return str(int(n1)+1)+':'+'00'
+    else:
+        return 'No'
 
 def roundeighth(num1):
     return ceil(num1*8)/8
@@ -1152,21 +1154,21 @@ def cancel(n1,n2):
     return [resn,resd,div]
 
 def feetinch(f,i):
-    if i >5 and i<=12:
+    if i >6 and i<=12:
         f = f+1
         i = 0
-        msg = "greater than 5"
+        msg = "greater than 6"
         ro = "Round up the Feet"
         cas = True
-    elif i==5:
+    elif i==6:
         f = f+1
         i = 0
-        msg = "equal to 5"
+        msg = "equal to 6"
         ro = "Round up the feet"
         cas = True
     elif i<5:
         i = 0
-        msg = "less than 5"
+        msg = "less than 6"
         ro = "Round down the feet"
         cas = True
     else:
@@ -1194,52 +1196,88 @@ def nearfeet(num1):
     return [whole,tens,hund,thou]
 
 def h_3(num1):
-    t = get_pos_nums(int(num1))
-    tens = t[-3]
-    getcontext().prec = 100
-    res1 = round(Decimal(num1),-3)
-    if tens>5:
-        st = 'which is greater than 5'
-        st1 = 'So round up the number'
-    elif tens==5:
-        st = 'which is equal to 5'
-        st1 = 'So, round up the number'
+    numstr = str(num1).split('.')
+    if len(numstr[0])>=4:
+        ttcas = True
+        tfcas = False
+        t = get_pos_nums(int(num1))
+        tens = t[-3]
+        getcontext().prec = 100
+        res1 = round(Decimal(num1),-3)
+        if tens>5:
+            st = 'which is greater than 5'
+            st1 = 'So round up the number'
+        elif tens==5:
+            st = 'which is equal to 5'
+            st1 = 'So, round up the number'
+        else:
+            st = 'which is less than 5'
+            st1 = 'So, round down the number'
     else:
-        st = 'which is less than 5'
-        st1 = 'So, round down the number'
-    return [st,st1,tens]
+        st = "We can't round to thousands because, there must be minimum of 4 digits before decimal point."
+        st1 = "Here there are only "+str(len(numstr[0]))+" digits before decimal. Hence it is 0"
+        tens = 0
+        ttcas = False
+        tfcas = True
+    return [st,st1,tens,ttcas,tfcas]
 
 def h_2(num1):
-    t = get_pos_nums(int(num1))
-    tens = t[-2]
-    getcontext().prec=100
-    res1 = round(Decimal(num1), -2)
-    if tens>5:
-        st = 'which is greater than 5'
-        st1 = 'So round up the number'
-    elif tens==5:
-        st = 'which is equal to 5'
-        st1 = 'So, round up the number'
+    numstr = str(num1).split('.')
+    if len(numstr[0])>=3:
+        htcas = True
+        hfcas = False
+        t = get_pos_nums(int(num1))
+        tens = t[-2]
+        getcontext().prec = 100
+        res1 = round(Decimal(num1),-2)
+        if tens>5:
+            st = 'which is greater than 5'
+            st1 = 'So round up the number'
+        elif tens==5:
+            st = 'which is equal to 5'
+            st1 = 'So, round up the number'
+        else:
+            st = 'which is less than 5'
+            st1 = 'So, round down the number'
     else:
-        st = 'which is less than 5'
-        st1 = 'So, round down the number'
-    return [st,st1,tens]
+        st = "We can't round to hundreds because, there must be minimum of 3 digits before decimal point."
+        st1 = "Here there are only "+str(len(numstr[0]))+" digits before decimal. Hence it is 0"
+        tens = 0
+        htcas = False
+        hfcas = True
+    return [st,st1,tens,htcas,hfcas]
 
 def h_1(num1):
-    t = get_pos_nums(int(num1))
-    tens = t[-1]
-    getcontext().prec = 100
-    res1 = round(Decimal(num1),-1)
-    if tens>5:
-        st = 'which is greater than 5'
-        st1 = 'So round up the number'
-    elif tens==5:
-        st = 'which is equal to 5'
-        st1 = 'So, round up the number'
+    numstr = str(num1).split('.')
+    if len(numstr[0])>=1:
+        if int(numstr[0])>10:
+            tetcas = True
+            tefcas = False
+            tens = int(numstr[0][-1])
+            getcontext().prec = 100
+            res1 = round(Decimal(num1),-1)
+            if tens>5:
+                st = 'which is greater than 5'
+                st1 = 'So round up the number'
+            elif tens==5:
+                st = 'which is equal to 5'
+                st1 = 'So, round up the number'
+            else:
+                st = 'which is less than 5'
+                st1 = 'So, round down the number'
+        else:
+            tetcas = False
+            tefcas = True
+            st = "The number is less than 10 and can't be rounded to nearest ten. So, it is 0"
+            st1 = ''
+            tens = 0
     else:
-        st = 'which is less than 5'
-        st1 = 'So, round down the number'
-    return [st,st1,tens]
+        st = "We can't round to tens because, there must be minimum of 1 digit before decimal point."
+        st1 = "Here there are only "+str(len(numstr[0]))+" digits before decimal. Hence it is 0"
+        tens = 0
+        tetcas = False
+        tefcas = True
+    return [st,st1,tens,tetcas,tefcas]
 
 def m_cm(f,i):
     if i >50 and i<=100:
@@ -1343,3 +1381,14 @@ def mm_mi(f,i):
         ro = ''
         cas = False
     return [f,i,msg,ro,cas]
+
+def min_30_round(n1,n2):
+    if n2 in ('00','01','02','03','04','05','06','07','08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22','23', '24', '25', '26', '27', '28', '29', '30'):
+        return n1+':'+'30'
+    elif n2 in ('31', '32', '33', '34', '35', '36', '37','38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50', '51', '52','53', '54', '55', '56', '57', '58', '59'):
+        if n1=='23':
+            return '00'+':'+'00'
+        else:
+            return str(int(n1)+1)+':'+'00'
+    else:
+        return 'No'

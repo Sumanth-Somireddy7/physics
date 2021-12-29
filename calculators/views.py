@@ -3060,14 +3060,23 @@ def time_clock_15_minutes(request):
         final = ''
         cas = False
         scas = False
-        min = ''
+        mcas = False
+        minu = ''
+        msg = ''
     else:
         num1 = str(num1)
         n = num1.split(":")
-        min = n[0]
-        if min in ('00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12','13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23'):
+        minu = n[0]
+        if minu in ('00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12','13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23'):
             final = min_15_round(n[0],n[1])
-            cas = True
+            if final=='No':
+                mcas = True
+                cas = False
+                msg = 'Enter valid Time Format in HH:MM where both HH and MM are postive integers'
+            else:
+                mcas = False
+                cas = True
+                msg = ''
             if n[1] in ('53', '54', '55', '56', '57', '58', '59', '60'):
                 scas = True
             else:
@@ -3076,7 +3085,9 @@ def time_clock_15_minutes(request):
             final = ''
             cas = False
             scas = False
-    return render(request,'time15minute.html',{'final':final,'cas':cas,'min':min,'scas':scas,'num1':num1})
+            msg = ''
+            mcas = True
+    return render(request,'time15minute.html',{'final':final,'cas':cas,'min':minu,'scas':scas,'num1':num1,'msg':msg,'mcas':mcas})
 
 def nearest_eighth(request):
     try:
@@ -3199,6 +3210,12 @@ def nearest_feet(request):
         sth = ''
         sth1 = ''
         thouid = ''
+        hfcas = False
+        htcas = False
+        ttcas = False
+        tfcas = False
+        tetcas = False
+        tefcas = False
     else:
         try:
             num1 = float(num1)
@@ -3222,6 +3239,12 @@ def nearest_feet(request):
             sth = ''
             sth1 = ''
             thouid = ''
+            htcas = False
+            hfcas = False
+            ttcas = False
+            tfcas = False
+            tetcas = False
+            tefcas = False
         else:
             if num1.is_integer():
                 cas1 = False
@@ -3236,12 +3259,18 @@ def nearest_feet(request):
             st = rnt[0]
             st1 = rnt[1]
             tensid = rnt[2]
+            tetcas = rnt[3]
+            tefcas = rnt[4]
             sh = rnh[0]
             sh1 = rnh[1]
             hunid = rnh[2]
+            htcas = rnh[3]
+            hfcas =  rnh[4]
             sth = rnth[0]
             sth1 = rnth[1]
             thouid = rnth[2]
+            ttcas = rnth[3]
+            tfcas = rnth[4]
             res = nearfeet(num1)
             whole = res[0]
             tens = res[1]
@@ -3249,8 +3278,8 @@ def nearest_feet(request):
             thou = res[3]
             cas = True
     return render(request,'nearestfeet.html',{'num1':num1,'whole':whole,'tens':tens,'hund':hund,'thou':thou,'cas':cas,
-    'placeten':placeten,'placehun':placehun,'placetho':placetho,'st':st,'st1':st,'sh':sh,'sh1':sh1,
-    'sth':sth,'sth1':sth1,'tensid':tensid,'hunid':hunid,'thouid':thouid,'cas1':cas1})
+    'placeten':placeten,'placehun':placehun,'placetho':placetho,'st':st,'st1':st1,'sh':sh,'sh1':sh1,
+    'sth':sth,'sth1':sth1,'tensid':tensid,'hunid':hunid,'thouid':thouid,'cas1':cas1,'ttcas':ttcas,'tfcas':tfcas,'htcas':htcas,'hfcas':hfcas,'tetcas':tetcas,'tefcas':tefcas})
 
 def meter_centimeter(request):
     try:
@@ -3311,6 +3340,12 @@ def nearest_meter(request):
         sth = ''
         sth1 = ''
         thouid = ''
+        hfcas = False
+        htcas = False
+        ttcas = False
+        tfcas = False
+        tetcas = False
+        tefcas = False
     else:
         try:
             num1 = float(num1)
@@ -3334,6 +3369,12 @@ def nearest_meter(request):
             sth = ''
             sth1 = ''
             thouid = ''
+            htcas = False
+            hfcas = False
+            ttcas = False
+            tfcas = False
+            tetcas = False
+            tefcas = False
         else:
             if num1.is_integer():
                 cas1 = False
@@ -3348,12 +3389,18 @@ def nearest_meter(request):
             st = rnt[0]
             st1 = rnt[1]
             tensid = rnt[2]
+            tetcas = rnt[3]
+            tefcas = rnt[4]
             sh = rnh[0]
             sh1 = rnh[1]
             hunid = rnh[2]
+            htcas = rnh[3]
+            hfcas =  rnh[4]
             sth = rnth[0]
             sth1 = rnth[1]
             thouid = rnth[2]
+            ttcas = rnth[3]
+            tfcas = rnth[4]
             res = nearfeet(num1)
             whole = res[0]
             tens = res[1]
@@ -3361,8 +3408,8 @@ def nearest_meter(request):
             thou = res[3]
             cas = True
     return render(request,'nearestmeter.html',{'num1':num1,'whole':whole,'tens':tens,'hund':hund,'thou':thou,'cas':cas,
-    'placeten':placeten,'placehun':placehun,'placetho':placetho,'st':st,'st1':st,'sh':sh,'sh1':sh1,
-    'sth':sth,'sth1':sth1,'tensid':tensid,'hunid':hunid,'thouid':thouid,'cas1':cas1})
+    'placeten':placeten,'placehun':placehun,'placetho':placetho,'st':st,'st1':st1,'sh':sh,'sh1':sh1,
+    'sth':sth,'sth1':sth1,'tensid':tensid,'hunid':hunid,'thouid':thouid,'cas1':cas1,'ttcas':ttcas,'tfcas':tfcas,'htcas':htcas,'hfcas':hfcas,'tetcas':tetcas,'tefcas':tefcas})
 
 def centimeter_millimeter(request):
     try:
@@ -3423,6 +3470,12 @@ def nearest_centimeter(request):
         sth = ''
         sth1 = ''
         thouid = ''
+        hfcas = False
+        htcas = False
+        ttcas = False
+        tfcas = False
+        tetcas = False
+        tefcas = False
     else:
         try:
             num1 = float(num1)
@@ -3446,6 +3499,12 @@ def nearest_centimeter(request):
             sth = ''
             sth1 = ''
             thouid = ''
+            htcas = False
+            hfcas = False
+            ttcas = False
+            tfcas = False
+            tetcas = False
+            tefcas = False
         else:
             if num1.is_integer():
                 cas1 = False
@@ -3460,12 +3519,18 @@ def nearest_centimeter(request):
             st = rnt[0]
             st1 = rnt[1]
             tensid = rnt[2]
+            tetcas = rnt[3]
+            tefcas = rnt[4]
             sh = rnh[0]
             sh1 = rnh[1]
             hunid = rnh[2]
+            htcas = rnh[3]
+            hfcas =  rnh[4]
             sth = rnth[0]
             sth1 = rnth[1]
             thouid = rnth[2]
+            ttcas = rnth[3]
+            tfcas = rnth[4]
             res = nearfeet(num1)
             whole = res[0]
             tens = res[1]
@@ -3473,8 +3538,8 @@ def nearest_centimeter(request):
             thou = res[3]
             cas = True
     return render(request,'nearestcentimeter.html',{'num1':num1,'whole':whole,'tens':tens,'hund':hund,'thou':thou,'cas':cas,
-    'placeten':placeten,'placehun':placehun,'placetho':placetho,'st':st,'st1':st,'sh':sh,'sh1':sh1,
-    'sth':sth,'sth1':sth1,'tensid':tensid,'hunid':hunid,'thouid':thouid,'cas1':cas1})
+    'placeten':placeten,'placehun':placehun,'placetho':placetho,'st':st,'st1':st1,'sh':sh,'sh1':sh1,
+    'sth':sth,'sth1':sth1,'tensid':tensid,'hunid':hunid,'thouid':thouid,'cas1':cas1,'ttcas':ttcas,'tfcas':tfcas,'htcas':htcas,'hfcas':hfcas,'tetcas':tetcas,'tefcas':tefcas})
 
 def kilometer_meter(request):
     try:
@@ -3535,6 +3600,12 @@ def nearest_kilometer(request):
         sth = ''
         sth1 = ''
         thouid = ''
+        hfcas = False
+        htcas = False
+        ttcas = False
+        tfcas = False
+        tetcas = False
+        tefcas = False
     else:
         try:
             num1 = float(num1)
@@ -3558,6 +3629,12 @@ def nearest_kilometer(request):
             sth = ''
             sth1 = ''
             thouid = ''
+            htcas = False
+            hfcas = False
+            ttcas = False
+            tfcas = False
+            tetcas = False
+            tefcas = False
         else:
             if num1.is_integer():
                 cas1 = False
@@ -3572,12 +3649,18 @@ def nearest_kilometer(request):
             st = rnt[0]
             st1 = rnt[1]
             tensid = rnt[2]
+            tetcas = rnt[3]
+            tefcas = rnt[4]
             sh = rnh[0]
             sh1 = rnh[1]
             hunid = rnh[2]
+            htcas = rnh[3]
+            hfcas =  rnh[4]
             sth = rnth[0]
             sth1 = rnth[1]
             thouid = rnth[2]
+            ttcas = rnth[3]
+            tfcas = rnth[4]
             res = nearfeet(num1)
             whole = res[0]
             tens = res[1]
@@ -3585,8 +3668,8 @@ def nearest_kilometer(request):
             thou = res[3]
             cas = True
     return render(request,'nearestkilometer.html',{'num1':num1,'whole':whole,'tens':tens,'hund':hund,'thou':thou,'cas':cas,
-    'placeten':placeten,'placehun':placehun,'placetho':placetho,'st':st,'st1':st,'sh':sh,'sh1':sh1,
-    'sth':sth,'sth1':sth1,'tensid':tensid,'hunid':hunid,'thouid':thouid,'cas1':cas1})
+    'placeten':placeten,'placehun':placehun,'placetho':placetho,'st':st,'st1':st1,'sh':sh,'sh1':sh1,
+    'sth':sth,'sth1':sth1,'tensid':tensid,'hunid':hunid,'thouid':thouid,'cas1':cas1,'ttcas':ttcas,'tfcas':tfcas,'htcas':htcas,'hfcas':hfcas,'tetcas':tetcas,'tefcas':tefcas})
 def nearest_millimeter(request):
     try:
         num1 = request.POST['num1']
@@ -3610,6 +3693,12 @@ def nearest_millimeter(request):
         sth = ''
         sth1 = ''
         thouid = ''
+        hfcas = False
+        htcas = False
+        ttcas = False
+        tfcas = False
+        tetcas = False
+        tefcas = False
     else:
         try:
             num1 = float(num1)
@@ -3633,6 +3722,12 @@ def nearest_millimeter(request):
             sth = ''
             sth1 = ''
             thouid = ''
+            htcas = False
+            hfcas = False
+            ttcas = False
+            tfcas = False
+            tetcas = False
+            tefcas = False
         else:
             if num1.is_integer():
                 cas1 = False
@@ -3647,12 +3742,18 @@ def nearest_millimeter(request):
             st = rnt[0]
             st1 = rnt[1]
             tensid = rnt[2]
+            tetcas = rnt[3]
+            tefcas = rnt[4]
             sh = rnh[0]
             sh1 = rnh[1]
             hunid = rnh[2]
+            htcas = rnh[3]
+            hfcas =  rnh[4]
             sth = rnth[0]
             sth1 = rnth[1]
             thouid = rnth[2]
+            ttcas = rnth[3]
+            tfcas = rnth[4]
             res = nearfeet(num1)
             whole = res[0]
             tens = res[1]
@@ -3660,8 +3761,9 @@ def nearest_millimeter(request):
             thou = res[3]
             cas = True
     return render(request,'nearestmillimeter.html',{'num1':num1,'whole':whole,'tens':tens,'hund':hund,'thou':thou,'cas':cas,
-    'placeten':placeten,'placehun':placehun,'placetho':placetho,'st':st,'st1':st,'sh':sh,'sh1':sh1,
-    'sth':sth,'sth1':sth1,'tensid':tensid,'hunid':hunid,'thouid':thouid,'cas1':cas1})
+    'placeten':placeten,'placehun':placehun,'placetho':placetho,'st':st,'st1':st1,'sh':sh,'sh1':sh1,
+    'sth':sth,'sth1':sth1,'tensid':tensid,'hunid':hunid,'thouid':thouid,'cas1':cas1,'ttcas':ttcas,'tfcas':tfcas,'htcas':htcas,'hfcas':hfcas,'tetcas':tetcas,'tefcas':tefcas})
+
 
 def millimeter_micrometer(request):
     try:
@@ -3721,6 +3823,12 @@ def nearest_micrometer(request):
         sth = ''
         sth1 = ''
         thouid = ''
+        hfcas = False
+        htcas = False
+        ttcas = False
+        tfcas = False
+        tetcas = False
+        tefcas = False
     else:
         try:
             num1 = float(num1)
@@ -3744,6 +3852,12 @@ def nearest_micrometer(request):
             sth = ''
             sth1 = ''
             thouid = ''
+            htcas = False
+            hfcas = False
+            ttcas = False
+            tfcas = False
+            tetcas = False
+            tefcas = False
         else:
             if num1.is_integer():
                 cas1 = False
@@ -3758,12 +3872,18 @@ def nearest_micrometer(request):
             st = rnt[0]
             st1 = rnt[1]
             tensid = rnt[2]
+            tetcas = rnt[3]
+            tefcas = rnt[4]
             sh = rnh[0]
             sh1 = rnh[1]
             hunid = rnh[2]
+            htcas = rnh[3]
+            hfcas =  rnh[4]
             sth = rnth[0]
             sth1 = rnth[1]
             thouid = rnth[2]
+            ttcas = rnth[3]
+            tfcas = rnth[4]
             res = nearfeet(num1)
             whole = res[0]
             tens = res[1]
@@ -3771,8 +3891,9 @@ def nearest_micrometer(request):
             thou = res[3]
             cas = True
     return render(request,'nearestmicrometer.html',{'num1':num1,'whole':whole,'tens':tens,'hund':hund,'thou':thou,'cas':cas,
-    'placeten':placeten,'placehun':placehun,'placetho':placetho,'st':st,'st1':st,'sh':sh,'sh1':sh1,
-    'sth':sth,'sth1':sth1,'tensid':tensid,'hunid':hunid,'thouid':thouid,'cas1':cas1})
+    'placeten':placeten,'placehun':placehun,'placetho':placetho,'st':st,'st1':st1,'sh':sh,'sh1':sh1,
+    'sth':sth,'sth1':sth1,'tensid':tensid,'hunid':hunid,'thouid':thouid,'cas1':cas1,'ttcas':ttcas,'tfcas':tfcas,'htcas':htcas,'hfcas':hfcas,'tetcas':tetcas,'tefcas':tefcas})
+
 
 def micrometer_nanometer(request):
     try:
@@ -3833,6 +3954,12 @@ def nearest_nanometer(request):
         sth = ''
         sth1 = ''
         thouid = ''
+        hfcas = False
+        htcas = False
+        ttcas = False
+        tfcas = False
+        tetcas = False
+        tefcas = False
     else:
         try:
             num1 = float(num1)
@@ -3856,6 +3983,12 @@ def nearest_nanometer(request):
             sth = ''
             sth1 = ''
             thouid = ''
+            htcas = False
+            hfcas = False
+            ttcas = False
+            tfcas = False
+            tetcas = False
+            tefcas = False
         else:
             if num1.is_integer():
                 cas1 = False
@@ -3870,12 +4003,18 @@ def nearest_nanometer(request):
             st = rnt[0]
             st1 = rnt[1]
             tensid = rnt[2]
+            tetcas = rnt[3]
+            tefcas = rnt[4]
             sh = rnh[0]
             sh1 = rnh[1]
             hunid = rnh[2]
+            htcas = rnh[3]
+            hfcas =  rnh[4]
             sth = rnth[0]
             sth1 = rnth[1]
             thouid = rnth[2]
+            ttcas = rnth[3]
+            tfcas = rnth[4]
             res = nearfeet(num1)
             whole = res[0]
             tens = res[1]
@@ -3883,8 +4022,8 @@ def nearest_nanometer(request):
             thou = res[3]
             cas = True
     return render(request,'nearestnanometer.html',{'num1':num1,'whole':whole,'tens':tens,'hund':hund,'thou':thou,'cas':cas,
-    'placeten':placeten,'placehun':placehun,'placetho':placetho,'st':st,'st1':st,'sh':sh,'sh1':sh1,
-    'sth':sth,'sth1':sth1,'tensid':tensid,'hunid':hunid,'thouid':thouid,'cas1':cas1})
+    'placeten':placeten,'placehun':placehun,'placetho':placetho,'st':st,'st1':st1,'sh':sh,'sh1':sh1,
+    'sth':sth,'sth1':sth1,'tensid':tensid,'hunid':hunid,'thouid':thouid,'cas1':cas1,'ttcas':ttcas,'tfcas':tfcas,'htcas':htcas,'hfcas':hfcas,'tetcas':tetcas,'tefcas':tefcas})
 def nearest_yard(request):
     try:
         num1 = request.POST['num1']
@@ -3908,6 +4047,12 @@ def nearest_yard(request):
         sth = ''
         sth1 = ''
         thouid = ''
+        hfcas = False
+        htcas = False
+        ttcas = False
+        tfcas = False
+        tetcas = False
+        tefcas = False
     else:
         try:
             num1 = float(num1)
@@ -3931,6 +4076,12 @@ def nearest_yard(request):
             sth = ''
             sth1 = ''
             thouid = ''
+            htcas = False
+            hfcas = False
+            ttcas = False
+            tfcas = False
+            tetcas = False
+            tefcas = False
         else:
             if num1.is_integer():
                 cas1 = False
@@ -3945,12 +4096,18 @@ def nearest_yard(request):
             st = rnt[0]
             st1 = rnt[1]
             tensid = rnt[2]
+            tetcas = rnt[3]
+            tefcas = rnt[4]
             sh = rnh[0]
             sh1 = rnh[1]
             hunid = rnh[2]
+            htcas = rnh[3]
+            hfcas =  rnh[4]
             sth = rnth[0]
             sth1 = rnth[1]
             thouid = rnth[2]
+            ttcas = rnth[3]
+            tfcas = rnth[4]
             res = nearfeet(num1)
             whole = res[0]
             tens = res[1]
@@ -3958,8 +4115,8 @@ def nearest_yard(request):
             thou = res[3]
             cas = True
     return render(request,'nearestyard.html',{'num1':num1,'whole':whole,'tens':tens,'hund':hund,'thou':thou,'cas':cas,
-    'placeten':placeten,'placehun':placehun,'placetho':placetho,'st':st,'st1':st,'sh':sh,'sh1':sh1,
-    'sth':sth,'sth1':sth1,'tensid':tensid,'hunid':hunid,'thouid':thouid,'cas1':cas1})
+    'placeten':placeten,'placehun':placehun,'placetho':placetho,'st':st,'st1':st1,'sh':sh,'sh1':sh1,
+    'sth':sth,'sth1':sth1,'tensid':tensid,'hunid':hunid,'thouid':thouid,'cas1':cas1,'ttcas':ttcas,'tfcas':tfcas,'htcas':htcas,'hfcas':hfcas,'tetcas':tetcas,'tefcas':tefcas})
 def nearest_mile(request):
     try:
         num1 = request.POST['num1']
@@ -3983,6 +4140,12 @@ def nearest_mile(request):
         sth = ''
         sth1 = ''
         thouid = ''
+        hfcas = False
+        htcas = False
+        ttcas = False
+        tfcas = False
+        tetcas = False
+        tefcas = False
     else:
         try:
             num1 = float(num1)
@@ -4006,6 +4169,12 @@ def nearest_mile(request):
             sth = ''
             sth1 = ''
             thouid = ''
+            htcas = False
+            hfcas = False
+            ttcas = False
+            tfcas = False
+            tetcas = False
+            tefcas = False
         else:
             if num1.is_integer():
                 cas1 = False
@@ -4020,12 +4189,18 @@ def nearest_mile(request):
             st = rnt[0]
             st1 = rnt[1]
             tensid = rnt[2]
+            tetcas = rnt[3]
+            tefcas = rnt[4]
             sh = rnh[0]
             sh1 = rnh[1]
             hunid = rnh[2]
+            htcas = rnh[3]
+            hfcas =  rnh[4]
             sth = rnth[0]
             sth1 = rnth[1]
             thouid = rnth[2]
+            ttcas = rnth[3]
+            tfcas = rnth[4]
             res = nearfeet(num1)
             whole = res[0]
             tens = res[1]
@@ -4033,5 +4208,44 @@ def nearest_mile(request):
             thou = res[3]
             cas = True
     return render(request,'nearestmile.html',{'num1':num1,'whole':whole,'tens':tens,'hund':hund,'thou':thou,'cas':cas,
-    'placeten':placeten,'placehun':placehun,'placetho':placetho,'st':st,'st1':st,'sh':sh,'sh1':sh1,
-    'sth':sth,'sth1':sth1,'tensid':tensid,'hunid':hunid,'thouid':thouid,'cas1':cas1})
+    'placeten':placeten,'placehun':placehun,'placetho':placetho,'st':st,'st1':st1,'sh':sh,'sh1':sh1,
+    'sth':sth,'sth1':sth1,'tensid':tensid,'hunid':hunid,'thouid':thouid,'cas1':cas1,'ttcas':ttcas,'tfcas':tfcas,'htcas':htcas,'hfcas':hfcas,'tetcas':tetcas,'tefcas':tefcas})
+
+def time_clock_30_minutes(request):
+    try:
+        num1 = request.POST['num1']
+    except:
+        num1 = ''
+        n = ''
+        resminute = ''
+        final = ''
+        cas = False
+        scas = False
+        mcas = False
+        minu = ''
+        msg = ''
+    else:
+        num1 = str(num1)
+        n = num1.split(":")
+        minu = n[0]
+        if minu in ('00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12','13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23'):
+            final = min_30_round(n[0],n[1])
+            if final=='No':
+                mcas = True
+                cas = False
+                msg = 'Enter valid Time Format in HH:MM where both HH and MM are postive integers and hours should be in range 00-23 & minutes in range 00-59'
+            else:
+                mcas = False
+                cas = True
+                msg = ''
+            if n[1] in ('31', '32', '33', '34', '35', '36', '37','38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50', '51', '52','53', '54', '55', '56', '57', '58', '59'):
+                scas = True
+            else:
+                scas = False
+        else:
+            final = ''
+            cas = False
+            scas = False
+            msg = ''
+            mcas = True
+    return render(request,'time30minutes.html',{'final':final,'cas':cas,'min':minu,'scas':scas,'num1':num1,'msg':msg,'mcas':mcas})
