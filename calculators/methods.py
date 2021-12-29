@@ -1166,7 +1166,7 @@ def feetinch(f,i):
         msg = "equal to 6"
         ro = "Round up the feet"
         cas = True
-    elif i<5:
+    elif i<6:
         i = 0
         msg = "less than 6"
         ro = "Round down the feet"
